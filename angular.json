@@ -33,7 +33,6 @@
               "src/css/volt.css"
             ],
             "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.js",
               "node_modules/@popperjs/core/dist/umd/popper.min.js",
               "node_modules/onscreen/dist/on-screen.umd.min.js",
               "node_modules/nouislider/dist/nouislider.min.js",
@@ -45,6 +44,7 @@
               "node_modules/vanillajs-datepicker/dist/js/datepicker.min.js",
               "node_modules/notyf/notyf.min.js",
               "node_modules/simplebar/dist/simplebar.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
               "src/assets/js/volt.js"
             ],
             "serviceWorker": true,

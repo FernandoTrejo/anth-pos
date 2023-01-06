@@ -7,13 +7,17 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { NavbarComponent } from './components/global/navbar/navbar.component';
 import { SidebarComponent } from './components/global/sidebar/sidebar.component';
 import { ContentComponent } from './components/global/content/content.component';
+import { AvatarComponent } from './components/global/content/top/avatar/avatar.component';
+import { NotificationsComponent } from './components/global/content/top/notifications/notifications.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     SidebarComponent,
-    ContentComponent
+    ContentComponent,
+    AvatarComponent,
+    NotificationsComponent
   ],
   imports: [
     BrowserModule,
