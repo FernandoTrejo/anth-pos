@@ -27,10 +27,25 @@
             ],
             "styles": [
               "src/styles.css",
-              "node_modules/bootstrap/dist/css/bootstrap.css"
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "node_modules/sweetalert2/dist/sweetalert2.min.css",
+              "node_modules/notyf/notyf.min.css",
+              "src/css/volt.css"
             ],
             "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.js"
+              "node_modules/bootstrap/dist/js/bootstrap.js",
+              "node_modules/@popperjs/core/dist/umd/popper.min.js",
+              "node_modules/onscreen/dist/on-screen.umd.min.js",
+              "node_modules/nouislider/dist/nouislider.min.js",
+              "node_modules/smooth-scroll/dist/smooth-scroll.polyfills.min.js",
+              "node_modules/chartist/dist/chartist.min.js",
+              "node_modules/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js",
+              "node_modules/vanillajs-datepicker/dist/js/datepicker.min.js",
+              "node_modules/sweetalert2/dist/sweetalert2.all.min.js",
+              "node_modules/vanillajs-datepicker/dist/js/datepicker.min.js",
+              "node_modules/notyf/notyf.min.js",
+              "node_modules/simplebar/dist/simplebar.min.js",
+              "src/assets/js/volt.js"
             ],
             "serviceWorker": true,
             "ngswConfigPath": "ngsw-config.json"
