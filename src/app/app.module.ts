@@ -9,6 +9,13 @@ import { SidebarComponent } from './components/global/sidebar/sidebar.component'
 import { ContentComponent } from './components/global/content/content.component';
 import { AvatarComponent } from './components/global/content/top/avatar/avatar.component';
 import { NotificationsComponent } from './components/global/content/top/notifications/notifications.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ProductosComponent } from './pages/productos/productos.component';
+import { InfoComponent } from './components/global/content/top/info/info.component';
+import { BtnNuevaVentaComponent } from './pages/dashboard/btn-nueva-venta/btn-nueva-venta.component';
+import { CardResumenVentasComponent } from './pages/dashboard/card-resumen-ventas/card-resumen-ventas.component';
+import { SectionTransaccionesComponent } from './pages/dashboard/section-transacciones/section-transacciones.component';
+import { SectionCortesComponent } from './pages/dashboard/section-cortes/section-cortes.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +24,14 @@ import { NotificationsComponent } from './components/global/content/top/notifica
     SidebarComponent,
     ContentComponent,
     AvatarComponent,
-    NotificationsComponent
+    NotificationsComponent,
+    DashboardComponent,
+    ProductosComponent,
+    InfoComponent,
+    BtnNuevaVentaComponent,
+    CardResumenVentasComponent,
+    SectionTransaccionesComponent,
+    SectionCortesComponent
   ],
   imports: [
     BrowserModule,
