@@ -1,14 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { liveQuery } from 'dexie';
+import { db, Transacciones } from './storage/db';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent{
+  transacciones$ = liveQuery(() => db.transacciones.toArray());
   title = 'anth-pos';
 
-  ngOnInit = () => {
-    
+  async resetDatabase(){
+    await db.resetDatabase();
   }
 }
