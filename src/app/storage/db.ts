@@ -1,24 +1,6 @@
-// import Dexie from "dexie";
-
-// const db = new Dexie("pos_client");
-
-// db.version(1).stores({
-//     transacciones: "&id, codigo, fecha, tipo_transaccion"
-// });
-
-// await db.transacciones.bulkAdd([
-//     { codigo: "sfre4rtre66rtert", fecha: new Date(),  tipo_transaccion: "venta"},
-//     { codigo: "sfgdthtrh5585dff", fecha: new Date(),  tipo_transaccion: "otros_ingresos"}
-// ]);
-
 import Dexie, { Table } from 'dexie';
+import { Transacciones, listaTransacciones } from './schema/transacciones/transacciones';
 
-export interface Transacciones {
-  id?: number;
-  codigo: string;
-  fecha: string,
-  tipo_transaccion: string
-}
 
 export class PosClientDB extends Dexie {
   transacciones!: Table<Transacciones, number>;
@@ -32,18 +14,7 @@ export class PosClientDB extends Dexie {
   }
 
   async populate() {
-    await db.transacciones.bulkAdd([
-      {
-        codigo: "sfre4rtre66rtert",
-        fecha: "2019-10-21",
-        tipo_transaccion: "venta"
-      },
-      {
-        codigo: "sfgdthtrh5585dff",
-        fecha: "2020-10-26",
-        tipo_transaccion: "otros_ingresos"
-      }
-    ]);
+    await db.transacciones.bulkAdd(listaTransacciones());
   }
 
   async resetDatabase() {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { liveQuery } from 'dexie';
-import { db, Transacciones } from './storage/db';
+import { db } from './storage/db';
 
 @Component({
   selector: 'app-root',

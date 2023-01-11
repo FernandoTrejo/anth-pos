@@ -16,6 +16,7 @@ import { BtnNuevaVentaComponent } from './pages/dashboard/btn-nueva-venta/btn-nu
 import { CardResumenVentasComponent } from './pages/dashboard/card-resumen-ventas/card-resumen-ventas.component';
 import { SectionTransaccionesComponent } from './pages/dashboard/section-transacciones/section-transacciones.component';
 import { SectionCortesComponent } from './pages/dashboard/section-cortes/section-cortes.component';
+import { IndexComponent } from './pages/ventas/index/index.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { SectionCortesComponent } from './pages/dashboard/section-cortes/section
     BtnNuevaVentaComponent,
     CardResumenVentasComponent,
     SectionTransaccionesComponent,
-    SectionCortesComponent
+    SectionCortesComponent,
+    IndexComponent
   ],
   imports: [
     BrowserModule,
