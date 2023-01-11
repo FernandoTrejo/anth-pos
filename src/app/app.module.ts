@@ -17,6 +17,7 @@ import { CardResumenVentasComponent } from './pages/dashboard/card-resumen-venta
 import { SectionTransaccionesComponent } from './pages/dashboard/section-transacciones/section-transacciones.component';
 import { SectionCortesComponent } from './pages/dashboard/section-cortes/section-cortes.component';
 import { IndexComponent } from './pages/ventas/index/index.component';
+import { NewComponent } from './pages/ventas/new/new.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { IndexComponent } from './pages/ventas/index/index.component';
     CardResumenVentasComponent,
     SectionTransaccionesComponent,
     SectionCortesComponent,
-    IndexComponent
+    IndexComponent,
+    NewComponent
   ],
   imports: [
     BrowserModule,
