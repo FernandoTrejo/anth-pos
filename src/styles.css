@@ -1,1 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+
+@media screen and (min-width: 1400px) {
+    .modal .modal-right-side{
+        margin-right: 0 !important;
+        margin-top: 0 !important;
+    }
+
+    .modal .modal-right-side .modal-content .modal-body .row  .scrollable-column {
+        max-height: calc(100vh - 230px);
+        overflow-y: auto; }
+}

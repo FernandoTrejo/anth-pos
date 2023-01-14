@@ -30,8 +30,7 @@
               "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/sweetalert2/dist/sweetalert2.min.css",
               "node_modules/notyf/notyf.min.css",
-              "src/css/volt.css",
-              "src/css/cursor-styles.css"
+              "src/css/volt.css"
             ],
             "scripts": [
               "node_modules/@popperjs/core/dist/umd/popper.min.js",

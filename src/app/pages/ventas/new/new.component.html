@@ -43,8 +43,171 @@
             <p class="mb-2"><b class="p-2">Productos</b></p>
             <div class="card border-0 shadow">
                 <div class="card-header d-flex justify-content-start gap-2">
-                    <button class="btn btn-tertiary">Buscar</button>
-                    <button class="btn btn-tertiary">Inventario</button>
+                    <!-- contenido de productos -->
+                    <div>
+                        <!-- Button Modal -->
+                        <button type="button" class="btn btn-block btn-tertiary mb-3" data-bs-toggle="modal"
+                            data-bs-target="#modal-productos">Buscar</button>
+                        <!-- Modal Content -->
+                        <div class="modal fade" id="modal-productos" tabindex="-1" role="dialog"
+                            aria-labelledby="modal-productos">
+                            <div class="modal-dialog modal-lg modal-right-side" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h2 class="h6 modal-title">Productos en Existencia</h2>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row mb-3 d-flex justify-content-end">
+                                            <div class="col-3">boton busqueda</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-3 scrollable-column">
+                                                <!-- Tab Nav -->
+                                                <ul class="nav nav-pills square nav-fill flex-column vertical-tab mb-3 mb-lg-0"
+                                                    id="tab12" role="tablist">
+
+                                                    <li class="nav-item"
+                                                        *ngFor="let category of categoriesWithProducts; index as i; first as isFirst">
+                                                        <div
+                                                            *ngIf="isFirst; then activeNavPanel else notActiveNavPanel">
+                                                        </div>
+
+
+                                                        <ng-template #activeNavPanel>
+                                                            <a class="nav-link active" id="home-tab-3"
+                                                                data-bs-toggle="tab" href="#tab-{{i}}" role="tab"
+                                                                aria-selected="true" attr.aria-labelledby="tab-{{i}}"><span
+                                                                    class="d-block">{{category.name}}</span></a>
+                                                        </ng-template>
+                                                        <ng-template #notActiveNavPanel>
+                                                            <a class="nav-link" id="home-tab-3" data-bs-toggle="tab"
+                                                                href="#tab-{{i}}" role="tab" aria-selected="true" attr.aria-labelledby="tab-{{i}}"><span
+                                                                    class="d-block">{{category.name}}</span></a>
+                                                        </ng-template>
+                                                    </li>
+                                                </ul>
+                                                <!-- End of Tab Nav -->
+                                            </div>
+                                            <div class="col-9 scrollable-column ">
+                                                <!-- Tab Content -->
+                                                <div class="card border-0">
+                                                    <div class="card-body py-0">
+
+                                                        <div class="tab-content" id="tabcontent">
+                                                            <div
+                                                                *ngFor="let category of categoriesWithProducts; index as i; first as isFirst">
+
+                                                                <div
+                                                                    *ngIf="isFirst; then activePanel else notActivePanel">
+                                                                </div>
+
+                                                                <ng-template #activePanel>
+                                                                    <div class="tab-pane fade show active" id="tab-{{i}}"
+                                                                        role="tabpanel" attr.aria-labelledby="tab-{{i}}">
+                                                                        <p>Exercitation photo booth stumptown tote bag
+                                                                            Banksy,
+                                                                            elit small batch freegan sed. Craft beer
+                                                                            elit
+                                                                            seitan
+                                                                            exercitation, photo booth et 8-bit kale
+                                                                            chips
+                                                                            proident chillwave deep v laborum. Aliquip
+                                                                            veniam
+                                                                            delectus,
+                                                                            Marfa eiusmod Pinterest in do umami
+                                                                            readymade
+                                                                            swag.
+                                                                        </p>
+                                                                        <p>Day handsome addition horrible sensible
+                                                                            goodness
+                                                                            two
+                                                                            contempt. Evening for married his account
+                                                                            removal.
+                                                                            Estimable me disposing of be moonlight
+                                                                            cordially
+                                                                            curiosity.</p>
+                                                                    </div>
+                                                                </ng-template>
+                                                                <ng-template #notActivePanel>
+                                                                    <div class="tab-pane fade" id="tab-{{i}}"
+                                                                        role="tabpanel">
+                                                                        <p>Photo booth stumptown tote bag Banksy, elit
+                                                                            small
+                                                                            batch freegan sed. Craft beer elit seitan
+                                                                            exercitation, photo booth et 8-bit kale
+                                                                            chips
+                                                                            proident chillwave deep v laborum. Aliquip
+                                                                            veniam
+                                                                            delectus, Marfa eiusmod
+                                                                            Pinterest in do umami readymade swag.</p>
+                                                                        <p>Day handsome addition horrible sensible
+                                                                            goodness two
+                                                                            contempt. Evening for married his account
+                                                                            removal.
+                                                                            Estimable me disposing of be moonlight
+                                                                            cordially
+                                                                            curiosity.</p>
+                                                                    </div>
+                                                                </ng-template>
+
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- End of Tab Content -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary">Agregar Productos</button>
+                                        <button type="button" class="btn btn-link text-gray-600 ms-auto"
+                                            data-bs-dismiss="modal">Cerrar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End of Modal Content -->
+                    </div>
+
+                    <!-- contenido de inventario -->
+                    <div>
+                        <!-- Button Modal -->
+                        <button type="button" class="btn btn-block btn-tertiary mb-3" data-bs-toggle="modal"
+                            data-bs-target="#modal-inventario">Inventario</button>
+                        <!-- Modal Content -->
+                        <div class="modal fade" id="modal-inventario" tabindex="-1" role="dialog"
+                            aria-labelledby="modal-default" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-right-side" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h2 class="h6 modal-title">Inventario</h2>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>With less than a month to go before the European Union enacts new consumer
+                                            privacy laws for its citizens, companies around the world are updating their
+                                            terms of service agreements to comply.</p>
+                                        <p>The European Union’s General Data Protection Regulation (G.D.P.R.) goes into
+                                            effect on May 25 and is meant to ensure a common set of data rights in the
+                                            European Union. It requires organizations to notify users as
+                                            soon as possible of high-risk data breaches that could personally affect
+                                            them.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary">Accept</button>
+                                        <button type="button" class="btn btn-link text-gray-600 ms-auto"
+                                            data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End of Modal Content -->
+                    </div>
+
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -75,9 +238,11 @@
                                     </td>
                                     <td class="d-flex">
                                         <button class="btn btn-sm btn-outline-danger p-1">
-                                            <svg class="icon icon-xxs" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                                              </svg>
+                                            <svg class="icon icon-xxs" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                            </svg>
                                         </button>
                                     </td>
                                 </tr>
@@ -98,9 +263,11 @@
                                     </td>
                                     <td class="d-flex">
                                         <button class="btn btn-sm btn-outline-danger p-1">
-                                            <svg class="icon icon-xxs" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                                              </svg>
+                                            <svg class="icon icon-xxs" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                            </svg>
                                         </button>
                                     </td>
                                 </tr>
@@ -121,9 +288,11 @@
                                     </td>
                                     <td class="d-flex">
                                         <button class="btn btn-sm btn-outline-danger p-1">
-                                            <svg class="icon icon-xxs" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                                              </svg>
+                                            <svg class="icon icon-xxs" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                            </svg>
                                         </button>
                                     </td>
                                 </tr>
