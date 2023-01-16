@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { liveQuery } from 'dexie';
+import { BreadcrumbItem } from 'src/app/components/global/breadcrumb/breadcrumb.component';
 import { db } from 'src/app/storage/db';
 import { Transacciones } from 'src/app/storage/schema/transacciones/transacciones';
 
@@ -19,4 +20,16 @@ export class IndexComponent {
 
     return (firstDateParts[2] + "/" + firstDateParts[1] + "/" + firstDateParts[0]);
   }
+
+  //breadcrumb
+  breadcrumbItems : Array<BreadcrumbItem> = [
+    {
+      title: 'Transacciones',
+      link: ''
+    },
+    {
+      title: 'Ventas',
+      link: ''
+    }
+  ];
 }

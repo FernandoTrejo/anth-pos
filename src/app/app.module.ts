@@ -18,6 +18,10 @@ import { SectionTransaccionesComponent } from './pages/dashboard/section-transac
 import { SectionCortesComponent } from './pages/dashboard/section-cortes/section-cortes.component';
 import { IndexComponent } from './pages/ventas/index/index.component';
 import { NewComponent } from './pages/ventas/new/new.component';
+import { ModalProductosComponent } from './pages/ventas/new/modal-productos/modal-productos.component';
+import { ModalInventarioComponent } from './pages/ventas/new/modal-inventario/modal-inventario.component';
+import { TablaProductosAgregadosComponent } from './pages/ventas/new/tabla-productos-agregados/tabla-productos-agregados.component';
+import { BreadcrumbComponent } from './components/global/breadcrumb/breadcrumb.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +39,11 @@ import { NewComponent } from './pages/ventas/new/new.component';
     SectionTransaccionesComponent,
     SectionCortesComponent,
     IndexComponent,
-    NewComponent
+    NewComponent,
+    ModalProductosComponent,
+    ModalInventarioComponent,
+    TablaProductosAgregadosComponent,
+    BreadcrumbComponent
   ],
   imports: [
     BrowserModule,

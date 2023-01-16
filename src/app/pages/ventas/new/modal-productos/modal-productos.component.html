@@ -1,0 +1,126 @@
+<div>
+    <!-- Button Modal -->
+    <button type="button" class="btn btn-block btn-tertiary mb-3" data-bs-toggle="modal"
+        data-bs-target="#modal-productos">Buscar</button>
+    <!-- Modal Content -->
+    <div class="modal fade" id="modal-productos" tabindex="-1" role="dialog"
+        aria-labelledby="modal-productos">
+        <div class="modal-dialog modal-xl modal-right-side" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="h6 modal-title">Productos en Existencia</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3 d-flex justify-content-between">
+                        <div class="col-5">
+                            <p class="mb-0 fw-bold">Categoria: Nombre</p>
+                        </div>
+                        <div class="col-3">
+                            <div class="input-group">
+                                <span class="input-group-text" id="">
+                                    <svg class="icon icon-xxs" fill="currentColor"
+                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                </span>
+                                <input type="text" class="form-control" id=""
+                                    placeholder="Buscar Producto" aria-label="Search">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 scrollable-column">
+                            <!-- Tab Nav -->
+                            <ul class="nav nav-pills square nav-fill flex-column vertical-tab mb-3 mb-lg-0"
+                                id="tab12" role="tablist">
+
+                                <li class="nav-item"
+                                    *ngFor="let category of categoriesWithProducts; index as i; first as isFirst">
+                                    <div
+                                        *ngIf="isFirst; then activeNavPanel else notActiveNavPanel">
+                                    </div>
+
+
+                                    <ng-template #activeNavPanel>
+                                        <a class="nav-link active" id="home-tab-3"
+                                            data-bs-toggle="tab" href="#tab-{{i}}" role="tab"
+                                            aria-selected="true"
+                                            attr.aria-labelledby="tab-{{i}}"><span
+                                                class="d-block">{{category.name}}</span></a>
+                                    </ng-template>
+                                    <ng-template #notActiveNavPanel>
+                                        <a class="nav-link" id="home-tab-3" data-bs-toggle="tab"
+                                            href="#tab-{{i}}" role="tab" aria-selected="true"
+                                            attr.aria-labelledby="tab-{{i}}"><span
+                                                class="d-block">{{category.name}}</span></a>
+                                    </ng-template>
+                                </li>
+                            </ul>
+                            <!-- End of Tab Nav -->
+                        </div>
+                        <div class="col-9 scrollable-column ">
+                            <!-- Tab Content -->
+                            <div class="card border-0">
+                                <div class="card-body py-0">
+
+                                    <div class="tab-content" id="tabcontent">
+
+                                        <div *ngFor="let category of categoriesWithProducts; index as i; first as isFirst"
+                                            class="tab-pane {{isFirst ? 'active show' : ''}} fade" id="tab-{{i}}" role="tabpanel" attr.aria-labelledby="tab-{{i}}">
+                                            <div class="row">
+                                                <div class="col-md-3"
+                                                    *ngFor="let product of category.products">
+                                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="{{product.name}}">
+                                                        <div
+                                                            class="product-card-1 bg-gray-300 d-block rounded mb-2">
+                                                            <div class="text-center">
+                                                                <img class="product-card-image"
+                                                                    src="{{product.url_image}}"
+                                                                    alt="">
+                                                            </div>
+                                                            <div
+                                                                class="d-flex justify-content-between p-2">
+
+                                                                <span style="font-size: 12px;">
+                                                                    <b>Stock:</b>
+                                                                    {{product.existence}}
+                                                                </span>
+                                                                <span style="font-size: 12px;">
+                                                                    <b>$</b> {{product.price}}
+                                                                </span>
+                                                            </div>
+                                                            <div class="px-2">
+                                                                <span class="mb-0 d-inline-block text-truncate fw-bold" style="font-size: 13px; max-width: 170px;">
+                                                                    {{product.name}}
+                                                                </span>
+
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End of Tab Content -->
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary">Agregar Productos</button>
+                    <button type="button" class="btn btn-link text-gray-600 ms-auto"
+                        data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of Modal Content -->
+</div>
