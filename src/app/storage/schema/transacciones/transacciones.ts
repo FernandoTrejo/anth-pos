@@ -1,12 +1,12 @@
 export interface Transacciones {
     id?: number;
     codigo: string;
-    fecha: Date,
-    referencia: string,
-    nombre_cliente: string,
-    total: number,
-    tipo_transaccion: string,
-    status: string
+    fecha: Date;
+    referencia: string;
+    nombre_cliente: string;
+    total: number;
+    tipo_transaccion: string;
+    status: string;
 }
 
 

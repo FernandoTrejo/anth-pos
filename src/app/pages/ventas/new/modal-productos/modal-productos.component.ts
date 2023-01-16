@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { FindCategoryWithProductsService } from 'src/app/services/product-categories/find-category-with-products.service';
+import { liveQuery } from 'dexie';
+import { FindCategoriesService } from 'src/app/services/categories/find-categories.service';
 
 @Component({
   selector: 'app-modal-productos',
@@ -7,11 +8,13 @@ import { FindCategoryWithProductsService } from 'src/app/services/product-catego
   styleUrls: ['./modal-productos.component.css']
 })
 export class ModalProductosComponent {
-  categoriesWithProducts = this.getCategoriesWithProducts();
-  constructor(private categoryFinder : FindCategoryWithProductsService){
+  categoriesWithProducts = liveQuery(() => this.getCategoriesWithProducts());
+
+  constructor(private categoryFinder : FindCategoriesService){
   }
 
-  getCategoriesWithProducts(){
-    return this.categoryFinder.all();
+
+  async getCategoriesWithProducts(){
+    return await this.categoryFinder.allWithProducts();
   }
 }
