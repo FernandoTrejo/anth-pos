@@ -1,21 +1,22 @@
 import Dexie, { Table } from 'dexie';
 import { Categoria, Producto, listaCategorias } from './schema/productos/productos_categorias';
 import { Transacciones, listaTransacciones } from './schema/transacciones/transacciones';
+import { ProductoOrden } from './schema/productos/productos_orden';
 
 
 export class PosClientDB extends Dexie {
   transacciones!: Table<Transacciones, number>;
   categorias!: Table<Categoria, number>;
   productos!: Table<Producto, number>;
+  productosOrden!: Table<ProductoOrden, number>;
 
   constructor() {
     super('PosClientDB');
     this.version(1).stores({
       transacciones: '++id',
-    });
-    this.version(2).stores({
       categorias: '++id',
-      productos: '++id, id_categoria'
+      productos: '++id, id_categoria',
+      productosOrden: '++id, codigo_orden'
     });
     this.on('populate', () => this.populate());
   }
@@ -44,6 +45,7 @@ export class PosClientDB extends Dexie {
       this.transacciones.clear();
       this.productos.clear();
       this.categorias.clear();
+      this.productosOrden.clear();
       this.populate();
     });
   }

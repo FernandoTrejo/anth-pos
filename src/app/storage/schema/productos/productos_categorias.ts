@@ -28,6 +28,7 @@ export const listaCategorias = () => {
                     imagen: 'https://cdn0.recetasgratis.net/es/posts/2/4/9/pastel_de_fresa_23942_600.webp',
                     precio: 10.50,
                     status: 'activo',
+                    existencias: 5,
                     id_categoria: 0
                 },
                 {
@@ -36,6 +37,7 @@ export const listaCategorias = () => {
                     imagen: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Pound_layer_cake.jpg/330px-Pound_layer_cake.jpg',
                     precio: 10.50,
                     status: 'activo',
+                    existencias: 10,
                     id_categoria: 0
                 }
             ]
@@ -50,6 +52,7 @@ export const listaCategorias = () => {
                     imagen: 'https://cdn0.recetasgratis.net/es/posts/2/4/9/pastel_de_fresa_23942_600.webp',
                     precio: 10.50,
                     status: 'activo',
+                    existencias: 5,
                     id_categoria: 0
                 },
                 {
@@ -58,6 +61,7 @@ export const listaCategorias = () => {
                     imagen: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Pound_layer_cake.jpg/330px-Pound_layer_cake.jpg',
                     precio: 10.50,
                     status: 'activo',
+                    existencias: 15,
                     id_categoria: 0
                 }
             ]
@@ -72,6 +76,7 @@ export const listaCategorias = () => {
                     imagen: 'https://cdn0.recetasgratis.net/es/posts/2/4/9/pastel_de_fresa_23942_600.webp',
                     precio: 5.25,
                     status: 'activo',
+                    existencias: 5,
                     id_categoria: 0
                 },
                 {
@@ -80,6 +85,7 @@ export const listaCategorias = () => {
                     imagen: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Pound_layer_cake.jpg/330px-Pound_layer_cake.jpg',
                     precio: 3.75,
                     status: 'activo',
+                    existencias: 25,
                     id_categoria: 0
                 }
             ]
@@ -94,6 +100,7 @@ export const listaCategorias = () => {
                     imagen: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Pound_layer_cake.jpg/330px-Pound_layer_cake.jpg',
                     precio: 10.50,
                     status: 'activo',
+                    existencias: 5,
                     id_categoria: 0
                 },
                 {
@@ -102,6 +109,7 @@ export const listaCategorias = () => {
                     imagen: 'https://cdn0.recetasgratis.net/es/posts/2/4/9/pastel_de_fresa_23942_600.webp',
                     precio: 20.60,
                     status: 'activo',
+                    existencias: 7,
                     id_categoria: 0
                 }
             ]
