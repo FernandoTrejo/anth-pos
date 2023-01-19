@@ -1,0 +1,63 @@
+<div>
+    <!-- Button Modal -->
+    <button type="button" class="btn btn-block btn-info mb-3" data-bs-toggle="modal"
+        data-bs-target="#modal-pago-efectivo">Efectivo</button>
+    <!-- Modal Content -->
+    <div class="modal fade" id="modal-pago-efectivo" tabindex="-1" role="dialog" aria-labelledby="modal-default"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="h6 modal-title">Pago en Efectivo</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center mb-4"><b>Valor Restante: $50</b></p>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="row gap-2">
+                                <div class="col-12 d-flex justify-content-between gap-1">
+                                    <button class="btn w-50 btn-block btn-outline-info">$1</button>
+                                    <button class="btn w-50 btn-block btn-outline-info">$5</button>
+                                </div>
+                                <div class="col-12 d-flex justify-content-between gap-1">
+                                    <button class="btn w-50 btn-block btn-outline-info">$10</button>
+                                    <button class="btn w-50 btn-block btn-outline-info">$20</button>
+                                </div>
+                                <div class="col-12 d-flex justify-content-between gap-1">
+                                    <button class="btn w-50 btn-block btn-outline-info">$50</button>
+                                    <button class="btn w-50 btn-block btn-outline-info">$100</button>
+                                </div>
+                                <div class="col-12">
+                                    <button class="w-100 btn btn-outline-info">Pago
+                                        Exacto</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="row mb-4">
+                                <div class="form-group">
+                                    <label for="txtReceivedPayment">Cantidad
+                                        Recibida</label>
+                                    <input type="text" class="form-control" id="txtReceivedPayment" [(ngModel)]="cantidad">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <label for="txtCambio">Vuelto</label>
+                                    <input type="text" class="form-control" id="txtCambio">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-tertiary" (click)="storePayment()" data-bs-dismiss="modal">Aceptar</button>
+                    <button type="button" class="btn btn-link text-gray-600 ms-auto"
+                        data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of Modal Content -->
+</div>

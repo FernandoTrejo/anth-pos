@@ -2,7 +2,7 @@
     <app-info></app-info>
 
     <div class="py-4">
-        <app-breadcrumb [items] = breadcrumbItems></app-breadcrumb>
+        <app-breadcrumb [items]=breadcrumbItems></app-breadcrumb>
 
         <div class="d-flex justify-content-between w-100 flex-wrap">
             <div class="mb-3 mb-lg-0">
@@ -24,8 +24,8 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6">
-            <p class="mb-2"><b class="p-2">Productos</b></p>
+        <div class="col-md-6 mb-2">
+            <p class="mb-2"><b class="p-2 h5">Productos</b></p>
             <div class="card border-0 shadow">
                 <div class="card-header d-flex justify-content-start gap-2">
                     <!-- contenido de productos -->
@@ -41,14 +41,45 @@
             </div>
         </div>
 
-        <div class="col-md-6">
-            <p class="mb-2"><b class="p-2">Detalles</b></p>
+        <div class="col-md-6 mb-2">
+            <p class="mb-2"><b class="p-2 h5">Detalles</b></p>
             <div class="card border-0 shadow">
-                <div class="card-header">
+                <div class="card-header d-flex justify-content-between gap-4">
+                    <select class="form-select mb-3" id="country" aria-label="Default select example">
+                        <option value="ticket_venta" selected>Ticket de Venta</option>
+                        <option value="factura_consumidor_final" disabled>Factura Consumidor Final</option>
+                        <option value="credito_fiscal" disabled>Credito Fiscal</option>
+                    </select>
 
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">
+                            <svg class="icon icon-xs text-gray-600" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </span>
+                        <input type="text" class="form-control" id="txtSearchSeller" placeholder="Buscar Vendedor"
+                            aria-label="Search">
+
+                    </div>
                 </div>
                 <div class="card-body">
+                    <div class="row mb-2" style="width: 100%; overflow-x: auto;">
+                        <div class="col d-flex gap-2">
+                            <app-modal-pago-efectivo></app-modal-pago-efectivo>
+                            <div>
+                                <button class="btn btn-block btn-info">Tarjeta</button>
+                            </div>
+                        </div>
+                    </div>
 
+                    <app-tabla-orden-pagos></app-tabla-orden-pagos>
+                    
+                </div>
+                <div class="card-footer">
+                    <app-tabla-resumen-pagos></app-tabla-resumen-pagos>
                 </div>
             </div>
         </div>

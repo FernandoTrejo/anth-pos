@@ -1,6 +1,6 @@
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -22,6 +22,10 @@ import { ModalProductosComponent } from './pages/ventas/new/modal-productos/moda
 import { ModalInventarioComponent } from './pages/ventas/new/modal-inventario/modal-inventario.component';
 import { TablaProductosAgregadosComponent } from './pages/ventas/new/tabla-productos-agregados/tabla-productos-agregados.component';
 import { BreadcrumbComponent } from './components/global/breadcrumb/breadcrumb.component';
+import { TablaResumenPagosComponent } from './pages/ventas/new/tabla-resumen-pagos/tabla-resumen-pagos.component';
+import { TablaOrdenPagosComponent } from './pages/ventas/new/tabla-orden-pagos/tabla-orden-pagos.component';
+import { ModalPagoEfectivoComponent } from './pages/ventas/new/modal-pago-efectivo/modal-pago-efectivo.component';
+
 
 @NgModule({
   declarations: [
@@ -43,7 +47,10 @@ import { BreadcrumbComponent } from './components/global/breadcrumb/breadcrumb.c
     ModalProductosComponent,
     ModalInventarioComponent,
     TablaProductosAgregadosComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    TablaResumenPagosComponent,
+    TablaOrdenPagosComponent,
+    ModalPagoEfectivoComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +60,8 @@ import { BreadcrumbComponent } from './components/global/breadcrumb/breadcrumb.c
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
-    })
+    }),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
