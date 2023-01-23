@@ -12,7 +12,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p class="text-center mb-4"><b>Valor Restante: $50</b></p>
+                    <p class="text-center mb-4"><b>Valor Restante: ${{restante | async}}</b></p>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="row gap-2">
@@ -29,7 +29,8 @@
                                     <button class="btn w-50 btn-block btn-outline-info">$100</button>
                                 </div>
                                 <div class="col-12">
-                                    <button class="w-100 btn btn-outline-info">Pago
+                                    <button class="w-100 btn btn-outline-info"
+                                        (click)="setExact()">Pago
                                         Exacto</button>
                                 </div>
                             </div>

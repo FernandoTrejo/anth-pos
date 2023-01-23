@@ -25,6 +25,7 @@ import { BreadcrumbComponent } from './components/global/breadcrumb/breadcrumb.c
 import { TablaResumenPagosComponent } from './pages/ventas/new/tabla-resumen-pagos/tabla-resumen-pagos.component';
 import { TablaOrdenPagosComponent } from './pages/ventas/new/tabla-orden-pagos/tabla-orden-pagos.component';
 import { ModalPagoEfectivoComponent } from './pages/ventas/new/modal-pago-efectivo/modal-pago-efectivo.component';
+import { SectionTicketComponent } from './pages/ventas/new/section-ticket/section-ticket.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { ModalPagoEfectivoComponent } from './pages/ventas/new/modal-pago-efecti
     BreadcrumbComponent,
     TablaResumenPagosComponent,
     TablaOrdenPagosComponent,
-    ModalPagoEfectivoComponent
+    ModalPagoEfectivoComponent,
+    SectionTicketComponent
   ],
   imports: [
     BrowserModule,

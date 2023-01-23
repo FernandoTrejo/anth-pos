@@ -16,6 +16,7 @@ export class TablaProductosAgregadosComponent {
   constructor(private findOrderProductsService : FindProductsService, private deleteOrderProductService : DeleteProductsService){}
 
   async getOrderProducts(){
+    //HARDCODE
     return this.findOrderProductsService.allByOrderCode('123456');
   }
 

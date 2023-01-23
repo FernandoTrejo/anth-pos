@@ -15,4 +15,9 @@ export class FindProductsService {
     const results = await db.productosOrden.where(filter).toArray();
     return results;
   }
+
+  async countAllByOrderCode(codigo : string){
+    const all = await this.allByOrderCode(codigo);
+    return all.length;
+  }
 }

@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { liveQuery } from 'dexie';
+import { CalculateRemainingService } from 'src/app/services/payments/calculate-remaining.service';
 import { StorePaymentInOrderService } from 'src/app/services/payments/store-payment-in-order.service';
 import { Pago } from 'src/app/storage/schema/pagos/pagos';
 
@@ -9,15 +11,15 @@ import { Pago } from 'src/app/storage/schema/pagos/pagos';
 })
 export class ModalPagoEfectivoComponent {
   cantidad: number = 0;
+  restante = liveQuery(() => this.getRemaining());
 
-  constructor(private storePaymentService: StorePaymentInOrderService) { }
+  constructor(private storePaymentService: StorePaymentInOrderService, private remainingCalculator : CalculateRemainingService) { }
 
   async storePayment() {
     if (this.cantidad <= 0) {
       return;
     }
 
-    console.log(this.cantidad, " la cantidad esta bien");
     // HARDCODE
     const payment : Pago = {
       tipo_pago: 'Efectivo',
@@ -27,5 +29,14 @@ export class ModalPagoEfectivoComponent {
     }
 
     await this.storePaymentService.store(payment);
+  }
+
+  async getRemaining(){
+    // HARDCODE
+    return await this.remainingCalculator.calculate('123456');
+  }
+
+  async setExact(){
+    this.cantidad = Number(await this.remainingCalculator.calculate('123456'));
   }
 }
