@@ -53,8 +53,10 @@
                             <td>
                                 {{venta.total}}
                             </td>
-                            <td class="text-success">
-                                <span class="fw-bold">{{venta.status}}</span>
+                            <td [ngSwitch]="venta.status">
+                                <span *ngSwitchCase="statusAbierta" class="fw-bold text-info">{{venta.status}}</span>
+                                <span *ngSwitchCase="statusCerrada" class="fw-bold">{{venta.status}}</span>
+                                <span *ngSwitchCase="statusAnulada" class="fw-bold text-danger">{{venta.status}}</span>
                             </td>
                         </tr>
                         <!-- End of Item -->

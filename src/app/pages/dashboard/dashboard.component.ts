@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { liveQuery } from 'dexie';
+import { FindOrdersCorteActualService } from 'src/app/services/orders/find-orders-corte-actual.service';
+import { TipoTransacciones } from 'src/app/utilities/tipo_transacciones';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,5 +9,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-
+  
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { liveQuery } from 'dexie';
 import { BreadcrumbItem } from 'src/app/components/global/breadcrumb/breadcrumb.component';
 import { FindOrdersCorteActualService } from 'src/app/services/orders/find-orders-corte-actual.service';
+import { Status } from 'src/app/utilities/status';
 import { TipoTransacciones } from 'src/app/utilities/tipo_transacciones';
 
 @Component({
@@ -11,6 +12,10 @@ import { TipoTransacciones } from 'src/app/utilities/tipo_transacciones';
 })
 export class IndexComponent {
   ventas = liveQuery(() => this.currentOrders.find(TipoTransacciones.Venta));
+
+  statusCerrada = Status.Closed;
+  statusAbierta = Status.Open;
+  statusAnulada = Status.Nulled;
 
   formatDate(date: Date) {
     const offset = date.getTimezoneOffset();
