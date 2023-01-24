@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { liveQuery } from 'dexie';
 import { DeletePaymentsService } from 'src/app/services/payments/delete-payments.service';
 import { FindPaymentsService } from 'src/app/services/payments/find-payments.service';
@@ -10,14 +10,13 @@ import { FindPaymentsService } from 'src/app/services/payments/find-payments.ser
 })
 export class TablaOrdenPagosComponent {
 
-
-  //HARDCODE
-  pagos = liveQuery(() => this.getPayments('123456'));
+  @Input() codigoVenta : string = '';
+  pagos = liveQuery(() => this.getPayments());
 
   constructor(private findPaymentsService: FindPaymentsService, private deletePaymentService: DeletePaymentsService) { }
 
-  async getPayments(orderCode: string) {
-    return await this.findPaymentsService.getPaymentsByOrderCode(orderCode);
+  async getPayments() {
+    return await this.findPaymentsService.getPaymentsByOrderCode(this.codigoVenta);
   }
 
   async deletePayment(paymentId?: number) {

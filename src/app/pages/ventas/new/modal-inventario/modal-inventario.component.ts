@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./modal-inventario.component.css']
 })
 export class ModalInventarioComponent {
-
+  
 }

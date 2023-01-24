@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { liveQuery } from 'dexie';
 import { FindCategoriesService } from 'src/app/services/categories/find-categories.service';
 import { StoreProductsService } from 'src/app/services/orders/added-products/store-products.service';
@@ -10,6 +10,7 @@ import { ProductoOrden } from 'src/app/storage/schema/productos/productos_orden'
   styleUrls: ['./modal-productos.component.css']
 })
 export class ModalProductosComponent {
+  @Input() codigoVenta : string = '';
   categoriesWithProducts = liveQuery(() => this.getCategoriesWithProducts());
 
   constructor(private categoryFinder : FindCategoriesService, private storeOrderProductService : StoreProductsService){
@@ -22,8 +23,7 @@ export class ModalProductosComponent {
   async storeOrderProduct(
     codigoProducto : string, 
     nombre : string,
-    precio: number,
-    codigoOrden: string
+    precio: number
   ){
     let orderProduct : ProductoOrden = {
       codigo_producto: codigoProducto,
@@ -31,7 +31,7 @@ export class ModalProductosComponent {
       precio: precio,
       cantidad: 1,
       subtotal: precio,
-      codigo_orden: codigoOrden
+      codigo_orden: this.codigoVenta
     }
     await this.storeOrderProductService.store(orderProduct);
   }

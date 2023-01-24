@@ -9,11 +9,22 @@
                 <h1 class="h4">Crear nueva venta</h1>
                 <p class="mb-0"></p>
             </div>
-            <div>
-                <a class="btn btn-outline-primary d-inline-flex align-items-center" (click)="process('', '123456')">
-                    
+            <div class="d-flex gap-2">
+                <a class="btn btn-outline-primary d-inline-flex align-items-center" (click)="waiting()">
+
                     <svg class="icon icon-xs me-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
+                    </svg>
+
+
+                    Espera
+                </a>
+                <a class="btn btn-outline-primary d-inline-flex align-items-center" (click)="process()">
+
+                    <svg class="icon icon-xs me-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
                     </svg>
@@ -30,14 +41,14 @@
             <div class="card border-0 shadow">
                 <div class="card-header d-flex justify-content-start gap-2">
                     <!-- contenido de productos -->
-                    <app-modal-productos></app-modal-productos>
+                    <app-modal-productos [codigoVenta]="codigoVenta"></app-modal-productos>
 
                     <!-- contenido de inventario -->
                     <app-modal-inventario></app-modal-inventario>
 
                 </div>
                 <div class="card-body">
-                    <app-tabla-productos-agregados></app-tabla-productos-agregados>
+                    <app-tabla-productos-agregados [codigoVenta]="codigoVenta"></app-tabla-productos-agregados>
                 </div>
             </div>
         </div>
@@ -68,22 +79,22 @@
                 </div>
                 <div class="card-body">
                     <div class="row mb-4">
-                        <app-section-ticket></app-section-ticket>
+                        <app-section-ticket (nombreCliente)="actualizarNombreCliente($event)"></app-section-ticket>
                     </div>
                     <div class="row mb-2" style="width: 100%; overflow-x: auto;">
                         <div class="col d-flex gap-2">
-                            <app-modal-pago-efectivo></app-modal-pago-efectivo>
+                            <app-modal-pago-efectivo [codigoVenta]="codigoVenta"></app-modal-pago-efectivo>
                             <div>
                                 <button class="btn btn-block btn-info">Tarjeta</button>
                             </div>
                         </div>
                     </div>
 
-                    <app-tabla-orden-pagos></app-tabla-orden-pagos>
+                    <app-tabla-orden-pagos [codigoVenta]="codigoVenta"></app-tabla-orden-pagos>
 
                 </div>
                 <div class="card-footer" [classList]="(tablaResumenPagoVisible | async) ? '' : 'd-none'">
-                    <app-tabla-resumen-pagos></app-tabla-resumen-pagos>
+                    <app-tabla-resumen-pagos [codigoVenta]="codigoVenta"></app-tabla-resumen-pagos>
                 </div>
             </div>
         </div>

@@ -1,8 +1,9 @@
 import Dexie, { Table } from 'dexie';
 import { Categoria, Producto, listaCategorias } from './schema/productos/productos_categorias';
-import { Transacciones, listaTransacciones } from './schema/transacciones/transacciones';
+import { Transacciones } from './schema/transacciones/transacciones';
 import { ProductoOrden } from './schema/productos/productos_orden';
 import { Pago } from './schema/pagos/pagos';
+import { CorteDiario, CorteMensual, CorteParcial } from './schema/cortes/cortes';
 
 
 export class PosClientDB extends Dexie {
@@ -11,22 +12,26 @@ export class PosClientDB extends Dexie {
   productos!: Table<Producto, number>;
   productosOrden!: Table<ProductoOrden, number>;
   pagosOrden!: Table<Pago, number>; 
+  cortesMensuales!: Table<CorteMensual, number>;
+  cortesDiarios!: Table<CorteDiario, number>;
+  cortesParciales!: Table<CorteParcial, number>;
 
   constructor() {
     super('PosClientDB');
     this.version(1).stores({
-      transacciones: '++id',
+      transacciones: '++id, codigo, numero_transaccion, status, corte_mensual, corte_diario, corte_parcial',
       categorias: '++id',
       productos: '++id, id_categoria',
       productosOrden: '++id, codigo_orden',
-      pagosOrden: '++id, codigo_orden'
+      pagosOrden: '++id, codigo_orden',
+      cortesMensuales: '++id, codigo, numero_corte, status',
+      cortesDiarios: '++id, codigo, numero_corte, codigo_corte_mensual, status',
+      cortesParciales: '++id, codigo, numero_corte, codigo_corte_diario, status'
     });
     this.on('populate', () => this.populate());
   }
 
   async populate() {
-    await db.transacciones.bulkAdd(listaTransacciones());
-
     //insertar categorias y productos
     let categorias = listaCategorias();
     for (let categoria of categorias) {
@@ -50,6 +55,9 @@ export class PosClientDB extends Dexie {
       this.categorias.clear();
       this.productosOrden.clear();
       this.pagosOrden.clear();
+      this.cortesDiarios.clear();
+      this.cortesMensuales.clear();
+      this.cortesParciales.clear();
       this.populate();
     });
   }

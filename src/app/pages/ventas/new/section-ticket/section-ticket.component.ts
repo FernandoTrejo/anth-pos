@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-section-ticket',
@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./section-ticket.component.css']
 })
 export class SectionTicketComponent {
+  @Output() nombreCliente : EventEmitter<string> = new EventEmitter<string>;
 
+  actualizarNombreCliente(nombre : string){
+    this.nombreCliente.emit(nombre);
+  }
 }

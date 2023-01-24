@@ -39,12 +39,10 @@
                         <!-- Item -->
                         <tr *ngFor="let venta of ventas | async">
                             <td>
-                                <a href="#" class="text-primary fw-bold">{{venta.codigo}}</a>
+                                <a href="#" class="text-primary fw-bold">{{venta.numero_transaccion}}</a>
                             </td>
                             <td class="fw-bold">
                                 {{formatDate(venta.fecha)}}
-
-                                
                             </td>
                             <td>
                                 {{venta.referencia}}

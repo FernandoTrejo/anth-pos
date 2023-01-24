@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { liveQuery } from 'dexie';
 import { BreadcrumbItem } from 'src/app/components/global/breadcrumb/breadcrumb.component';
-import { db } from 'src/app/storage/db';
-import { Transacciones } from 'src/app/storage/schema/transacciones/transacciones';
+import { FindOrdersCorteActualService } from 'src/app/services/orders/find-orders-corte-actual.service';
+import { TipoTransacciones } from 'src/app/utilities/tipo_transacciones';
 
 @Component({
   selector: 'app-index',
@@ -10,7 +10,7 @@ import { Transacciones } from 'src/app/storage/schema/transacciones/transaccione
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent {
-  ventas = liveQuery(() => db.transacciones.toArray());
+  ventas = liveQuery(() => this.currentOrders.find(TipoTransacciones.Venta));
 
   formatDate(date: Date) {
     const offset = date.getTimezoneOffset();
@@ -32,4 +32,6 @@ export class IndexComponent {
       link: ''
     }
   ];
+
+  constructor(private currentOrders : FindOrdersCorteActualService){}
 }

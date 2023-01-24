@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { liveQuery } from 'dexie';
 import { CalculateTotalOrderService } from 'src/app/services/orders/added-products/calculate-total-order.service';
 import { CalculateTotalReceivedService } from 'src/app/services/payments/calculate-total-received.service';
@@ -9,8 +9,7 @@ import { CalculateTotalReceivedService } from 'src/app/services/payments/calcula
   styleUrls: ['./tabla-resumen-pagos.component.css']
 })
 export class TablaResumenPagosComponent{
-  // HARDCODE
-  orderCode = '123456';
+  @Input() codigoVenta : string = '';
 
   total = liveQuery(() => this.calculateTotal());
   recibido = liveQuery(() => this.calculateReceived());
@@ -20,11 +19,11 @@ export class TablaResumenPagosComponent{
   constructor(private totalCalculatorService : CalculateTotalOrderService, private totalReceivedService: CalculateTotalReceivedService){}
 
   async calculateTotal(){
-    return await this.totalCalculatorService.calculate(this.orderCode);
+    return await this.totalCalculatorService.calculate(this.codigoVenta);
   }
 
   async calculateReceived(){
-    return await this.totalReceivedService.calculate(this.orderCode);
+    return await this.totalReceivedService.calculate(this.codigoVenta);
   }
 
   async calculatePending(){

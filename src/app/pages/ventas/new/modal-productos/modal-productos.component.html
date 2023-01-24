@@ -74,7 +74,7 @@
                                                 <div class="col-md-3"
                                                     *ngFor="let product of category.productos">
                                                     <a data-bs-toggle="tooltip" data-bs-placement="top" title="{{product.nombre}}" 
-                                                        (click)="storeOrderProduct(product.codigo, product.nombre, product.precio, '123456')">
+                                                        (click)="storeOrderProduct(product.codigo, product.nombre, product.precio)">
                                                         <div
                                                             class="product-card-1 bg-gray-300 d-block rounded mb-2">
                                                             <div class="text-center">

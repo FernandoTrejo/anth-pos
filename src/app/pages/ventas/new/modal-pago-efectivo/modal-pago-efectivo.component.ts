@@ -10,33 +10,35 @@ import { Pago } from 'src/app/storage/schema/pagos/pagos';
   styleUrls: ['./modal-pago-efectivo.component.css']
 })
 export class ModalPagoEfectivoComponent {
+  @Input() codigoVenta : string = '';
   cantidad: number = 0;
   restante = liveQuery(() => this.getRemaining());
+  tipoPago = 'efectivo';
+  emisor = '';
 
   constructor(private storePaymentService: StorePaymentInOrderService, private remainingCalculator : CalculateRemainingService) { }
 
   async storePayment() {
     if (this.cantidad <= 0) {
+      console.log(this.cantidad);
       return;
     }
 
-    // HARDCODE
     const payment : Pago = {
-      tipo_pago: 'Efectivo',
-      emisor: '',
+      tipo_pago: this.tipoPago,
+      emisor: this.emisor,
       recibido: this.cantidad,
-      codigo_orden: '123456'
+      codigo_orden: this.codigoVenta
     }
 
     await this.storePaymentService.store(payment);
   }
 
   async getRemaining(){
-    // HARDCODE
-    return await this.remainingCalculator.calculate('123456');
+    return await this.remainingCalculator.calculate(this.codigoVenta);
   }
 
   async setExact(){
-    this.cantidad = Number(await this.remainingCalculator.calculate('123456'));
+    this.cantidad = Number(await this.remainingCalculator.calculate(this.codigoVenta));
   }
 }

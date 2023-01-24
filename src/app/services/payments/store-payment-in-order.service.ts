@@ -11,7 +11,7 @@ export class StorePaymentInOrderService {
   constructor(private totalCalculator : CalculateTotalOrderService) { }
 
   async store(payment : Pago){
-    if(await this.totalIsGreaterThanZero()){
+    if(await this.totalIsGreaterThanZero(payment.codigo_orden)){
       const id = await db.pagosOrden.add(payment);
       return id;
     }
@@ -19,9 +19,8 @@ export class StorePaymentInOrderService {
     return null;
   }
 
-  async totalIsGreaterThanZero(){
-    //HARDCODE
-    const total = await this.totalCalculator.calculate('123456');
+  async totalIsGreaterThanZero(orderCode : string){
+    const total = await this.totalCalculator.calculate(orderCode);
     return Number(total) > 0;
   }
 }
