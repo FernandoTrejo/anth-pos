@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-section-ticket',
@@ -7,7 +7,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class SectionTicketComponent {
   @Output() nombreCliente : EventEmitter<string> = new EventEmitter<string>;
-
+  @Input() nombreInicial : string = '';
   actualizarNombreCliente(nombre : string){
     this.nombreCliente.emit(nombre);
   }

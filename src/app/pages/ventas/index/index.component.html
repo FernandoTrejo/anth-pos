@@ -39,7 +39,8 @@
                         <!-- Item -->
                         <tr *ngFor="let venta of ventas | async">
                             <td>
-                                <a href="#" class="text-primary fw-bold">{{venta.numero_transaccion}}</a>
+                                <!-- <a routerLink="/ventas/{{venta.codigo}}" routerLinkActive="active" ariaCurrentWhenActive="page" class="text-primary fw-bold">{{venta.numero_transaccion}}</a> -->
+                                <a routerLink="/ventas/{{venta.codigo}}" routerLinkActive="active" ariaCurrentWhenActive="page" class="text-primary fw-bold">123456</a>
                             </td>
                             <td class="fw-bold">
                                 {{formatDate(venta.fecha)}}
