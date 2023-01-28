@@ -9,7 +9,7 @@
                 <h1 class="h4">Visualizar venta</h1>
                 <p class="mb-0"></p>
             </div>
-            <div class="d-flex gap-2">
+            <div class="d-flex gap-2" *ngIf="statusTransaccion != statusCerrada">
                 <a class="btn btn-outline-primary d-inline-flex align-items-center" (click)="waiting()">
 
                     <svg class="icon icon-xs me-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -39,7 +39,7 @@
         <div class="col-md-6 mb-2">
             <p class="mb-2"><b class="p-2 h5">Productos</b></p>
             <div class="card border-0 shadow">
-                <div class="card-header d-flex justify-content-start gap-2">
+                <div class="card-header d-flex justify-content-start gap-2" *ngIf="statusTransaccion != statusCerrada">
                     <!-- contenido de productos -->
                     <app-modal-productos [codigoVenta]="codigoVenta"></app-modal-productos>
 
@@ -48,7 +48,7 @@
 
                 </div>
                 <div class="card-body">
-                    <app-tabla-productos-agregados [codigoVenta]="codigoVenta"></app-tabla-productos-agregados>
+                    <app-tabla-productos-agregados [statusTransaccion]="statusTransaccion"  [codigoVenta]="codigoVenta"></app-tabla-productos-agregados>
                 </div>
             </div>
         </div>
@@ -56,7 +56,7 @@
         <div class="col-md-6 mb-2">
             <p class="mb-2"><b class="p-2 h5">Detalles</b></p>
             <div class="card border-0 shadow">
-                <div class="card-header d-flex justify-content-between gap-4">
+                <div class="card-header d-flex justify-content-between gap-4" *ngIf="statusTransaccion != statusCerrada">
                     <select class="form-select mb-3" id="country" aria-label="Default select example">
                         <option value="ticket_venta" selected>Ticket de Venta</option>
                         <option value="factura_consumidor_final" disabled>Factura Consumidor Final</option>
@@ -79,9 +79,13 @@
                 </div>
                 <div class="card-body">
                     <div class="row mb-4">
-                        <app-section-ticket (nombreCliente)="actualizarNombreCliente($event)"></app-section-ticket>
+                        <div class="form-group">
+                            <label class="" for="nombre">Nombre del cliente</label>
+                            <input class="form-control" type="text" name="" #nombre placeholder="Nombre del Cliente" [(ngModel)]="nombreCliente">
+                        </div>
+                        
                     </div>
-                    <div class="row mb-2" style="width: 100%; overflow-x: auto;">
+                    <div class="row mb-2" style="width: 100%; overflow-x: auto;" *ngIf="statusTransaccion != statusCerrada">
                         <div class="col d-flex gap-2">
                             <app-modal-pago-efectivo [codigoVenta]="codigoVenta"></app-modal-pago-efectivo>
                             <div>
@@ -90,11 +94,11 @@
                         </div>
                     </div>
 
-                    <app-tabla-orden-pagos [codigoVenta]="codigoVenta"></app-tabla-orden-pagos>
+                    <app-tabla-orden-pagos [statusTransaccion]="statusTransaccion" [codigoVenta]="codigoVenta"></app-tabla-orden-pagos>
 
                 </div>
-                <div class="card-footer" [classList]="(tablaResumenPagoVisible | async) ? '' : 'd-none'">
-                    <app-tabla-resumen-pagos [codigoVenta]="codigoVenta"></app-tabla-resumen-pagos>
+                <div class="card-footer">
+                    <app-tabla-resumen-pagos [codigoVenta]="codigoVenta"  [classList]="(tablaResumenPagoVisible | async) ? '' : 'd-none'"></app-tabla-resumen-pagos>
                 </div>
             </div>
         </div>

@@ -3,6 +3,7 @@ import { liveQuery } from 'dexie';
 import { DeleteProductsService } from 'src/app/services/orders/added-products/delete-products.service';
 import { FindProductsService } from 'src/app/services/orders/added-products/find-products.service';
 import { ProductoOrden } from 'src/app/storage/schema/productos/productos_orden';
+import { Status } from 'src/app/utilities/status';
 
 @Component({
   selector: 'app-tabla-productos-agregados',
@@ -11,7 +12,9 @@ import { ProductoOrden } from 'src/app/storage/schema/productos/productos_orden'
 })
 export class TablaProductosAgregadosComponent {
   @Input() codigoVenta : string = '';
+  @Input() statusTransaccion : string = '';
   productosAgregados = liveQuery(() => this.getOrderProducts());
+  statusCerrada = Status.Closed;
 
   constructor(private findOrderProductsService : FindProductsService, private deleteOrderProductService : DeleteProductsService){}
 

@@ -93,7 +93,7 @@
                     <app-tabla-orden-pagos [codigoVenta]="codigoVenta"></app-tabla-orden-pagos>
 
                 </div>
-                <div class="card-footer" [classList]="(tablaResumenPagoVisible | async) ? '' : 'd-none'">
+                <div class="card-footer" *ngIf="tablaResumenPagoVisible | async">
                     <app-tabla-resumen-pagos [codigoVenta]="codigoVenta"></app-tabla-resumen-pagos>
                 </div>
             </div>

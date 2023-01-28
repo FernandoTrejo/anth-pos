@@ -39,14 +39,22 @@ export class ViewComponent implements OnInit, OnDestroy {
   tablaResumenPagoVisible = liveQuery(() => this.getTablaResumenPagoVisibility());
   tipoTransaccion = TipoTransacciones.Venta;
   nombreCliente = '';
+  statusTransaccion = '';
 
   codigoVenta: string = '';
   private sub: any;
+  statusCerrada = Status.Closed;
 
   async ngOnInit() {
     this.sub = this.route.params.subscribe((params: { [x: string]: string; }) => {
       this.codigoVenta = params['codigo_venta'];
     });
+
+    let datosOrden = await this.getOrderData(this.codigoVenta);
+    if(datosOrden){
+      this.nombreCliente = datosOrden?.nombre_cliente;
+      this.statusTransaccion = datosOrden.status;
+    }
   }
 
   ngOnDestroy() {
@@ -55,15 +63,14 @@ export class ViewComponent implements OnInit, OnDestroy {
 
   constructor(
     private findProducts: FindProductsService,
-    private processOrder: StoreOrderService,
     private calculateTotal: CalculateTotalOrderService,
     private router: Router,
     private findCorteMensual: FindActiveCorteMensualService,
     private findCorteParcial: FindActiveCorteParcialService,
     private findCorteDiario: FindActiveCorteDiarioService,
     private updateOrder: UpdateOrderService,
-    private route: ActivatedRoute
-
+    private route: ActivatedRoute,
+    private findOrder: FindByCodeService
   ) {
   }
 
@@ -110,7 +117,8 @@ export class ViewComponent implements OnInit, OnDestroy {
     await this.store(Status.Open);
   }
 
-  actualizarNombreCliente(nombre: string) {
-    this.nombreCliente = nombre;
+  async getOrderData(codigo : string){
+    const order = await this.findOrder.find(codigo);
+    return order;
   }
 }

@@ -4,6 +4,7 @@ import { BreadcrumbItem } from 'src/app/components/global/breadcrumb/breadcrumb.
 import { FindOrdersCorteActualService } from 'src/app/services/orders/find-orders-corte-actual.service';
 import { Status } from 'src/app/utilities/status';
 import { TipoTransacciones } from 'src/app/utilities/tipo_transacciones';
+import { formatDate } from 'src/app/utilities/date';
 
 @Component({
   selector: 'app-index',
@@ -17,13 +18,14 @@ export class IndexComponent {
   statusAbierta = Status.Open;
   statusAnulada = Status.Nulled;
 
-  formatDate(date: Date) {
-    const offset = date.getTimezoneOffset();
-    date = new Date(date.getTime() - (offset * 60 * 1000));
-    let firstDate = date.toISOString().split('T')[0];
-    let firstDateParts = firstDate.split('-');
+  statusActual = '';
 
-    return (firstDateParts[2] + "/" + firstDateParts[1] + "/" + firstDateParts[0]);
+  viewStatus(status : string){
+    this.statusActual = status;
+  }
+
+  format(date: Date) {
+    return formatDate(date);
   }
 
   //breadcrumb

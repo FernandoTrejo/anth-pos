@@ -19,8 +19,11 @@
 
     <button class="btn btn-primary my-3"  routerLink="/ventas/nueva" routerLinkActive="active" ariaCurrentWhenActive="page">Crear Nueva</button>
     <div class="card border-0 shadow">
-        <div class="card-header">
-
+        <div class="card-header d-flex gap-2">
+            <button class="btn btn-tertiary" (click)="viewStatus('')">Todas</button>
+            <button class="btn btn-info" (click)="viewStatus(statusAbierta)">Abiertas</button>
+            <button class="btn btn-secondary" (click)="viewStatus(statusCerrada)">Cerradas</button>
+            <button class="btn btn-danger" (click)="viewStatus(statusAnulada)">Anuladas</button>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -37,13 +40,13 @@
                     </thead>
                     <tbody>
                         <!-- Item -->
-                        <tr *ngFor="let venta of ventas | async">
+                        <tr *ngFor="let venta of ventas | async" [classList]="(venta.status == statusActual || statusActual == '') ? '' : 'd-none'">
                             <td>
                                 <!-- <a routerLink="/ventas/{{venta.codigo}}" routerLinkActive="active" ariaCurrentWhenActive="page" class="text-primary fw-bold">{{venta.numero_transaccion}}</a> -->
                                 <a routerLink="/ventas/{{venta.codigo}}" routerLinkActive="active" ariaCurrentWhenActive="page" class="text-primary fw-bold">123456</a>
                             </td>
                             <td class="fw-bold">
-                                {{formatDate(venta.fecha)}}
+                                {{format(venta.fecha)}}
                             </td>
                             <td>
                                 {{venta.referencia}}
