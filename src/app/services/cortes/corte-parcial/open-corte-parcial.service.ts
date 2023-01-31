@@ -14,19 +14,23 @@ export class OpenCorteParcialService {
 
   async open() {
     const corteDiario = await this.ActiveCorteDiario.find();
-    if (corteDiario) {
-      const corte: CorteParcial = {
-        codigo: 'cp-' + v4(),
-        numero_corte: '',
-        codigo_corte_diario: corteDiario.codigo,
-        fecha_inicio: new Date(),
-        status: CortesStatus.Active
-      };
-
-      const id = await db.cortesParciales.add(corte);
-      return id;
+    if (!corteDiario) {
+      return null;
     }
 
-    return null;
+    //inactivar todos los cortes anteriores
+    await db.cortesParciales.toCollection().modify({status: CortesStatus.Inactive});
+
+    //inicializar nuevo corte
+    const corte: CorteParcial = {
+      codigo: 'cp-' + v4(),
+      numero_corte: '',
+      codigo_corte_diario: corteDiario.codigo,
+      fecha_inicio: new Date(),
+      status: CortesStatus.Active
+    };
+
+    const id = await db.cortesParciales.add(corte);
+    return id;
   }
 }

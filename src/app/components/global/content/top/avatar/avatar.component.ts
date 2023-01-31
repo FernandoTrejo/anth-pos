@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { liveQuery } from 'dexie';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
@@ -11,9 +12,14 @@ export class AvatarComponent {
 
   authUser = liveQuery(() => this.user());
 
-  constructor(private auth : AuthService){}
+  constructor(private auth : AuthService, public router : Router){}
 
   async user(){
     return await this.auth.user();
+  }
+
+  async logout(){
+    await this.auth.logout();
+    this.router.navigate(['login']);
   }
 }

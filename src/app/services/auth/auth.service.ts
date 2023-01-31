@@ -35,4 +35,9 @@ export class AuthService {
       }
     return empleados[0];
   }
+
+  async logout(){
+    //inactivar todas las sesiones que pudieran estar activas por error
+    await db.sesionesAuth.toCollection().modify({status: StatusSesion.Inactiva});
+  }
 }
