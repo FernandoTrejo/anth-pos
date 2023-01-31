@@ -27,6 +27,7 @@ import { TablaOrdenPagosComponent } from './pages/ventas/new/tabla-orden-pagos/t
 import { ModalPagoEfectivoComponent } from './pages/ventas/new/modal-pago-efectivo/modal-pago-efectivo.component';
 import { SectionTicketComponent } from './pages/ventas/new/section-ticket/section-ticket.component';
 import { ViewComponent } from './pages/ventas/view/view.component';
+import { LoginComponent } from './pages/auth/login/login.component';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { ViewComponent } from './pages/ventas/view/view.component';
     TablaOrdenPagosComponent,
     ModalPagoEfectivoComponent,
     SectionTicketComponent,
-    ViewComponent
+    ViewComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
