@@ -5,34 +5,36 @@ import { StorePaymentInOrderService } from 'src/app/services/payments/store-paym
 import { Pago } from 'src/app/storage/schema/pagos/pagos';
 
 @Component({
-  selector: 'app-modal-pago-efectivo',
-  templateUrl: './modal-pago-efectivo.component.html',
-  styleUrls: ['./modal-pago-efectivo.component.css']
+  selector: 'app-modal-pago-tarjeta',
+  templateUrl: './modal-pago-tarjeta.component.html',
+  styleUrls: ['./modal-pago-tarjeta.component.css']
 })
-export class ModalPagoEfectivoComponent {
+export class ModalPagoTarjetaComponent {
   @Input() codigoVenta : string = '';
   cantidad: number = 0;
-  vuelto: number = 0;
   restante = liveQuery(() => this.getRemaining());
-  tipoPago = 'efectivo';
+  tipoPago = 'tarjeta';
   emisor = '';
+  numeroAutorizacion = '';
+  numeroTelefono = '';
+  ult4Digitos = '';
 
   constructor(private storePaymentService: StorePaymentInOrderService, private remainingCalculator : CalculateRemainingService) { }
 
   async storePayment() {
-    if (this.cantidad <= 0) {
-      console.log(this.cantidad);
+    const res = await this.remainingCalculator.calculate(this.codigoVenta);
+    if (res <= 0) {
       return;
     }
 
     const payment : Pago = {
       tipo_pago: this.tipoPago,
       emisor: this.emisor,
-      recibido: this.cantidad,
+      recibido: Number(res),
       codigo_orden: this.codigoVenta,
-      numero_autorizacion: '',
-      numero_telefono: '',
-      ultimos_digitos_tarjeta: ''
+      numero_autorizacion: this.numeroAutorizacion,
+      numero_telefono: this.numeroTelefono,
+      ultimos_digitos_tarjeta: this.ult4Digitos
     }
 
     await this.storePaymentService.store(payment);
@@ -42,22 +44,4 @@ export class ModalPagoEfectivoComponent {
     return await this.remainingCalculator.calculate(this.codigoVenta);
   }
 
-  async setExact(){
-    this.cantidad = Number(await this.remainingCalculator.calculate(this.codigoVenta));
-  }
-
-  async setPayment(quantity : number){
-    this.cantidad  = Number(quantity);
-    this.vuelto = await this.calculateVuelto();
-    console.log(this.vuelto);
-  }
-
-  async calculateVuelto(){
-    const res = await this.getRemaining();
-    const diferencia = Number(res) - Number(this.cantidad);
-    if(Number(diferencia) < 0){
-      return Math.abs(Number(diferencia));
-    }
-    return 0;
-  }
 }

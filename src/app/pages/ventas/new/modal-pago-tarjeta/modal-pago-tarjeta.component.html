@@ -1,0 +1,56 @@
+<div>
+    <!-- Button Modal -->
+    <button type="button" class="btn btn-block btn-info mb-3" data-bs-toggle="modal"
+        data-bs-target="#modal-pago-tarjeta">Tarjeta</button>
+    <!-- Modal Content -->
+    <div class="modal fade" id="modal-pago-tarjeta" tabindex="-1" role="dialog" aria-labelledby="modal-default"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="h6 modal-title">Pago Tarjeta</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center mb-4"><b>Saldo por cobrar: ${{restante | async}}</b></p>
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="form-group">
+                                <label for="txtReceivedPayment">Numero de Autorizacion</label>
+                                <input type="text" class="form-control fw-bold" id="txtNumeroAutorizacion" [(ngModel)]="numeroAutorizacion">
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="form-group">
+                                <label for="txtReceivedPayment">Numero de Telefono</label>
+                                <input type="text" class="form-control fw-bold" id="txtNumeroTelefono" [(ngModel)]="numeroTelefono">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mb-4">
+                            <div class="form-group">
+                                <label for="txtReceivedPayment">Emisor</label>
+                                <input type="text" class="form-control fw-bold" id="txtEmisor" [(ngModel)]="emisor">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="txtReceivedPayment">Ultimos 4 digitos de la tarjeta</label>
+                                <input type="text" class="form-control fw-bold" id="txt4Digitos" [(ngModel)]="ult4Digitos">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-tertiary" (click)="storePayment()" data-bs-dismiss="modal">Aceptar</button>
+                    <button type="button" class="btn btn-link text-gray-600 ms-auto"
+                        data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of Modal Content -->
+</div>

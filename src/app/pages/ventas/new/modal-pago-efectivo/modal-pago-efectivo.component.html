@@ -17,16 +17,16 @@
                         <div class="col-md-6">
                             <div class="row gap-2">
                                 <div class="col-12 d-flex justify-content-between gap-1">
-                                    <button class="btn w-50 btn-block btn-outline-info">$1</button>
-                                    <button class="btn w-50 btn-block btn-outline-info">$5</button>
+                                    <button class="btn w-50 btn-block btn-outline-info" (click)="setPayment(1)">$1</button>
+                                    <button class="btn w-50 btn-block btn-outline-info" (click)="setPayment(5)">$5</button>
                                 </div>
                                 <div class="col-12 d-flex justify-content-between gap-1">
-                                    <button class="btn w-50 btn-block btn-outline-info">$10</button>
-                                    <button class="btn w-50 btn-block btn-outline-info">$20</button>
+                                    <button class="btn w-50 btn-block btn-outline-info" (click)="setPayment(10)">$10</button>
+                                    <button class="btn w-50 btn-block btn-outline-info" (click)="setPayment(20)">$20</button>
                                 </div>
                                 <div class="col-12 d-flex justify-content-between gap-1">
-                                    <button class="btn w-50 btn-block btn-outline-info">$50</button>
-                                    <button class="btn w-50 btn-block btn-outline-info">$100</button>
+                                    <button class="btn w-50 btn-block btn-outline-info" (click)="setPayment(50)">$50</button>
+                                    <button class="btn w-50 btn-block btn-outline-info" (click)="setPayment(100)">$100</button>
                                 </div>
                                 <div class="col-12">
                                     <button class="w-100 btn btn-outline-info"
@@ -46,7 +46,7 @@
                             <div class="row">
                                 <div class="form-group">
                                     <label for="txtCambio">Vuelto</label>
-                                    <input type="text" class="form-control fw-bold" id="txtCambio">
+                                    <input type="text" class="form-control fw-bold" id="txtCambio" [(ngModel)]="vuelto">
                                 </div>
                             </div>
                         </div>

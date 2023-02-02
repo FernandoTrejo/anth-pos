@@ -28,6 +28,7 @@ import { ModalPagoEfectivoComponent } from './pages/ventas/new/modal-pago-efecti
 import { SectionTicketComponent } from './pages/ventas/new/section-ticket/section-ticket.component';
 import { ViewComponent } from './pages/ventas/view/view.component';
 import { LoginComponent } from './pages/auth/login/login.component';
+import { ModalPagoTarjetaComponent } from './pages/ventas/new/modal-pago-tarjeta/modal-pago-tarjeta.component';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { LoginComponent } from './pages/auth/login/login.component';
     ModalPagoEfectivoComponent,
     SectionTicketComponent,
     ViewComponent,
-    LoginComponent
+    LoginComponent,
+    ModalPagoTarjetaComponent
   ],
   imports: [
     BrowserModule,

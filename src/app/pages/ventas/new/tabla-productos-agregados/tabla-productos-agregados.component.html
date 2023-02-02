@@ -17,7 +17,7 @@
                     {{producto.nombre_producto}}
                 </td>
                 <td>
-                    {{producto.cantidad}}
+                    <input type="number" class="form-control" name="" value="{{producto.cantidad}}" (change)="changeQuantity($event, producto.id, producto.precio)">
                 </td>
                 <td>
                     ${{producto.precio}}
