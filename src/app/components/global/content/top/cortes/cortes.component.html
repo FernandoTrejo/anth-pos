@@ -21,7 +21,8 @@
 
             Corte X
         </a>
-        <a class="dropdown-item d-flex align-items-center" href="#">
+        <a class="dropdown-item d-flex align-items-center" data-bs-toggle="modal"
+        data-bs-target="#modal-corte-diario">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 class="dropdown-icon text-gray-400 me-2" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -29,7 +30,8 @@
             </svg>
             Corte Z
         </a>
-        <a class="dropdown-item d-flex align-items-center" href="#">
+        <a class="dropdown-item d-flex align-items-center" data-bs-toggle="modal"
+        data-bs-target="#modal-corte-mensual">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 class="dropdown-icon text-gray-400 me-2" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -54,6 +56,42 @@
             </div>
             <div class="modal-body">
                 <app-corte-parcial-modal></app-corte-parcial-modal>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Modal Content -->
+
+
+<!-- corte diario -->
+<div class="modal fade" id="modal-corte-diario" tabindex="-1" role="dialog" aria-labelledby="modal-default"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="h6 modal-title">Corte Z</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <app-corte-diario-modal></app-corte-diario-modal>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Modal Content -->
+
+
+<!-- corte diario -->
+<div class="modal fade" id="modal-corte-mensual" tabindex="-1" role="dialog" aria-labelledby="modal-default"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="h6 modal-title">Corte Z</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <app-corte-mensual-modal></app-corte-mensual-modal>
             </div>
         </div>
     </div>

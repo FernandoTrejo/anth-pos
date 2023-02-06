@@ -9,35 +9,41 @@ export class AuthService {
 
   constructor() { }
 
-  async isAuthenticated(){
+  async isAuthenticated() {
     const sessions = await db.sesionesAuth.where({
       status: StatusSesion.Activa
     }).toArray();
 
-    if(sessions.length == 0){
+    if (sessions.length == 0) {
       return false;
     }
 
     return true;
   }
 
-  async user(){
+  async user() {
     const sessions = await db.sesionesAuth.where({
       status: StatusSesion.Activa
     }).toArray();
-    const session = sessions[0];
 
-    const empleados = await db.empleados.where({
-      codigo: session.codigo_usuario
-    }).limit(1).toArray();
-      if(empleados.length == 0){
+    if (sessions.length > 0) {
+      const session = sessions[0];
+
+      const empleados = await db.empleados.where({
+        codigo: session.codigo_usuario
+      }).limit(1).toArray();
+      if (empleados.length == 0) {
         return null;
       }
-    return empleados[0];
+      return empleados[0];
+    }
+
+    return null;
+
   }
 
-  async logout(){
+  async logout() {
     //inactivar todas las sesiones que pudieran estar activas por error
-    await db.sesionesAuth.toCollection().modify({status: StatusSesion.Inactiva});
+    await db.sesionesAuth.toCollection().modify({ status: StatusSesion.Inactiva });
   }
 }

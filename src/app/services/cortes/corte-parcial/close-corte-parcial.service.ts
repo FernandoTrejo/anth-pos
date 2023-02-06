@@ -26,27 +26,23 @@ export class CloseCorteParcialService {
     }
 
 
-    await db.transaction('rw', 'transacciones', async () => {
+    const response = await db.transaction('rw', db.cortesParciales, db.cortesTipoPagos, async () => {
       montos.forEach(m => m.codigo_corte = activeX.codigo);
-      const response = await this.bulkService.bulk(montos);
-      if (response.type == MessageType.success) {
-        await db.cortesParciales.where({ codigo: activeX.codigo }).modify({ status: CortesStatus.Inactive });
-        return {
-          title: 'Se ha cerrado el corte de forma correcta',
-          type: MessageType.success
-        }
+      await db.cortesTipoPagos.bulkAdd(montos);
+      await db.cortesParciales.where({ codigo: activeX.codigo }).modify({ status: CortesStatus.Inactive });
+      
+      return {
+        title: 'Se ha cerrado el corte de forma correcta',
+        type: MessageType.success
       }
 
+    }).catch(err => {
       return {
         title: 'Ha ocurrido un error al cerrar el corte',
         type: MessageType.error
       }
     });
 
-    return {
-      title: 'Error',
-      type: MessageType.error
-    }
-
+    return response;
   }
 }
