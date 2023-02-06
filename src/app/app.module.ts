@@ -29,6 +29,10 @@ import { SectionTicketComponent } from './pages/ventas/new/section-ticket/sectio
 import { ViewComponent } from './pages/ventas/view/view.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { ModalPagoTarjetaComponent } from './pages/ventas/new/modal-pago-tarjeta/modal-pago-tarjeta.component';
+import { CortesComponent } from './components/global/content/top/cortes/cortes.component';
+import { CorteParcialModalComponent } from './components/global/content/top/cortes/corte-parcial-modal/corte-parcial-modal.component';
+import { CorteDiarioModalComponent } from './components/global/content/top/cortes/corte-diario-modal/corte-diario-modal.component';
+import { CorteMensualModalComponent } from './components/global/content/top/cortes/corte-mensual-modal/corte-mensual-modal.component';
 
 
 @NgModule({
@@ -58,7 +62,11 @@ import { ModalPagoTarjetaComponent } from './pages/ventas/new/modal-pago-tarjeta
     SectionTicketComponent,
     ViewComponent,
     LoginComponent,
-    ModalPagoTarjetaComponent
+    ModalPagoTarjetaComponent,
+    CortesComponent,
+    CorteParcialModalComponent,
+    CorteDiarioModalComponent,
+    CorteMensualModalComponent
   ],
   imports: [
     BrowserModule,

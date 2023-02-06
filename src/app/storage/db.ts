@@ -6,6 +6,8 @@ import { Pago } from './schema/pagos/pagos';
 import { CorteDiario, CorteMensual, CorteParcial } from './schema/cortes/cortes';
 import { Empleado, TipoEmpleado } from './schema/empleados/empleados';
 import { AuthSesion } from './schema/auth/sesiones';
+import { getPagosMock, TipoPagoPermitido } from './schema/pagos/tipos_pago';
+import { CorteTipoPago } from './schema/cortes/cortes_tipo_pagos';
 
 export class PosClientDB extends Dexie {
   transacciones!: Table<Transacciones, number>;
@@ -18,6 +20,8 @@ export class PosClientDB extends Dexie {
   cortesParciales!: Table<CorteParcial, number>;
   empleados!: Table<Empleado, number>;
   sesionesAuth!: Table<AuthSesion, number>;
+  tiposPagoPermitido!: Table<TipoPagoPermitido, number>;
+  cortesTipoPagos!: Table<CorteTipoPago, number>;
 
   constructor() {
     super('PosClientDB');
@@ -31,7 +35,9 @@ export class PosClientDB extends Dexie {
       cortesDiarios: '++id, codigo, numero_corte, codigo_corte_mensual, status',
       cortesParciales: '++id, codigo, numero_corte, codigo_corte_diario, status',
       empleados: '++id, codigo, usuario',
-      sesionesAuth: '++id, status'
+      sesionesAuth: '++id, status',
+      tiposPagoPermitido: '++id, codigo',
+      cortesTipoPagos: '++id, codigo_corte, codigo_tipo_pago, tipo'
     });
     this.on('populate', () => this.populate());
   }
@@ -70,6 +76,8 @@ export class PosClientDB extends Dexie {
         url_imagen: 'https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'
       }
     ]);
+
+    await this.tiposPagoPermitido.bulkAdd(getPagosMock());
   }
 
   async resetDatabase() {
@@ -84,6 +92,8 @@ export class PosClientDB extends Dexie {
       this.cortesParciales.clear();
       this.empleados.clear();
       this.sesionesAuth.clear();
+      this.tiposPagoPermitido.clear();
+      this.cortesTipoPagos.clear();
       this.populate();
     });
   }

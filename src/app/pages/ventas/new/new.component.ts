@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { liveQuery } from 'dexie';
+import { Observable } from 'rxjs';
 import { BreadcrumbItem } from 'src/app/components/global/breadcrumb/breadcrumb.component';
 import { FindActiveCorteDiarioService } from 'src/app/services/cortes/corte-diario/find-active-corte-diario.service';
 import { FindActiveCorteMensualService } from 'src/app/services/cortes/corte-mensual/find-active-corte-mensual.service';
@@ -9,10 +10,12 @@ import { CalculateTotalOrderService } from 'src/app/services/orders/added-produc
 import { FindProductsService } from 'src/app/services/orders/added-products/find-products.service';
 import { FindByCodeService } from 'src/app/services/orders/find-by-code.service';
 import { StoreOrderService } from 'src/app/services/orders/store-order.service';
+import { GetAllowedPaymentTypesService } from 'src/app/services/payments/get-allowed-payment-types.service';
+import { TipoPagoPermitido } from 'src/app/storage/schema/pagos/tipos_pago';
 import { Transacciones } from 'src/app/storage/schema/transacciones/transacciones';
 import { Status } from 'src/app/utilities/status';
 import { TipoTransacciones } from 'src/app/utilities/tipo_transacciones';
-import { v4 as v4uuid} from 'uuid';
+import { v4 as v4uuid } from 'uuid';
 @Component({
   selector: 'app-new',
   templateUrl: './new.component.html',
@@ -38,17 +41,21 @@ export class NewComponent {
   tipoTransaccion = TipoTransacciones.Venta;
   codigoVenta = v4uuid();
   nombreCliente = '';
+  pagosPermitidos = liveQuery(() => this.getPagosPermitidos());
+  tipoEfectivo = 'efectivo';
+  tipoTarjeta = 'tarjeta';
 
   constructor(
-    private findProducts: FindProductsService, 
-    private processOrder: StoreOrderService, 
-    private calculateTotal : CalculateTotalOrderService, 
+    private findProducts: FindProductsService,
+    private processOrder: StoreOrderService,
+    private calculateTotal: CalculateTotalOrderService,
     private router: Router,
     private findCorteMensual: FindActiveCorteMensualService,
-    private findCorteParcial : FindActiveCorteParcialService,
+    private findCorteParcial: FindActiveCorteParcialService,
     private findCorteDiario: FindActiveCorteDiarioService,
-    private findOrderByCode : FindByCodeService
-  ) { 
+    private findOrderByCode: FindByCodeService,
+    private paymentTypeFinder: GetAllowedPaymentTypesService
+  ) {
     console.log(this.codigoVenta);
   }
 
@@ -65,7 +72,7 @@ export class NewComponent {
     const corteDiario = await this.findCorteDiario.find();
     const corteParcial = await this.findCorteParcial.find();
 
-    if(!corteMensual || !corteDiario || !corteParcial || Number(total) == 0){
+    if (!corteMensual || !corteDiario || !corteParcial || Number(total) == 0) {
       return;
     }
 
@@ -87,13 +94,13 @@ export class NewComponent {
   }
 
   // COLOCAR ORDEN EN ESPERA
-  async waiting(){
+  async waiting() {
     const total = await this.calculateTotal.calculate(this.codigoVenta);
     const corteMensual = await this.findCorteMensual.find();
     const corteDiario = await this.findCorteDiario.find();
     const corteParcial = await this.findCorteParcial.find();
 
-    if(!corteMensual || !corteDiario || !corteParcial || Number(total) == 0){
+    if (!corteMensual || !corteDiario || !corteParcial || Number(total) == 0) {
       return;
     }
 
@@ -114,7 +121,23 @@ export class NewComponent {
     this.router.navigate(['/ventas']);
   }
 
-  actualizarNombreCliente(nombre : string){
+  actualizarNombreCliente(nombre: string) {
     this.nombreCliente = nombre;
   }
+
+  async getPagosPermitidos() {
+    const response = await this.paymentTypeFinder.get();
+    if (response) {
+      return response;
+    }
+
+    return [];
+  }
+
+  async pagoEsPermitido(codigo: string) {
+    const pagos = await this.getPagosPermitidos();
+    console.log(pagos.find(pago => pago.codigo === codigo));
+    return pagos.find(pago => pago.codigo === codigo);
+  }
+
 }
