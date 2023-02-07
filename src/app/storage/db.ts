@@ -28,8 +28,8 @@ export class PosClientDB extends Dexie {
     this.version(1).stores({
       transacciones: '++id, codigo, numero_transaccion, status, corte_mensual, corte_diario, corte_parcial',
       categorias: '++id',
-      productos: '++id, id_categoria',
-      productosOrden: '++id, codigo_orden',
+      productos: '++id, id_categoria, codigo',
+      productosOrden: '++id, codigo_orden, codigo_producto',
       pagosOrden: '++id, codigo_orden',
       cortesMensuales: '++id, codigo, numero_corte, status',
       cortesDiarios: '++id, codigo, numero_corte, codigo_corte_mensual, status',

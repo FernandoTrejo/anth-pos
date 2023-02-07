@@ -5,6 +5,7 @@ export interface Producto {
     imagen: string;
     precio: number;
     status: string;
+    stock_inicial: number;
     existencias: number;
     id_categoria: number;
 }
@@ -29,7 +30,8 @@ export const listaCategorias = () => {
                     precio: 10.50,
                     status: 'activo',
                     existencias: 5,
-                    id_categoria: 0
+                    id_categoria: 0,
+                    stock_inicial: 5
                 },
                 {
                     codigo: 'prod2',
@@ -38,7 +40,8 @@ export const listaCategorias = () => {
                     precio: 10.50,
                     status: 'activo',
                     existencias: 10,
-                    id_categoria: 0
+                    id_categoria: 0,
+                    stock_inicial: 10
                 }
             ]
         },
@@ -53,7 +56,8 @@ export const listaCategorias = () => {
                     precio: 10.50,
                     status: 'activo',
                     existencias: 5,
-                    id_categoria: 0
+                    id_categoria: 0,
+                    stock_inicial: 5
                 },
                 {
                     codigo: 'prod4',
@@ -62,7 +66,8 @@ export const listaCategorias = () => {
                     precio: 10.50,
                     status: 'activo',
                     existencias: 15,
-                    id_categoria: 0
+                    id_categoria: 0,
+                    stock_inicial: 15
                 }
             ]
         },
@@ -77,7 +82,8 @@ export const listaCategorias = () => {
                     precio: 5.25,
                     status: 'activo',
                     existencias: 5,
-                    id_categoria: 0
+                    id_categoria: 0,
+                    stock_inicial: 5
                 },
                 {
                     codigo: 'prod6',
@@ -86,7 +92,8 @@ export const listaCategorias = () => {
                     precio: 3.75,
                     status: 'activo',
                     existencias: 25,
-                    id_categoria: 0
+                    id_categoria: 0,
+                    stock_inicial: 25
                 }
             ]
         },
@@ -101,7 +108,8 @@ export const listaCategorias = () => {
                     precio: 10.50,
                     status: 'activo',
                     existencias: 5,
-                    id_categoria: 0
+                    id_categoria: 0,
+                    stock_inicial: 5
                 },
                 {
                     codigo: 'prod8',
@@ -110,7 +118,8 @@ export const listaCategorias = () => {
                     precio: 20.60,
                     status: 'activo',
                     existencias: 7,
-                    id_categoria: 0
+                    id_categoria: 0,
+                    stock_inicial: 7
                 }
             ]
         }

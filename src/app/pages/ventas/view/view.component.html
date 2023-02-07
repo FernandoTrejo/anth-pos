@@ -93,9 +93,16 @@
                     </div>
                     <div class="row mb-2" style="width: 100%; overflow-x: auto;" *ngIf="statusTransaccion != statusCerrada">
                         <div class="col d-flex gap-2">
-                            <app-modal-pago-efectivo [codigoVenta]="codigoVenta"></app-modal-pago-efectivo>
-                            <div>
-                                <button class="btn btn-block btn-info">Tarjeta</button>
+                            <div *ngFor="let pago of pagosPermitidos | async">
+                                <div [ngSwitch]="pago.codigo">
+                                    <app-modal-pago-efectivo [codigoVenta]="codigoVenta"
+                                        *ngSwitchCase="tipoEfectivo"></app-modal-pago-efectivo>
+
+                                    <app-modal-pago-tarjeta [codigoVenta]="codigoVenta"
+                                        *ngSwitchCase="tipoTarjeta"></app-modal-pago-tarjeta>
+
+                                    <button type="button" class="btn btn-block btn-info mb-3" *ngSwitchDefault>{{pago.titulo}}</button>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -13,6 +13,7 @@ import { TipoTransacciones } from 'src/app/utilities/tipo_transacciones';
 import { Transacciones } from 'src/app/storage/schema/transacciones/transacciones';
 import { Status } from 'src/app/utilities/status';
 import { UpdateOrderService } from 'src/app/services/orders/update-order.service';
+import { GetAllowedPaymentTypesService } from 'src/app/services/payments/get-allowed-payment-types.service';
 
 @Component({
   selector: 'app-view',
@@ -45,6 +46,10 @@ export class ViewComponent implements OnInit, OnDestroy {
   private sub: any;
   statusCerrada = Status.Closed;
 
+  pagosPermitidos = liveQuery(() => this.getPagosPermitidos());
+  tipoEfectivo = 'efectivo';
+  tipoTarjeta = 'tarjeta';
+
   async ngOnInit() {
     this.sub = this.route.params.subscribe((params: { [x: string]: string; }) => {
       this.codigoVenta = params['codigo_venta'];
@@ -70,7 +75,8 @@ export class ViewComponent implements OnInit, OnDestroy {
     private findCorteDiario: FindActiveCorteDiarioService,
     private updateOrder: UpdateOrderService,
     private route: ActivatedRoute,
-    private findOrder: FindByCodeService
+    private findOrder: FindByCodeService,
+    private paymentTypeFinder: GetAllowedPaymentTypesService
   ) {
   }
 
@@ -120,5 +126,20 @@ export class ViewComponent implements OnInit, OnDestroy {
   async getOrderData(codigo : string){
     const order = await this.findOrder.find(codigo);
     return order;
+  }
+
+  async getPagosPermitidos() {
+    const response = await this.paymentTypeFinder.get();
+    if (response) {
+      return response;
+    }
+
+    return [];
+  }
+
+  async pagoEsPermitido(codigo: string) {
+    const pagos = await this.getPagosPermitidos();
+    console.log(pagos.find(pago => pago.codigo === codigo));
+    return pagos.find(pago => pago.codigo === codigo);
   }
 }

@@ -39,7 +39,7 @@ export class ModalProductosComponent {
     if (productInOrder) {
       if (productInOrder.id) {
         const nuevaCantidad = Number(productInOrder.cantidad) + 1;
-        await this.quantityChanger.change(productInOrder.id, Number(nuevaCantidad), Number(nuevaCantidad * precio));
+        await this.quantityChanger.change(productInOrder.codigo_producto, productInOrder.id, Number(nuevaCantidad), Number(nuevaCantidad * precio));
         this.notify.success('Se ha incrementado la cantidad de este producto');
       }
       return;

@@ -7,4 +7,5 @@ export interface Pago {
     numero_autorizacion: string;
     numero_telefono: string;
     ultimos_digitos_tarjeta: string;
+    vuelto?: number;
 }
