@@ -9,6 +9,8 @@
 
     <div class="py-4">
         <app-btn-nueva-venta></app-btn-nueva-venta>
+
+        <app-btn-apertura-caja *ngIf="(corteActivo | async) == null"></app-btn-apertura-caja>
     </div>
 
     <div class="row">

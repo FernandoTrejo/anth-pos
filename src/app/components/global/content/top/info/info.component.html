@@ -2,7 +2,7 @@
     <div class="container-fluid px-0">
         <div class="d-flex justify-content-between w-100" id="navbarSupportedContent">
             <div class="d-flex align-items-center">
-                <div class="card bg-success border-0 shadow mx-1">
+                <div class="card bg-success border-0 shadow mx-1" *ngIf="(corteParcial | async) != null">
                     <div class="card-body">
                         <h2 class="h6 text-gray-200 mb-0">Corte: {{(corteParcial | async)?.id}}</h2>
                     </div>

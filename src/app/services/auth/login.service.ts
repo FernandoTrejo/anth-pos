@@ -33,7 +33,7 @@ export class LoginService{
       status: StatusSesion.Activa
     });
 
-    await this.initService.init();
+    // await this.initService.init();
 
     return user;
   }

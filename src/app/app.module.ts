@@ -33,6 +33,7 @@ import { CortesComponent } from './components/global/content/top/cortes/cortes.c
 import { CorteParcialModalComponent } from './components/global/content/top/cortes/corte-parcial-modal/corte-parcial-modal.component';
 import { CorteDiarioModalComponent } from './components/global/content/top/cortes/corte-diario-modal/corte-diario-modal.component';
 import { CorteMensualModalComponent } from './components/global/content/top/cortes/corte-mensual-modal/corte-mensual-modal.component';
+import { BtnAperturaCajaComponent } from './pages/dashboard/btn-apertura-caja/btn-apertura-caja.component';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { CorteMensualModalComponent } from './components/global/content/top/cort
     CortesComponent,
     CorteParcialModalComponent,
     CorteDiarioModalComponent,
-    CorteMensualModalComponent
+    CorteMensualModalComponent,
+    BtnAperturaCajaComponent
   ],
   imports: [
     BrowserModule,
