@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { db } from 'src/app/storage/db';
-import { CorteTipoPago } from 'src/app/storage/schema/cortes/cortes_tipo_pagos';
+import { CorteTipoPago, TipoCorte } from 'src/app/storage/schema/cortes/cortes_tipo_pagos';
 import { CortesStatus } from 'src/app/utilities/cortes_status';
 import { Message, MessageType } from 'src/app/utilities/messages';
 import { FindActiveCorteDiarioService } from '../corte-diario/find-active-corte-diario.service';
@@ -34,7 +34,16 @@ export class CloseCorteDiarioService {
     }
 
 
-    const response = await db.transaction('rw', db.cortesParciales, db.cortesDiarios, db.cortesTipoPagos, async () => {
+    const response = await db.transaction('rw', db.cortesFinalizados,db.cortesParciales, db.cortesDiarios, db.cortesTipoPagos, async () => {
+      await db.cortesFinalizados.add({
+        codigo: activeZ.codigo,
+        numero_corte: activeZ.numero_corte,
+        fecha_inicio: activeZ.fecha_inicio,
+        fecha_fin: new Date(),
+        usuario_id: activeZ.usuario_id,
+        tipo_corte: TipoCorte.Diario
+      });
+      
       montos.forEach(m => m.codigo_corte = activeZ.codigo);
       await db.cortesTipoPagos.bulkAdd(montos);
       await db.cortesParciales.where({ codigo: activeX.codigo }).modify({ status: CortesStatus.Inactive });

@@ -14,8 +14,8 @@ import { IndexComponent as CortesIndex } from './pages/cortes/index/index.compon
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService] },
   { path: 'productos', component: ProductosComponent, canActivate: [AuthGuardService] },
-  { path: 'sesiones', component: SesionesIndex},
-  { path: 'cortes', component: CortesIndex},
+  { path: 'sesiones', component: SesionesIndex, canActivate: [AuthGuardService]},
+  { path: 'cortes', component: CortesIndex, canActivate: [AuthGuardService]},
   { path: 'ventas', component: VentasIndexComponent, canActivate: [CorteActivateGuardService] },
   { path: 'ventas/nueva', component: VentasNewComponent, canActivate: [CorteActivateGuardService] },
   { path: 'ventas/:codigo_venta', component: VentasViewComponent, canActivate: [CorteActivateGuardService] },

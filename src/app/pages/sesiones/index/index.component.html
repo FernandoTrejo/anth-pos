@@ -36,8 +36,8 @@
                     <tbody>
                         <tr *ngFor="let sesion of sesionesAuth | async">
                             <td>{{format(sesion.fecha_hora_ingreso)}}</td>
-                            <td>{{sesion.codigo_usuario}}</td>
-                            <td>{{sesion.fecha_hora_salida}}</td>
+                            <td>{{sesion.datosUser?.nombre}}</td>
+                            <td>{{format(sesion.fecha_hora_salida)}}</td>
                             <td></td>
                         </tr>
                     </tbody>

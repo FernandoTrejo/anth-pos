@@ -1,3 +1,6 @@
+import { Empleado } from "../empleados/empleados";
+import { TipoCorte } from "./cortes_tipo_pagos";
+
 export interface CorteMensual{
     id? : number;
     codigo : string;
@@ -5,6 +8,7 @@ export interface CorteMensual{
     fecha_inicio: Date;
     fecha_fin?: Date;
     status: string;
+    usuario_id: number;
 }
 
 export interface CorteDiario{
@@ -15,6 +19,7 @@ export interface CorteDiario{
     fecha_inicio: Date;
     fecha_fin?: Date;
     status: string;
+    usuario_id: number;
 }
 
 export interface CorteParcial{
@@ -25,4 +30,18 @@ export interface CorteParcial{
     fecha_inicio: Date;
     fecha_fin?: Date;
     status: string;
+    usuario_id: number;
+}
+
+export interface CorteFinalizado{
+    id? : number;
+    codigo : string;
+    numero_corte : string;
+    fecha_inicio: Date;
+    fecha_fin: Date;
+    usuario_id: number;
+    tipo_corte: TipoCorte;
+
+
+    datosUser? : Empleado;
 }

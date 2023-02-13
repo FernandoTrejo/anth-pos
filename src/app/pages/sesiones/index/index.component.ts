@@ -25,7 +25,10 @@ export class IndexComponent {
 
   constructor(private sFinder : FindSesionesService){}
 
-  format(date : Date){
+  format(date : Date | undefined){
+    if(date == undefined){
+      return '';
+    }
     return formatDateTime(date);
   }
 }

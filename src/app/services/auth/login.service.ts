@@ -32,7 +32,7 @@ export class LoginService{
 
     //activar nueva sesion
     await db.sesionesAuth.add({
-      codigo_usuario: user.codigo,
+      id_usuario: user.id,
       fecha_hora_ingreso: new Date(),
       status: StatusSesion.Activa
     });
