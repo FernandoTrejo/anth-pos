@@ -9,5 +9,6 @@ export interface CorteTipoPago{
     codigo_corte?: string;
     tipo: TipoCorte,
     codigo_tipo_pago: string,
-    monto: number
+    monto: number,
+    fecha: Date
 }

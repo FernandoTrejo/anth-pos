@@ -31,7 +31,8 @@ export class CorteParcialModalComponent {
       corteParcialPagos.push({
         monto: cantidad,
         codigo_tipo_pago: codigoPago,
-        tipo: TipoCorte.Parcial
+        tipo: TipoCorte.Parcial,
+        fecha: new Date()
       });
     });
 

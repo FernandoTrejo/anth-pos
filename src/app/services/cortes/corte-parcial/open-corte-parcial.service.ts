@@ -4,19 +4,29 @@ import { CorteParcial } from 'src/app/storage/schema/cortes/cortes';
 import { CortesStatus } from 'src/app/utilities/cortes_status';
 import { v4 } from 'uuid';
 import { FindActiveCorteDiarioService } from '../corte-diario/find-active-corte-diario.service';
+import { FindActiveCorteParcialService } from './find-active-corte-parcial.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OpenCorteParcialService {
 
-  constructor(private ActiveCorteDiario: FindActiveCorteDiarioService) { }
+  constructor(
+    private ActiveCorteDiario: FindActiveCorteDiarioService,
+    private xFinder : FindActiveCorteParcialService
+    ) { }
 
   async open() {
     const corteDiario = await this.ActiveCorteDiario.find();
     if (!corteDiario) {
       return null;
     }
+
+    const corteParcial = await this.xFinder.find();
+    if (corteParcial) {
+      return null; // ya existe
+    }
+
 
     //inactivar todos los cortes anteriores
     await db.cortesParciales.toCollection().modify({status: CortesStatus.Inactive});

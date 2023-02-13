@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { db } from 'src/app/storage/db';
 import { StatusSesion } from 'src/app/storage/schema/auth/sesiones';
+import { FindActiveCorteDiarioService } from '../cortes/corte-diario/find-active-corte-diario.service';
 import { InitService } from '../init/init.service';
 
 @Injectable({
@@ -8,7 +9,10 @@ import { InitService } from '../init/init.service';
 })
 export class LoginService{
 
-  constructor(private initService : InitService) { }
+  constructor(
+    private initService : InitService,
+    private zFinder : FindActiveCorteDiarioService
+    ) { }
 
   async login(username: string, pass: string){
     const userList = await db.empleados.where({
@@ -33,7 +37,12 @@ export class LoginService{
       status: StatusSesion.Activa
     });
 
-    // await this.initService.init();
+    const zCorte = await this.zFinder.find();
+    if(!zCorte){
+      return user;
+    }
+    
+    await this.initService.init();
 
     return user;
   }

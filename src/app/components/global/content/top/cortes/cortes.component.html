@@ -55,7 +55,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <app-corte-parcial-modal></app-corte-parcial-modal>
+                <app-corte-parcial-modal *ngIf="(corteParcial | async) != null"></app-corte-parcial-modal>
+                <div *ngIf="(corteParcial | async) == null">
+                    <h5 class="text-danger">No se ha abierto caja</h5>
+                </div>
             </div>
         </div>
     </div>
@@ -73,7 +76,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <app-corte-diario-modal></app-corte-diario-modal>
+                <app-corte-diario-modal *ngIf="(corteDiario | async) != null"></app-corte-diario-modal>
+                <div *ngIf="(corteDiario | async) == null">
+                    <h5 class="text-danger">No se ha abierto caja</h5>
+                </div>
             </div>
         </div>
     </div>

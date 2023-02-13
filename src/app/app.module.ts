@@ -34,8 +34,8 @@ import { CorteParcialModalComponent } from './components/global/content/top/cort
 import { CorteDiarioModalComponent } from './components/global/content/top/cortes/corte-diario-modal/corte-diario-modal.component';
 import { CorteMensualModalComponent } from './components/global/content/top/cortes/corte-mensual-modal/corte-mensual-modal.component';
 import { BtnAperturaCajaComponent } from './pages/dashboard/btn-apertura-caja/btn-apertura-caja.component';
-
-
+import { IndexComponent as SesionesIndex } from './pages/sesiones/index/index.component';
+import { IndexComponent as CortesIndex } from './pages/cortes/index/index.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,7 +68,9 @@ import { BtnAperturaCajaComponent } from './pages/dashboard/btn-apertura-caja/bt
     CorteParcialModalComponent,
     CorteDiarioModalComponent,
     CorteMensualModalComponent,
-    BtnAperturaCajaComponent
+    BtnAperturaCajaComponent,
+    CortesIndex,
+    SesionesIndex
   ],
   imports: [
     BrowserModule,
