@@ -18,7 +18,7 @@ export class CloseCorteDiarioService {
 
   async close(montos: CorteTipoPago[]): Promise<Message> {
     const activeZ = await this.zFinder.find();
-    const activeX = await this.zFinder.find();
+    const activeX = await this.xFinder.find();
     if (!activeZ) {
       return {
         title: 'No existe ningun corte Z activo',
@@ -36,15 +36,15 @@ export class CloseCorteDiarioService {
 
     const response = await db.transaction('rw', db.cortesFinalizados,db.cortesParciales, db.cortesDiarios, db.cortesTipoPagos, async () => {
       await db.cortesFinalizados.add({
-        codigo: activeZ.codigo,
-        numero_corte: activeZ.numero_corte,
-        fecha_inicio: activeZ.fecha_inicio,
+        codigo: activeX.codigo,
+        numero_corte: activeX.numero_corte,
+        fecha_inicio: activeX.fecha_inicio,
         fecha_fin: new Date(),
-        usuario_id: activeZ.usuario_id,
+        usuario_id: activeX.usuario_id,
         tipo_corte: TipoCorte.Diario
       });
       
-      montos.forEach(m => m.codigo_corte = activeZ.codigo);
+      montos.forEach(m => m.codigo_corte = activeX.codigo);
       await db.cortesTipoPagos.bulkAdd(montos);
       await db.cortesParciales.where({ codigo: activeX.codigo }).modify({ status: CortesStatus.Inactive });
       await db.cortesDiarios.where({ codigo: activeZ.codigo }).modify({ status: CortesStatus.Inactive });

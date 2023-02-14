@@ -28,8 +28,8 @@
                     <thead>
                         <tr>
                             <th>N° Corte</th>
-                            <th>Fecha Inicio</th>
-                            <th>Fecha Fin</th>
+                            <!-- <th>Fecha Inicio</th> -->
+                            <th>Fecha Corte</th>
                             <th>Usuario</th>
                             <th>Tipo de Corte</th>
                             <th></th>
@@ -37,8 +37,10 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let corte of cortes | async">
-                            <td>{{corte.codigo}}</td>
-                            <td>{{format(corte.fecha_inicio)}}</td>
+                            <td>
+                                <a routerLink="/cortes/{{corte.codigo}}" routerLinkActive="active" ariaCurrentWhenActive="page">{{corte.codigo}}</a>
+                            </td>
+                            <!-- <td>{{format(corte.fecha_inicio)}}</td> -->
                             <td>{{format(corte.fecha_fin)}}</td>
                             <td>{{corte.datosUser?.nombre}}</td>
                             <td>{{corte.tipo_corte}}</td>

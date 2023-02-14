@@ -10,12 +10,14 @@ import { AuthGuardService } from './services/auth/auth-guard.service';
 import { CorteActivateGuardService } from './services/auth/corte-activate-guard.service';
 import { IndexComponent as SesionesIndex } from './pages/sesiones/index/index.component';
 import { IndexComponent as CortesIndex } from './pages/cortes/index/index.component';
+import { ViewComponent as CortesView } from './pages/cortes/view/view.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService] },
   { path: 'productos', component: ProductosComponent, canActivate: [AuthGuardService] },
   { path: 'sesiones', component: SesionesIndex, canActivate: [AuthGuardService]},
   { path: 'cortes', component: CortesIndex, canActivate: [AuthGuardService]},
+  { path: 'cortes/:codigo_corte', component: CortesView, canActivate: [AuthGuardService]},
   { path: 'ventas', component: VentasIndexComponent, canActivate: [CorteActivateGuardService] },
   { path: 'ventas/nueva', component: VentasNewComponent, canActivate: [CorteActivateGuardService] },
   { path: 'ventas/:codigo_venta', component: VentasViewComponent, canActivate: [CorteActivateGuardService] },
