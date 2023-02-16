@@ -12,7 +12,7 @@ export class ChangeQuantityService {
 
   async change(prodCode : string, id : number, quantity: number, subtotal: number){
 
-    const response = await db.transaction('rw', db.productosOrden, db.productos, async () => {
+    const response = await db.transaction('rw', db.productosOrden, db.productos, db.cortesParciales, async () => {
       
       // actualizar cantidad en orden
       await db.productosOrden.update(id, {

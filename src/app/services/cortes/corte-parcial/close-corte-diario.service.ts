@@ -34,7 +34,7 @@ export class CloseCorteDiarioService {
     }
 
 
-    const response = await db.transaction('rw', db.cortesFinalizados,db.cortesParciales, db.cortesDiarios, db.cortesTipoPagos, async () => {
+    const response = await db.transaction('rw', db.cortesFinalizados,db.cortesParciales, db.cortesDiarios, db.cortesTipoPagos, db.productos, async () => {
       await db.cortesFinalizados.add({
         codigo: activeX.codigo,
         numero_corte: activeX.numero_corte,
@@ -48,7 +48,9 @@ export class CloseCorteDiarioService {
       await db.cortesTipoPagos.bulkAdd(montos);
       await db.cortesParciales.where({ codigo: activeX.codigo }).modify({ status: CortesStatus.Inactive });
       await db.cortesDiarios.where({ codigo: activeZ.codigo }).modify({ status: CortesStatus.Inactive });
-      
+      await db.productos.toCollection().modify(producto => {
+        producto.stock_inicial = producto.existencias;
+      });
       return {
         title: 'Se ha cerrado el corte de forma correcta',
         type: MessageType.success

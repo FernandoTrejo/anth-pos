@@ -1,9 +1,12 @@
 import { Component, ElementRef, ViewChildren } from '@angular/core';
+import { Router } from '@angular/router';
 import { liveQuery } from 'dexie';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { CloseCorteDiarioService } from 'src/app/services/cortes/corte-parcial/close-corte-diario.service';
 import { NotifyService } from 'src/app/services/Notifications/notify.service';
 import { GetAllowedPaymentTypesService } from 'src/app/services/payments/get-allowed-payment-types.service';
 import { CorteTipoPago, TipoCorte } from 'src/app/storage/schema/cortes/cortes_tipo_pagos';
+import { MessageType } from 'src/app/utilities/messages';
 
 @Component({
   selector: 'app-corte-diario-modal',
@@ -15,7 +18,9 @@ export class CorteDiarioModalComponent {
   tiposPagos = liveQuery(() => this.getPayments());
   constructor(private paymentTypesFinder: GetAllowedPaymentTypesService,
     private zCloser : CloseCorteDiarioService,
-    private notifier : NotifyService
+    private notifier : NotifyService,
+    private auth : AuthService,
+    private router : Router
     ) { }
 
   async getPayments() {
@@ -38,5 +43,9 @@ export class CorteDiarioModalComponent {
 
     const response = await this.zCloser.close(corteDiarioPagos);
     this.notifier.show(response.type, response.title);
+    if(response.type == MessageType.success){
+      await this.auth.logout();
+      this.router.navigate(['login']);
+    }
   }
 }

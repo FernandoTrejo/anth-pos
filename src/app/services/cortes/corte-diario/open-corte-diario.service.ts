@@ -13,9 +13,9 @@ import { FindActiveCorteDiarioService } from './find-active-corte-diario.service
 export class OpenCorteDiarioService {
 
   constructor(
-    private ActiveCorteMensual: FindActiveCorteMensualService, 
+    private ActiveCorteMensual: FindActiveCorteMensualService,
     private ActiveCorteDiario: FindActiveCorteDiarioService,
-    private auth : AuthService) { }
+    private auth: AuthService) { }
 
   async open() {
     const corteDiario = await this.ActiveCorteDiario.find();
@@ -39,8 +39,22 @@ export class OpenCorteDiarioService {
         usuario_id: (user.id) ? user.id : 0
       };
 
-      const id = await db.cortesDiarios.add(corte);
-      return id;
+
+      const response = await db.transaction('rw', db.cortesDiarios, db.transacciones, db.pagosOrden, db.productos, async () => {
+        const id = await db.cortesDiarios.add(corte);
+
+        //actualizar la cantidad inicial de inventario
+        await db.productos.toCollection().modify(producto => {
+          producto.stock_inicial = producto.existencias;
+        })
+
+        return id;
+      }).catch(err => {
+        console.log(err);
+        return null;
+      })
+
+      return response;
     }
 
     return null;

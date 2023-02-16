@@ -5,5 +5,6 @@ export interface ProductoOrden{
     precio: number,
     cantidad: number,
     subtotal: number,
-    codigo_orden: string
+    codigo_orden: string,
+    codigo_corte_x: string;
 }

@@ -11,7 +11,7 @@ export class DeleteProductsService {
   constructor(private actualStock : CalculateActualStockBasedOnProductOrdersService) { }
 
   async delete(orderProductId : number, prodCode : string) : Promise<Message>{
-    const response  = await db.transaction('rw', db.productos, db.productosOrden, async () => {
+    const response  = await db.transaction('rw', db.productos, db.productosOrden, db.cortesParciales, async () => {
       await db.productosOrden.delete(orderProductId);
       await this.actualStock.calculate(prodCode);
 
