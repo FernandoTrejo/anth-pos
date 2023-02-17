@@ -18,7 +18,10 @@
                 </td>
                 <td>
                     <input min="1" step="1" type="number" class="form-control" name="" value="{{producto.cantidad}}"
-                        (change)="changeQuantity($event, producto.id, producto.precio, producto.codigo_producto, producto.cantidad)">
+                        (change)="changeQuantity($event, producto.id, producto.precio, producto.codigo_producto, producto.cantidad)" *ngIf="statusTransaccion != statusCerrada && statusTransaccion != statusAnulada">
+                    <span *ngIf="statusTransaccion == statusCerrada || statusTransaccion == statusAnulada">
+                        {{producto.cantidad}}
+                    </span>
                 </td>
                 <td>
                     ${{producto.precio}}
@@ -29,7 +32,7 @@
                 <td class="d-flex">
                     <button class="btn btn-sm btn-outline-danger p-1"
                         (click)="deleteOrderProduct( producto.codigo_producto, producto.id)"
-                        *ngIf="statusTransaccion != statusCerrada">
+                        *ngIf="statusTransaccion != statusCerrada && statusTransaccion != statusAnulada">
                         <svg class="icon icon-xxs" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                             stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round"

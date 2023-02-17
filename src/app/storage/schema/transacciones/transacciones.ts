@@ -1,3 +1,4 @@
+
 export interface Transacciones {
     id?: number;
     codigo: string;
@@ -11,4 +12,5 @@ export interface Transacciones {
     corte_mensual : string;
     corte_diario : string;
     corte_parcial : string;
+    tipo_documento_clave : string;
 }

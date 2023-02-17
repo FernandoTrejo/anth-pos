@@ -18,6 +18,7 @@ export class TablaProductosAgregadosComponent {
   @Input() statusTransaccion: string = '';
   productosAgregados = liveQuery(() => this.getOrderProducts());
   statusCerrada = Status.Closed;
+  statusAnulada = Status.Nulled;
 
   constructor(
     private findOrderProductsService: FindProductsService,

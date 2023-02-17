@@ -50,6 +50,8 @@ export class ViewComponent implements OnInit, OnDestroy {
   tipoEfectivo = 'efectivo';
   tipoTarjeta = 'tarjeta';
 
+  documentoSeleccionado = 'ticket_venta';
+
   async ngOnInit() {
     this.sub = this.route.params.subscribe((params: { [x: string]: string; }) => {
       this.codigoVenta = params['codigo_venta'];
@@ -59,6 +61,7 @@ export class ViewComponent implements OnInit, OnDestroy {
     if(datosOrden){
       this.nombreCliente = datosOrden?.nombre_cliente;
       this.statusTransaccion = datosOrden.status;
+      this.documentoSeleccionado = datosOrden.tipo_documento_clave;
     }
   }
 
@@ -109,7 +112,8 @@ export class ViewComponent implements OnInit, OnDestroy {
       status: status,
       corte_diario: corteDiario.codigo,
       corte_parcial: corteParcial.codigo,
-      corte_mensual: corteMensual.codigo
+      corte_mensual: corteMensual.codigo,
+      tipo_documento_clave: ''
     };
     await this.updateOrder.update(this.codigoVenta, transaccion);
     this.router.navigate(['/ventas']);

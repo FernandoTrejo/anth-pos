@@ -1,10 +1,10 @@
 
 <app-navbar></app-navbar>
 
-<app-sidebar></app-sidebar>
+<!-- <app-sidebar></app-sidebar> -->
 
 
-<main class="content">
+<div class="fluid-container mx-3">
     <app-info></app-info>
 
     <div class="py-4">
@@ -43,8 +43,8 @@
 
     <div class="row">
         <div class="col-md-6 mb-2">
-            <p class="mb-2"><b class="p-2 h5">Productos</b></p>
             <div class="card border-0 shadow">
+                <p class="mt-3 mx-4"><b class="p-2 h5">Productos</b></p>
                 <div class="card-header d-flex justify-content-start gap-2" *ngIf="statusTransaccion != statusCerrada">
                     <!-- contenido de productos -->
                     <app-modal-productos [codigoVenta]="codigoVenta"></app-modal-productos>
@@ -60,13 +60,13 @@
         </div>
 
         <div class="col-md-6 mb-2">
-            <p class="mb-2"><b class="p-2 h5">Detalles</b></p>
             <div class="card border-0 shadow">
+                <p class="mt-3 mx-4"><b class="p-2 h5">Detalles</b></p>
                 <div class="card-header d-flex justify-content-between gap-4" *ngIf="statusTransaccion != statusCerrada">
                     <select class="form-select mb-3" id="country" aria-label="Default select example">
-                        <option value="ticket_venta" selected>Ticket de Venta</option>
-                        <option value="factura_consumidor_final" disabled>Factura Consumidor Final</option>
-                        <option value="credito_fiscal" disabled>Credito Fiscal</option>
+                        <option value="ticket_venta">Ticket de Venta</option>
+                        <option value="factura_consumidor_final">Factura Consumidor Final</option>
+                        <option value="credito_fiscal">Credito Fiscal</option>
                     </select>
 
                     <div class="input-group mb-3">
@@ -116,4 +116,4 @@
             </div>
         </div>
     </div>
-</main>
+</div>

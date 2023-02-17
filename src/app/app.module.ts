@@ -37,6 +37,9 @@ import { BtnAperturaCajaComponent } from './pages/dashboard/btn-apertura-caja/bt
 import { IndexComponent as SesionesIndex } from './pages/sesiones/index/index.component';
 import { IndexComponent as CortesIndex } from './pages/cortes/index/index.component';
 import { ViewComponent as CortesView } from './pages/cortes/view/view.component';
+import { SectionConsumidorFinalComponent } from './pages/ventas/new/section-consumidor-final/section-consumidor-final.component';
+import { SectionCreditoFiscalComponent } from './pages/ventas/new/section-credito-fiscal/section-credito-fiscal.component';
+import { DevolucionesIndexComponent } from './pages/devoluciones/devoluciones-index/devoluciones-index.component';
 
 
 @NgModule({
@@ -74,7 +77,10 @@ import { ViewComponent as CortesView } from './pages/cortes/view/view.component'
     BtnAperturaCajaComponent,
     CortesIndex,
     SesionesIndex,
-    CortesView
+    CortesView,
+    SectionConsumidorFinalComponent,
+    SectionCreditoFiscalComponent,
+    DevolucionesIndexComponent
   ],
   imports: [
     BrowserModule,

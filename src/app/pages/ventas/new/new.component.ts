@@ -14,6 +14,7 @@ import { GetAllowedPaymentTypesService } from 'src/app/services/payments/get-all
 import { TipoPagoPermitido } from 'src/app/storage/schema/pagos/tipos_pago';
 import { Transacciones } from 'src/app/storage/schema/transacciones/transacciones';
 import { Status } from 'src/app/utilities/status';
+import { TipoDocumentos } from 'src/app/utilities/tipo_documentos';
 import { TipoTransacciones } from 'src/app/utilities/tipo_transacciones';
 import { v4 as v4uuid } from 'uuid';
 @Component({
@@ -44,6 +45,8 @@ export class NewComponent {
   pagosPermitidos = liveQuery(() => this.getPagosPermitidos());
   tipoEfectivo = 'efectivo';
   tipoTarjeta = 'tarjeta';
+
+  documentoSeleccionado = 'ticket_venta';
 
   constructor(
     private findProducts: FindProductsService,
@@ -87,7 +90,8 @@ export class NewComponent {
       status: Status.Closed,
       corte_diario: corteDiario.codigo,
       corte_parcial: corteParcial.codigo,
-      corte_mensual: corteMensual.codigo
+      corte_mensual: corteMensual.codigo,
+      tipo_documento_clave: this.documentoSeleccionado
     };
     await this.processOrder.process(transaccion);
     this.router.navigate(['/ventas']);
@@ -115,7 +119,8 @@ export class NewComponent {
       status: Status.Open,
       corte_diario: corteDiario.codigo,
       corte_parcial: corteParcial.codigo,
-      corte_mensual: corteMensual.codigo
+      corte_mensual: corteMensual.codigo,
+      tipo_documento_clave: this.documentoSeleccionado
     };
     await this.processOrder.process(transaccion);
     this.router.navigate(['/ventas']);
@@ -140,4 +145,7 @@ export class NewComponent {
     return pagos.find(pago => pago.codigo === codigo);
   }
 
+  changeDocSelection(event : any){
+    this.documentoSeleccionado = (event.target.value);
+  }
 }

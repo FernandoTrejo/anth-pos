@@ -32,7 +32,8 @@ export class ModalPagoEfectivoComponent {
       codigo_orden: this.codigoVenta,
       numero_autorizacion: '',
       numero_telefono: '',
-      ultimos_digitos_tarjeta: ''
+      ultimos_digitos_tarjeta: '',
+      vuelto: this.vuelto
     }
 
     await this.storePaymentService.store(payment);

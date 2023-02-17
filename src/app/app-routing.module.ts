@@ -11,6 +11,7 @@ import { CorteActivateGuardService } from './services/auth/corte-activate-guard.
 import { IndexComponent as SesionesIndex } from './pages/sesiones/index/index.component';
 import { IndexComponent as CortesIndex } from './pages/cortes/index/index.component';
 import { ViewComponent as CortesView } from './pages/cortes/view/view.component';
+import { DevolucionesIndexComponent } from './pages/devoluciones/devoluciones-index/devoluciones-index.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService] },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'ventas', component: VentasIndexComponent, canActivate: [CorteActivateGuardService] },
   { path: 'ventas/nueva', component: VentasNewComponent, canActivate: [CorteActivateGuardService] },
   { path: 'ventas/:codigo_venta', component: VentasViewComponent, canActivate: [CorteActivateGuardService] },
+  { path: 'devoluciones', component: DevolucionesIndexComponent, canActivate: [CorteActivateGuardService]},
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 ];
