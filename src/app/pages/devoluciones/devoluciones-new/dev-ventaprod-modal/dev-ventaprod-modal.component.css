@@ -1,0 +1,8 @@
+.selected-product{
+    background: rgba(0, 0, 255, 0.609);
+    color: #fff;
+}
+
+.pointer{
+    cursor: pointer;
+}

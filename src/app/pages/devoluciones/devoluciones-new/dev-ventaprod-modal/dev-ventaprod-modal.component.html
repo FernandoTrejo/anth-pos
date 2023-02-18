@@ -1,23 +1,43 @@
 <div class="table-responsive">
-    <table class="table table-striped">
+    <table class="table">
         <thead>
             <tr>
                 <th>Producto</th>
                 <th>Cantidad</th>
                 <th>Precio</th>
                 <th>Subtotal</th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let producto of ventaProductos | async">
-                <td>
-                    <a (click)="agregarProductoDevolucion(producto.id)">{{producto.nombre_producto}}</a>
+                <td (click)="agregarProductoDevolucion(producto.codigo_producto, $event)" class="pointer">
+                    {{producto.nombre_producto}}
                 </td>
-                <td>{{producto.cantidad}}</td>
-                <td>{{formatMoney(producto.precio)}}</td>
-                <td>{{formatMoney(producto.subtotal)}}</td>
-                <td></td>
+                <td>
+                    <span class="w-100 text-center">
+                        {{producto.cantidad}}
+                    </span>
+                    <input 
+                        type="number" 
+                        class="d-none rounded text-center" 
+                        max="{{producto.cantidad}}"
+                        min="1" 
+                        value="{{producto.cantidad}}"
+                        (click)="actualizarCantidadDevolucion(producto.codigo_producto, producto.cantidad, $event)">
+                </td>
+                <td>
+                    <span>
+                        {{formatMoney(producto.precio)}}
+                    </span>
+                </td>
+                <td>
+                    <span>
+                        {{formatMoney(producto.subtotal)}}
+                    </span>
+                    <span class="d-none">
+                        {{formatMoney(producto.subtotal)}}
+                    </span>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -31,12 +51,12 @@
 
 <div class="row">
     <div class="col d-flex justify-content-between">
-        <p>Total Devolucion: <b>$0.00</b></p>
+        <p>Total Devolucion: <b>{{totalDevolucion()}}</b></p>
     </div>
 </div>
 
 <div class="row">
     <div class="col d-flex justify-content-between">
-        <button class="btn btn-secondary">Realizar Devolucion</button>
+        <button class="btn btn-secondary" data-bs-dismiss="modal" (click)="storeDevolucion()">Realizar Devolucion</button>
     </div>
 </div>
