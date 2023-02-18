@@ -40,6 +40,8 @@ import { ViewComponent as CortesView } from './pages/cortes/view/view.component'
 import { SectionConsumidorFinalComponent } from './pages/ventas/new/section-consumidor-final/section-consumidor-final.component';
 import { SectionCreditoFiscalComponent } from './pages/ventas/new/section-credito-fiscal/section-credito-fiscal.component';
 import { DevolucionesIndexComponent } from './pages/devoluciones/devoluciones-index/devoluciones-index.component';
+import { DevolucionesNewComponent } from './pages/devoluciones/devoluciones-new/devoluciones-new.component';
+import { DevVentaprodModalComponent } from './pages/devoluciones/devoluciones-new/dev-ventaprod-modal/dev-ventaprod-modal.component';
 
 
 @NgModule({
@@ -80,7 +82,9 @@ import { DevolucionesIndexComponent } from './pages/devoluciones/devoluciones-in
     CortesView,
     SectionConsumidorFinalComponent,
     SectionCreditoFiscalComponent,
-    DevolucionesIndexComponent
+    DevolucionesIndexComponent,
+    DevolucionesNewComponent,
+    DevVentaprodModalComponent
   ],
   imports: [
     BrowserModule,

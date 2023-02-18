@@ -1,0 +1,42 @@
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Subtotal</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let producto of ventaProductos | async">
+                <td>
+                    <a (click)="agregarProductoDevolucion(producto.id)">{{producto.nombre_producto}}</a>
+                </td>
+                <td>{{producto.cantidad}}</td>
+                <td>{{formatMoney(producto.precio)}}</td>
+                <td>{{formatMoney(producto.subtotal)}}</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="row">
+    <div class="col d-flex justify-content-between">
+        <p>Se han seleccionado <b>{{productosDevolucion.length}}</b> producto(s) para devolver</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col d-flex justify-content-between">
+        <p>Total Devolucion: <b>$0.00</b></p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col d-flex justify-content-between">
+        <button class="btn btn-secondary">Realizar Devolucion</button>
+    </div>
+</div>

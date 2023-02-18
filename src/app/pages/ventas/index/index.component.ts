@@ -5,6 +5,7 @@ import { FindOrdersCorteActualService } from 'src/app/services/orders/find-order
 import { Status } from 'src/app/utilities/status';
 import { TipoTransacciones } from 'src/app/utilities/tipo_transacciones';
 import { formatDate } from 'src/app/utilities/date';
+import { Money } from 'src/app/utilities/money';
 
 @Component({
   selector: 'app-index',
@@ -26,6 +27,10 @@ export class IndexComponent {
 
   format(date: Date) {
     return formatDate(date);
+  }
+
+  formatMoney(quantity : number){
+    return (new Money(quantity)).toString();
   }
 
   //breadcrumb

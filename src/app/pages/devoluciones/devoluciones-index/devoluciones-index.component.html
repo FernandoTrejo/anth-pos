@@ -8,7 +8,7 @@
     <app-info></app-info>
 
     <div class="py-4">
-        <!-- <app-breadcrumb [items] = breadcrumbItems></app-breadcrumb> -->
+        <app-breadcrumb [items] = breadcrumbItems></app-breadcrumb>
         <div class="d-flex justify-content-between w-100 flex-wrap">
             <div class="mb-3 mb-lg-0">
                 <h1 class="h4">Devoluciones</h1>
@@ -46,28 +46,28 @@
                     </thead>
                     <tbody>
                         <!-- Item -->
-                        <!-- <tr *ngFor="let venta of ventas | async" [classList]="(venta.status == statusActual || statusActual == '') ? '' : 'd-none'">
+                        <tr *ngFor="let devolucion of devoluciones | async" [classList]="(devolucion.status == statusActual || statusActual == '') ? '' : 'd-none'">
                             <td>
-                                <a routerLink="/ventas/{{venta.codigo}}" routerLinkActive="active" ariaCurrentWhenActive="page" class="text-primary fw-bold">123456</a>
+                                <a routerLink="/devoluciones/{{devolucion.codigo}}" routerLinkActive="active" ariaCurrentWhenActive="page" class="text-primary fw-bold">123456</a>
                             </td>
                             <td class="fw-bold">
-                                {{format(venta.fecha)}}
+                                {{format(devolucion.fecha)}}
                             </td>
                             <td>
-                                {{venta.referencia}}
+                                {{devolucion.referencia}}
                             </td>
                             <td>
-                                {{venta.nombre_cliente}}
+                                {{devolucion.nombre_cliente}}
                             </td>
                             <td>
-                                {{venta.total}}
+                                {{devolucion.total}}
                             </td>
-                            <td [ngSwitch]="venta.status">
-                                <span *ngSwitchCase="statusAbierta" class="fw-bold text-info">{{venta.status}}</span>
-                                <span *ngSwitchCase="statusCerrada" class="fw-bold">{{venta.status}}</span>
-                                <span *ngSwitchCase="statusAnulada" class="fw-bold text-danger">{{venta.status}}</span>
+                            <td [ngSwitch]="devolucion.status">
+                                <span *ngSwitchCase="statusAbierta" class="fw-bold text-info">{{devolucion.status}}</span>
+                                <span *ngSwitchCase="statusCerrada" class="fw-bold">{{devolucion.status}}</span>
+                                <span *ngSwitchCase="statusAnulada" class="fw-bold text-danger">{{devolucion.status}}</span>
                             </td>
-                        </tr> -->
+                        </tr>
                         <!-- End of Item -->
                     </tbody>
                 </table>
