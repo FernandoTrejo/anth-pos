@@ -1,16 +1,22 @@
 <div>
     <!-- Button Modal -->
     <button type="button" class="btn btn-block btn-tertiary mb-3" data-bs-toggle="modal"
-        data-bs-target="#modal-productos">Buscar</button>
+        data-bs-target="#modal-productos">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+            class="icon icon-xs me-1">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+        </svg>
+
+        Buscar
+    </button>
     <!-- Modal Content -->
-    <div class="modal fade" id="modal-productos" tabindex="-1" role="dialog"
-        aria-labelledby="modal-productos">
+    <div class="modal fade" id="modal-productos" tabindex="-1" role="dialog" aria-labelledby="modal-productos">
         <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h2 class="h6 modal-title">Productos en Existencia</h2>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="row mb-3 d-flex justify-content-between">
@@ -20,44 +26,33 @@
                         <div class="col-3">
                             <div class="input-group">
                                 <span class="input-group-text" id="">
-                                    <svg class="icon icon-xxs" fill="currentColor"
-                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <svg class="icon icon-xxs" fill="currentColor" viewBox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd"
                                             d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
                                             clip-rule="evenodd"></path>
                                     </svg>
                                 </span>
-                                <input type="text" class="form-control" id=""
-                                    placeholder="Buscar Producto" aria-label="Search">
+                                <input type="text" class="form-control" id="" placeholder="Buscar Producto"
+                                    aria-label="Search">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-3 scrollable-column">
                             <!-- Tab Nav -->
-                            <ul class="nav nav-pills square nav-fill flex-column vertical-tab mb-3 mb-lg-0"
-                                id="tab12" role="tablist">
+                            <ul class="nav nav-pills square nav-fill flex-column vertical-tab mb-3 mb-lg-0" id="tab12"
+                                role="tablist">
 
                                 <li class="nav-item"
                                     *ngFor="let category of categoriesWithProducts | async; index as i; first as isFirst">
-                                    <!-- <div
-                                        *ngIf="isFirst; then activeNavPanel else notActiveNavPanel">
-                                    </div> -->
 
+                                    <a (click)="setActiveCategoryIndex(i)"
+                                        class="nav-link {{(categoryIndexActive == i) ? 'active bg-info text-white' : ''}}"
+                                        id="home-tab-3" data-bs-toggle="tab" href="#tab-{{i}}" role="tab"
+                                        aria-selected="true" attr.aria-labelledby="tab-{{i}}"><span
+                                            class="d-block">{{category.nombre}}</span></a>
 
-                                    <!-- <ng-template #activeNavPanel> -->
-                                        <a (click)="setActiveCategoryIndex(i)" class="nav-link {{(categoryIndexActive == i) ? 'active' : ''}}" id="home-tab-3"
-                                            data-bs-toggle="tab" href="#tab-{{i}}" role="tab"
-                                            aria-selected="true"
-                                            attr.aria-labelledby="tab-{{i}}"><span
-                                                class="d-block">{{category.nombre}}</span></a>
-                                    <!-- </ng-template> -->
-                                    <!-- <ng-template #notActiveNavPanel>
-                                        <a (click)="setActiveCategoryIndex(i)" class="nav-link" id="home-tab-3" data-bs-toggle="tab"
-                                            href="#tab-{{i}}" role="tab" aria-selected="true"
-                                            attr.aria-labelledby="tab-{{i}}"><span
-                                                class="d-block">{{category.nombre}}</span></a>
-                                    </ng-template> -->
                                 </li>
                             </ul>
                             <!-- End of Tab Nav -->
@@ -69,21 +64,19 @@
 
                                     <div class="tab-content" id="tabcontent">
                                         <div *ngFor="let category of categoriesWithProducts | async; index as i; first as isFirst"
-                                            class="tab-pane {{categoryIndexActive == i ? 'active show' : ''}} fade" id="tab-{{i}}" role="tabpanel" attr.aria-labelledby="tab-{{i}}">
+                                            class="tab-pane {{categoryIndexActive == i ? 'active show' : ''}} fade"
+                                            id="tab-{{i}}" role="tabpanel" attr.aria-labelledby="tab-{{i}}">
                                             <div class="row">
-                                                <div class="col-md-3"
-                                                    *ngFor="let product of category.productos">
-                                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="{{product.nombre}}" 
+                                                <div class="col-md-3" *ngFor="let product of category.productos">
+                                                    <a data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        title="{{product.nombre}}"
                                                         (click)="storeOrderProduct(product.codigo, product.nombre, product.precio)">
-                                                        <div
-                                                            class="product-card-1 bg-gray-300 d-block rounded mb-2">
+                                                        <div class="product-card-1 bg-gray-300 d-block rounded mb-2">
                                                             <div class="text-center">
-                                                                <img class="product-card-image"
-                                                                    src="{{product.imagen}}"
+                                                                <img class="product-card-image" src="{{product.imagen}}"
                                                                     alt="">
                                                             </div>
-                                                            <div
-                                                                class="d-flex justify-content-between p-2">
+                                                            <div class="d-flex justify-content-between p-2">
 
                                                                 <span style="font-size: 12px;">
                                                                     <b>Stock:</b>
@@ -94,7 +87,8 @@
                                                                 </span>
                                                             </div>
                                                             <div class="px-2">
-                                                                <span class="mb-0 d-inline-block text-truncate fw-bold" style="font-size: 13px; max-width: 170px;">
+                                                                <span class="mb-0 d-inline-block text-truncate fw-bold"
+                                                                    style="font-size: 13px; max-width: 170px;">
                                                                     {{product.nombre}}
                                                                 </span>
 
@@ -115,7 +109,6 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary">Agregar Productos</button>
                     <button type="button" class="btn btn-link text-gray-600 ms-auto"
                         data-bs-dismiss="modal">Cerrar</button>
                 </div>

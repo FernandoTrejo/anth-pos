@@ -19,6 +19,7 @@ export class StoreDevolucionService {
         await db.productos.toCollection().modify(producto => {
           if(producto.codigo == productoDevolucion.codigo_producto){
             producto.existencias = Number(producto.existencias) - Number(productoDevolucion.cantidad);
+            producto.stock_inicial = Number(producto.stock_inicial) - Number(productoDevolucion.cantidad);
           }
         });
       }));

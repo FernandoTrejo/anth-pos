@@ -6,13 +6,16 @@ import { BreadcrumbItem } from 'src/app/components/global/breadcrumb/breadcrumb.
 import { FindActiveCorteDiarioService } from 'src/app/services/cortes/corte-diario/find-active-corte-diario.service';
 import { FindActiveCorteMensualService } from 'src/app/services/cortes/corte-mensual/find-active-corte-mensual.service';
 import { FindActiveCorteParcialService } from 'src/app/services/cortes/corte-parcial/find-active-corte-parcial.service';
+import { NotifyService } from 'src/app/services/Notifications/notify.service';
 import { CalculateTotalOrderService } from 'src/app/services/orders/added-products/calculate-total-order.service';
 import { FindProductsService } from 'src/app/services/orders/added-products/find-products.service';
+import { DeleteOrderDataService } from 'src/app/services/orders/delete-order-data.service';
 import { FindByCodeService } from 'src/app/services/orders/find-by-code.service';
 import { StoreOrderService } from 'src/app/services/orders/store-order.service';
 import { GetAllowedPaymentTypesService } from 'src/app/services/payments/get-allowed-payment-types.service';
 import { TipoPagoPermitido } from 'src/app/storage/schema/pagos/tipos_pago';
 import { Transacciones } from 'src/app/storage/schema/transacciones/transacciones';
+import { MessageType } from 'src/app/utilities/messages';
 import { Status } from 'src/app/utilities/status';
 import { TipoDocumentos } from 'src/app/utilities/tipo_documentos';
 import { TipoTransacciones } from 'src/app/utilities/tipo_transacciones';
@@ -56,8 +59,9 @@ export class NewComponent {
     private findCorteMensual: FindActiveCorteMensualService,
     private findCorteParcial: FindActiveCorteParcialService,
     private findCorteDiario: FindActiveCorteDiarioService,
-    private findOrderByCode: FindByCodeService,
-    private paymentTypeFinder: GetAllowedPaymentTypesService
+    private deleteOrderData: DeleteOrderDataService,
+    private paymentTypeFinder: GetAllowedPaymentTypesService,
+    private notifier : NotifyService
   ) {
     console.log(this.codigoVenta);
   }
@@ -147,5 +151,15 @@ export class NewComponent {
 
   changeDocSelection(event : any){
     this.documentoSeleccionado = (event.target.value);
+  }
+
+  async cancelOrder(){
+    const response = await this.deleteOrderData.removeAll(this.codigoVenta);
+    if(response.type == MessageType.error){
+      this.notifier.error(response.title);
+      return;
+    }
+
+    this.router.navigate(['ventas']);
   }
 }

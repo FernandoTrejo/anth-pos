@@ -16,7 +16,20 @@
                 <p class="mb-0"></p>
             </div>
             <div class="d-flex gap-2">
-                <a class="btn btn-outline-primary d-inline-flex align-items-center" (click)="waiting()">
+                <a class="btn btn-primary d-inline-flex align-items-center" (click)="cancelOrder()">
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="icon icon-xs me-1">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+
+
+
+                    Cancelar
+                </a>
+                <a class="btn btn-tertiary d-inline-flex align-items-center" (click)="waiting()">
 
                     <svg class="icon icon-xs me-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke-width="1.5" stroke="currentColor">
@@ -27,7 +40,7 @@
 
                     Espera
                 </a>
-                <a class="btn btn-outline-primary d-inline-flex align-items-center" (click)="process()">
+                <a class="btn btn-tertiary d-inline-flex align-items-center" (click)="process()">
 
                     <svg class="icon icon-xs me-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke-width="1.5" stroke="currentColor">
@@ -63,7 +76,8 @@
             <div class="card border-0 shadow">
                 <p class="mt-3 mx-4"><b class="p-2 h5">Detalles</b></p>
                 <div class="card-header d-flex justify-content-between gap-4">
-                    <select class="form-select mb-3" id="country" aria-label="Default select example" (change)="changeDocSelection($event)">
+                    <select class="form-select mb-3" id="country" aria-label="Default select example"
+                        (change)="changeDocSelection($event)">
                         <option value="ticket_venta" selected>Ticket de Venta</option>
                         <option value="factura_consumidor_final">Factura Consumidor Final</option>
                         <option value="credito_fiscal">Credito Fiscal</option>
@@ -71,7 +85,7 @@
 
                     <div class="input-group mb-3">
                         <span class="input-group-text">
-                     
+
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="icon icon-xs text-gray-600">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -86,9 +100,12 @@
                 </div>
                 <div class="card-body">
                     <div class="row mb-4">
-                        <app-section-ticket *ngIf="documentoSeleccionado == 'ticket_venta'" (nombreCliente)="actualizarNombreCliente($event)"></app-section-ticket>
-                        <app-section-consumidor-final *ngIf="documentoSeleccionado == 'factura_consumidor_final'" (nombreCliente)="actualizarNombreCliente($event)"></app-section-consumidor-final>
-                        <app-section-credito-fiscal *ngIf="documentoSeleccionado == 'credito_fiscal'"></app-section-credito-fiscal>
+                        <app-section-ticket *ngIf="documentoSeleccionado == 'ticket_venta'"
+                            (nombreCliente)="actualizarNombreCliente($event)"></app-section-ticket>
+                        <app-section-consumidor-final *ngIf="documentoSeleccionado == 'factura_consumidor_final'"
+                            (nombreCliente)="actualizarNombreCliente($event)"></app-section-consumidor-final>
+                        <app-section-credito-fiscal
+                            *ngIf="documentoSeleccionado == 'credito_fiscal'"></app-section-credito-fiscal>
                     </div>
                     <hr>
                     <div class="row mb-2" style="width: 100%; overflow-x: auto;">
