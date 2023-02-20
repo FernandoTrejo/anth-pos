@@ -41,6 +41,7 @@
                             <th class="border-0">Referencia</th>
                             <th class="border-0">Cliente</th>
                             <th class="border-0">Total</th>
+                            <th class="border-0">Doc</th>
                             <th class="border-0 rounded-end">Status</th>
                         </tr>
                     </thead>
@@ -62,6 +63,9 @@
                             </td>
                             <td>
                                 {{formatMoney(venta.total)}}
+                            </td>
+                            <td>
+                                {{mostrarTipoDoc(venta.tipo_documento_clave)}}
                             </td>
                             <td [ngSwitch]="venta.status">
                                 <span *ngSwitchCase="statusAbierta" class="fw-bold text-info">{{venta.status}}</span>

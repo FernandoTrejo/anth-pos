@@ -6,6 +6,7 @@ import { Status } from 'src/app/utilities/status';
 import { TipoTransacciones } from 'src/app/utilities/tipo_transacciones';
 import { formatDate } from 'src/app/utilities/date';
 import { Money } from 'src/app/utilities/money';
+import { TraducirTipoDocumento } from 'src/app/utilities/tipo_documentos';
 
 @Component({
   selector: 'app-index',
@@ -31,6 +32,10 @@ export class IndexComponent {
 
   formatMoney(quantity : number){
     return (new Money(quantity)).toString();
+  }
+
+  mostrarTipoDoc(tipo : string){
+    return TraducirTipoDocumento(tipo);
   }
 
   //breadcrumb
