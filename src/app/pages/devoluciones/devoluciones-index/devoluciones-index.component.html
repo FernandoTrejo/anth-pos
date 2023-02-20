@@ -32,7 +32,7 @@
             <button class="btn btn-danger" (click)="viewStatus(statusAnulada)">Anuladas</button> -->
         </div>
         <div class="card-body">
-            <div class="table-responsive">
+            <div class="table-responsive" *ngIf="(devoluciones | async)?.length; else noData">
                 <table class="table table-centered table-nowrap mb-0 rounded">
                     <thead class="">
                         <tr>
@@ -60,7 +60,7 @@
                                 {{devolucion.nombre_cliente}}
                             </td>
                             <td>
-                                {{devolucion.total}}
+                                {{formatMoney(devolucion.total)}}
                             </td>
                             <td [ngSwitch]="devolucion.status">
                                 <span *ngSwitchCase="statusAbierta" class="fw-bold text-info">{{devolucion.status}}</span>
@@ -72,6 +72,10 @@
                     </tbody>
                 </table>
             </div>
+
+            <ng-template #noData>
+                No hay devoluciones
+            </ng-template>
         </div>
     </div>
 </main>

@@ -76,29 +76,52 @@ export class PosClientDB extends Dexie {
         nombre: 'Maria',
         clave: 'holamundo',
         url_imagen: 'https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'
-      }
+      }, {
+        codigo: '0219631260',
+        tipo_empleado: TipoEmpleado.Encargado,
+        usuario: 'usuario',
+        nombre: 'Encargado Suc. X',
+        clave: '123456',
+        url_imagen: 'https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'
+      },
     ]);
 
     await this.tiposPagoPermitido.bulkAdd(getPagosMock());
   }
 
   async resetDatabase() {
-    await db.transaction('rw', 'transacciones', () => {
-      this.transacciones.clear();
-      this.productos.clear();
-      this.categorias.clear();
-      this.productosOrden.clear();
-      this.pagosOrden.clear();
-      this.cortesDiarios.clear();
-      this.cortesMensuales.clear();
-      this.cortesParciales.clear();
-      this.empleados.clear();
-      this.sesionesAuth.clear();
-      this.tiposPagoPermitido.clear();
-      this.cortesTipoPagos.clear();
-      this.cortesFinalizados.clear();
-      this.populate();
-    });
+    await db.transaction('rw',
+      [
+        'transacciones',
+        'productos',
+        'categorias',
+        'productosOrden',
+        'pagosOrden',
+        'cortesDiarios',
+        'cortesMensuales',
+        'cortesParciales',
+        'empleados',
+        'sesionesAuth',
+        'tiposPagoPermitido',
+        'cortesTipoPagos',
+        'cortesFinalizados'
+      ],
+      () => {
+        this.transacciones.clear();
+        this.productos.clear();
+        this.categorias.clear();
+        this.productosOrden.clear();
+        this.pagosOrden.clear();
+        this.cortesDiarios.clear();
+        this.cortesMensuales.clear();
+        this.cortesParciales.clear();
+        this.empleados.clear();
+        this.sesionesAuth.clear();
+        this.tiposPagoPermitido.clear();
+        this.cortesTipoPagos.clear();
+        this.cortesFinalizados.clear();
+        this.populate();
+      });
   }
 }
 

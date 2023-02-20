@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { db } from 'src/app/storage/db';
 import { ProductoOrden } from 'src/app/storage/schema/productos/productos_orden';
-import { Message, Messages, MessageType } from 'src/app/utilities/messages';
+import { Message, MessageType } from 'src/app/utilities/messages';
 
 @Injectable({
   providedIn: 'root'

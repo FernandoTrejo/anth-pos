@@ -8,6 +8,7 @@ import { Status } from 'src/app/utilities/status';
 import { TipoTransacciones } from 'src/app/utilities/tipo_transacciones';
 import { FindProductsService } from 'src/app/services/orders/added-products/find-products.service';
 import { ProductoOrden } from 'src/app/storage/schema/productos/productos_orden';
+import { Money } from 'src/app/utilities/money';
 
 @Component({
   selector: 'app-devoluciones-new',
@@ -23,7 +24,7 @@ export class DevolucionesNewComponent {
     },
     {
       title: 'Devoluciones',
-      link: ''
+      link: '/devoluciones'
     },
     {
       title: 'Nueva',
@@ -55,6 +56,10 @@ export class DevolucionesNewComponent {
 
   format(date: Date) {
     return formatDateTime(date);
+  }
+
+  formatMoney(quantity : number){
+    return (new Money(quantity)).toString();
   }
 
   ventaCodigo = '';

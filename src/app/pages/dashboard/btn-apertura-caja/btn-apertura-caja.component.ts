@@ -5,6 +5,7 @@ import { FindActiveCorteParcialService } from 'src/app/services/cortes/corte-par
 import { InitService } from 'src/app/services/init/init.service';
 import { NotifyService } from 'src/app/services/Notifications/notify.service';
 import { formatDate } from 'src/app/utilities/date';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-btn-apertura-caja',
@@ -27,6 +28,24 @@ export class BtnAperturaCajaComponent {
     }else{
       this.notifier.error('Ya se aperturó la caja con esta fecha');
     }
+  }
+
+  async showConfirmation(){
+    Swal.fire({
+      title: '¿Desea abrir caja con fecha ' + this.fecha + '?',
+      text: 'Aperturar caja con fecha ' + this.fecha,
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'No',
+      confirmButtonText: 'Si'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await this.AbrirCaja();
+      } 
+
+    });
   }
 
 }

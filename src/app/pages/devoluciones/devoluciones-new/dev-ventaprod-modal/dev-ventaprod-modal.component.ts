@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { liveQuery } from 'dexie';
 import { FindActiveCorteDiarioService } from 'src/app/services/cortes/corte-diario/find-active-corte-diario.service';
@@ -15,6 +15,8 @@ import { Status } from 'src/app/utilities/status';
 import { TipoDocumentos } from 'src/app/utilities/tipo_documentos';
 import { TipoTransacciones } from 'src/app/utilities/tipo_transacciones';
 import { v4 } from 'uuid';
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-dev-ventaprod-modal',
   templateUrl: './dev-ventaprod-modal.component.html',
@@ -23,7 +25,8 @@ import { v4 } from 'uuid';
 export class DevVentaprodModalComponent implements OnChanges {
   @Input() ventaCodigo = '';
   productosDevolucion: ProductoOrden[] = [];
-  
+  @ViewChild('btnCloseModal') CloseModal!: ElementRef<HTMLButtonElement>;
+
   ventaProductos = liveQuery(() => this.orderProductFinder.allByOrderCode(this.ventaCodigo));
 
   constructor(
@@ -31,10 +34,10 @@ export class DevVentaprodModalComponent implements OnChanges {
     private findCorteMensual: FindActiveCorteMensualService,
     private findCorteParcial: FindActiveCorteParcialService,
     private findCorteDiario: FindActiveCorteDiarioService,
-    private ventaFinder : FindByCodeService,
+    private ventaFinder: FindByCodeService,
     private notifier: NotifyService,
     private guardarDevolucion: StoreDevolucionService,
-    private router : Router) { }
+    private router: Router) { }
 
   ngOnChanges(): void {
     this.ventaProductos = liveQuery(() => this.orderProductFinder.allByOrderCode(this.ventaCodigo));
@@ -100,7 +103,7 @@ export class DevVentaprodModalComponent implements OnChanges {
     return (new Money(total)).toString();
   }
 
-  calcularTotal(){
+  calcularTotal() {
     return this.productosDevolucion.reduce((total: number, current: ProductoOrden) => total += Number(current.subtotal), 0);
   }
 
@@ -130,7 +133,33 @@ export class DevVentaprodModalComponent implements OnChanges {
     subtotalSecondSpan.innerText = this.formatMoney(subtotal);
   }
 
+  async showConfirmation() {
+    if (this.productosDevolucion.length == 0) {
+      this.notifier.error('No ha seleccionado ningun producto para devolver');
+    } else {
+
+      Swal.fire({
+        title: '¿Estas seguro de realizar esta accion?',
+        text: 'Realizar devolucion',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'No',
+        confirmButtonText: 'Si, realizar devolucion'
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          await this.storeDevolucion();
+          this.CloseModal.nativeElement.click();
+        }
+
+      });
+    }
+  }
+
+
   async storeDevolucion() {
+
     const corteMensual = await this.findCorteMensual.find();
     const corteDiario = await this.findCorteDiario.find();
     const corteParcial = await this.findCorteParcial.find();
@@ -142,7 +171,7 @@ export class DevVentaprodModalComponent implements OnChanges {
     }
 
     const venta = await this.ventaFinder.find(this.ventaCodigo);
-    if(!venta){
+    if (!venta) {
       this.notifier.error('Ha ocurrido un error');
       return;
     }
@@ -155,7 +184,7 @@ export class DevVentaprodModalComponent implements OnChanges {
       fecha: new Date(),
       referencia: venta.codigo,//extraer de orden de venta
       nombre_cliente: venta.nombre_cliente,//extraer de orden de venta
-      total: Number(total),
+      total: Number(total) * -1,
       tipo_transaccion: TipoTransacciones.Devolucion,
       status: Status.Closed,
       corte_mensual: corteMensual.codigo,
@@ -168,11 +197,13 @@ export class DevVentaprodModalComponent implements OnChanges {
       producto.id = undefined;
       producto.codigo_corte_x = corteParcial?.codigo;
       producto.codigo_orden = codigoDevolucion;
+      producto.cantidad = Number(producto.cantidad) * -1,
+        producto.subtotal = Number(producto.subtotal) * -1
     });
 
     const response = await this.guardarDevolucion.store(devolucion, this.productosDevolucion);
     this.notifier.show(response.type, response.title);
-    if(response.type ==  MessageType.success){
+    if (response.type == MessageType.success) {
       this.router.navigate(['devoluciones']);
     }
   }

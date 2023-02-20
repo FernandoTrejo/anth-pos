@@ -5,6 +5,7 @@ import { FindOrdersCorteActualService } from 'src/app/services/orders/find-order
 import { TipoTransacciones } from 'src/app/utilities/tipo_transacciones';
 import { formatDateTime } from 'src/app/utilities/date';
 import { BreadcrumbItem } from 'src/app/components/global/breadcrumb/breadcrumb.component';
+import { Money } from 'src/app/utilities/money';
 
 @Component({
   selector: 'app-devoluciones-index',
@@ -35,4 +36,8 @@ export class DevolucionesIndexComponent {
       link: ''
     }
   ];
+
+  formatMoney(q : number){
+    return (new Money(Math.abs(q))).toString();
+  }
 }

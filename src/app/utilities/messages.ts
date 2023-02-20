@@ -7,7 +7,3 @@ export interface Message{
     title: string;
     type: MessageType;
 }
-
-export enum Messages{
-    
-}

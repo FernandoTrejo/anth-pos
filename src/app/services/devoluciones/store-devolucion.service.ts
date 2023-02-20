@@ -12,9 +12,17 @@ export class StoreDevolucionService {
   constructor() { }
 
   async store(devolucion : Transacciones, productosDevolucion : ProductoOrden[]) : Promise<Message>{
-    const response = await db.transaction('rw', db.productosOrden, db.transacciones, async () => {
+    const response = await db.transaction('rw', db.productosOrden, db.transacciones, db.productos, async () => {
       await db.productosOrden.bulkAdd(productosDevolucion);
       await db.transacciones.add(devolucion);
+      await Promise.all(productosDevolucion.map(async productoDevolucion => {
+        await db.productos.toCollection().modify(producto => {
+          if(producto.codigo == productoDevolucion.codigo_producto){
+            producto.existencias = Number(producto.existencias) - Number(productoDevolucion.cantidad);
+          }
+        });
+      }));
+
       return {
         title: 'La devolucion se ha guardado',
         type: MessageType.success
