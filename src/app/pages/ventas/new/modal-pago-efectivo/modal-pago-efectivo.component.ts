@@ -47,7 +47,7 @@ export class ModalPagoEfectivoComponent {
     this.cantidad = Number(await this.remainingCalculator.calculate(this.codigoVenta));
   }
 
-  async setPayment(quantity : number){
+  async setPayment(quantity : number | string){
     this.cantidad  = Number(quantity);
     this.vuelto = await this.calculateVuelto();
     console.log(this.vuelto);
