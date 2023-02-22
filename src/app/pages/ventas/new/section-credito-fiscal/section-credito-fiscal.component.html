@@ -1,21 +1,97 @@
+<div class="">
+    <!-- Button Modal -->
+    <button type="button" class="btn btn-block btn-outline-info mb-3" data-bs-toggle="modal"
+        data-bs-target="#modal-clientes">Buscar Cliente</button>
 
-<div class="row">
-    <div class="col-6">
-        <div class="form-group">
-            <label for="">Nombre del Cliente</label>
-            <input class="form-control" type="text" name="" #nombre placeholder="Nombre del Cliente" (keyup)="actualizarNombreCliente(nombre.value)" value="{{nombreInicial}}">
+    <div *ngIf="(attachedCliente | async)">
+        <div class="">{{(attachedCliente | async)?.nombre_cliente}}</div>
+    </div>
+    <!-- Modal Content -->
+    <div class="modal fade" id="modal-clientes" tabindex="-1" role="dialog" aria-labelledby="modal-default"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="h6 modal-title">Clientes</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive" *ngIf="(clientes | async)?.length; else noClientesInfo">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Cliente</th>
+                                    <th>NRC</th>
+                                    <th>NIT</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let cliente of clientes | async">
+                                    <td>
+                                        {{cliente.nombre_cliente}}
+                                    </td>
+                                    <td>
+                                        {{cliente.nrc}}
+                                    </td>
+                                    <td>
+                                        {{cliente.nit}}
+                                    </td>
+                                    <td>
+                                        <button data-bs-dismiss="modal" (click)="selectNewClient(cliente.codigo)" class="btn btn-info">Seleccionar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <ng-template #noClientesInfo class="d-flex justify-content-center">
+                        <span>No hay clientes registrados</span>
+                    </ng-template>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal"
+                        data-bs-target="#modal-agregar-cliente">Agregar Nuevo</button>
+                    <button type="button" data-bs-dismiss="modal"
+                        class="btn btn-link text-gray-600 ms-auto">Cancelar</button>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="col">
-        <div class="form-group">
-            <label for="">NRC</label>
-            <input class="form-control" type="text" name="" #nrc placeholder="NRC">
-        </div>
-    </div>
-    <div class="col">
-        <div class="form-group">
-            <label for="">NIT</label>
-            <input class="form-control" type="text" name="" #nit placeholder="NIT">
+    <!-- End of Modal Content -->
+
+    <div class="modal fade" id="modal-agregar-cliente" tabindex="-1" role="dialog" aria-labelledby="modal-default"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="h6 modal-title">Agregar Nuevo Cliente</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group mb-2">
+                        <label for="">Nombre del Cliente</label>
+                        <input class="form-control" type="text" name="" #nombre placeholder="Nombre del Cliente"
+                            [(ngModel)]="nombreClienteNuevo">
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="">NRC</label>
+                        <input class="form-control" type="text" name="" #nrc placeholder="NRC"
+                            [(ngModel)]="nrcClienteNuevo">
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="">NIT</label>
+                        <input class="form-control" type="text" name="" #nit placeholder="NIT"
+                            [(ngModel)]="nitClienteNuevo">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" (click)="store()" class="btn btn-tertiary"
+                        data-bs-dismiss="modal">Aceptar</button>
+                    <button type="button" class="btn btn-link text-gray-600 ms-auto"
+                        data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

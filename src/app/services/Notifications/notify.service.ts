@@ -9,8 +9,8 @@ export class NotifyService {
   notyf = new Notyf({
     duration: 4000,
     ripple: true,
-    position: { x: 'right', y: 'top' },
-    dismissible: false
+    position: { x: 'right', y: 'bottom' },
+    dismissible: true
   });
 
 

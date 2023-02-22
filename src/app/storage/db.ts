@@ -8,6 +8,7 @@ import { Empleado, TipoEmpleado } from './schema/empleados/empleados';
 import { AuthSesion } from './schema/auth/sesiones';
 import { getPagosMock, TipoPagoPermitido } from './schema/pagos/tipos_pago';
 import { CorteTipoPago } from './schema/cortes/cortes_tipo_pagos';
+import { Cliente, ClienteOrden } from './schema/clientes/clientes';
 
 export class PosClientDB extends Dexie {
   transacciones!: Table<Transacciones, number>;
@@ -23,6 +24,8 @@ export class PosClientDB extends Dexie {
   tiposPagoPermitido!: Table<TipoPagoPermitido, number>;
   cortesTipoPagos!: Table<CorteTipoPago, number>;
   cortesFinalizados!: Table<CorteFinalizado, number>;
+  clientes!: Table<Cliente, number>;
+  clientesOrden!: Table<ClienteOrden, number>;
 
   constructor() {
     super('PosClientDB');
@@ -39,7 +42,9 @@ export class PosClientDB extends Dexie {
       sesionesAuth: '++id, status',
       tiposPagoPermitido: '++id, codigo',
       cortesTipoPagos: '++id, codigo_corte, codigo_tipo_pago, tipo',
-      cortesFinalizados: '++id, codigo_corte, tipo_corte'
+      cortesFinalizados: '++id, codigo_corte, tipo_corte',
+      clientes: '++id, nit, nrc, codigo',
+      clientesOrden: '++id, codigo_orden, codigo_cliente',
     });
     this.on('populate', () => this.populate());
   }
@@ -104,7 +109,9 @@ export class PosClientDB extends Dexie {
         'sesionesAuth',
         'tiposPagoPermitido',
         'cortesTipoPagos',
-        'cortesFinalizados'
+        'cortesFinalizados',
+        'clientes',
+        'clientesOrden'
       ],
       () => {
         this.transacciones.clear();
@@ -120,6 +127,8 @@ export class PosClientDB extends Dexie {
         this.tiposPagoPermitido.clear();
         this.cortesTipoPagos.clear();
         this.cortesFinalizados.clear();
+        this.clientes.clear();
+        this.clientesOrden.clear();
         this.populate();
       });
   }

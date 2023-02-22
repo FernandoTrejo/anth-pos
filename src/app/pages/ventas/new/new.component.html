@@ -104,7 +104,7 @@
                             (nombreCliente)="actualizarNombreCliente($event)"></app-section-ticket>
                         <app-section-consumidor-final *ngIf="documentoSeleccionado == 'factura_consumidor_final'"
                             (nombreCliente)="actualizarNombreCliente($event)"></app-section-consumidor-final>
-                        <app-section-credito-fiscal
+                        <app-section-credito-fiscal [codigoVenta]="codigoVenta"
                             *ngIf="documentoSeleccionado == 'credito_fiscal'"></app-section-credito-fiscal>
                     </div>
                     <hr>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { db } from 'src/app/storage/db';
 import { Pago } from 'src/app/storage/schema/pagos/pagos';
+import { Message, MessageType } from 'src/app/utilities/messages';
 import { CalculateTotalOrderService } from '../orders/added-products/calculate-total-order.service';
 
 @Injectable({
@@ -10,13 +11,19 @@ export class StorePaymentInOrderService {
 
   constructor(private totalCalculator : CalculateTotalOrderService) { }
 
-  async store(payment : Pago){
+  async store(payment : Pago) : Promise<Message>{
     if(await this.totalIsGreaterThanZero(payment.codigo_orden)){
       const id = await db.pagosOrden.add(payment);
-      return id;
+      return {
+        title: 'El pago se ha registrado',
+        type: MessageType.success
+      };
     }
 
-    return null;
+    return {
+      title: 'Ha ocurrido un error al registrar el pago',
+      type: MessageType.error
+    };
   }
 
   async totalIsGreaterThanZero(orderCode : string){

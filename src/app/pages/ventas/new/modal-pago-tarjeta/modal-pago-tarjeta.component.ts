@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { liveQuery } from 'dexie';
+import { NotifyService } from 'src/app/services/Notifications/notify.service';
 import { CalculateRemainingService } from 'src/app/services/payments/calculate-remaining.service';
 import { StorePaymentInOrderService } from 'src/app/services/payments/store-payment-in-order.service';
 import { Pago } from 'src/app/storage/schema/pagos/pagos';
@@ -19,11 +20,13 @@ export class ModalPagoTarjetaComponent {
   numeroTelefono = '';
   ult4Digitos = '';
 
-  constructor(private storePaymentService: StorePaymentInOrderService, private remainingCalculator : CalculateRemainingService) { }
+  constructor(private storePaymentService: StorePaymentInOrderService, private remainingCalculator : CalculateRemainingService,
+    private notifier : NotifyService) { }
 
   async storePayment() {
     const res = await this.remainingCalculator.calculate(this.codigoVenta);
     if (res <= 0) {
+      this.notifier.error('No se ha agregado ningun producto');
       return;
     }
 
@@ -37,7 +40,8 @@ export class ModalPagoTarjetaComponent {
       ultimos_digitos_tarjeta: this.ult4Digitos
     }
 
-    await this.storePaymentService.store(payment);
+    const response = await this.storePaymentService.store(payment);
+    this.notifier.show(response.type, response.title);
   }
 
   async getRemaining(){
