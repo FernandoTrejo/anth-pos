@@ -122,6 +122,46 @@ export const listaCategorias = () => {
                     stock_inicial: 7
                 }
             ]
+        },
+        {
+            codigo: 'categoria_5',
+            nombre: 'Categoria 5',
+            productos: []
+        },
+        {
+            codigo: 'categoria_6',
+            nombre: 'Categoria 6',
+            productos: []
+        },
+        {
+            codigo: 'categoria_7',
+            nombre: 'Categoria 7',
+            productos: []
+        },
+        {
+            codigo: 'categoria_8',
+            nombre: 'Categoria 8',
+            productos: []
+        },
+        {
+            codigo: 'categoria_9',
+            nombre: 'Categoria 9',
+            productos: []
+        },
+        {
+            codigo: 'categoria_10',
+            nombre: 'Categoria 10',
+            productos: []
+        },
+        {
+            codigo: 'categoria_11',
+            nombre: 'Categoria 12',
+            productos: []
+        },
+        {
+            codigo: 'categoria_13',
+            nombre: 'Categoria 13',
+            productos: []
         }
     ]
 }

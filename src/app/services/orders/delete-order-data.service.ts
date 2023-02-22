@@ -10,7 +10,7 @@ export class DeleteOrderDataService {
   constructor() { }
 
   async removeAll(code : string) : Promise<Message>{
-    const response = await db.transaction('rw', db.productosOrden, db.pagosOrden, db.productos, async () => {
+    const response = await db.transaction('rw', db.productosOrden, db.pagosOrden, db.productos, db.clientesOrden, async () => {
       await db.pagosOrden.where({'codigo_orden' : code}).delete();
       const productosAgregados = await db.productosOrden.where({'codigo_orden' : code}).toArray();
       await Promise.all(productosAgregados.map(async (producto) => {
@@ -21,6 +21,7 @@ export class DeleteOrderDataService {
         }
       }));
       await db.productosOrden.where({'codigo_orden' : code}).delete();
+      await db.clientesOrden.where({codigo_orden: code}).delete();
 
       return {
         title: 'La orden se ha eliminado',

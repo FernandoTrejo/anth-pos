@@ -8,7 +8,7 @@ import { Empleado, TipoEmpleado } from './schema/empleados/empleados';
 import { AuthSesion } from './schema/auth/sesiones';
 import { getPagosMock, TipoPagoPermitido } from './schema/pagos/tipos_pago';
 import { CorteTipoPago } from './schema/cortes/cortes_tipo_pagos';
-import { Cliente, ClienteOrden } from './schema/clientes/clientes';
+import { Cliente, ClienteOrden, getClientesMock } from './schema/clientes/clientes';
 
 export class PosClientDB extends Dexie {
   transacciones!: Table<Transacciones, number>;
@@ -92,6 +92,7 @@ export class PosClientDB extends Dexie {
     ]);
 
     await this.tiposPagoPermitido.bulkAdd(getPagosMock());
+    await this.clientes.bulkAdd(getClientesMock());
   }
 
   async resetDatabase() {

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { liveQuery } from 'dexie';
 import { Observable } from 'rxjs';
 import { BreadcrumbItem } from 'src/app/components/global/breadcrumb/breadcrumb.component';
+import { FindAttachedClientToStoreService } from 'src/app/services/clientes/find-attached-client-to-store.service';
 import { FindActiveCorteDiarioService } from 'src/app/services/cortes/corte-diario/find-active-corte-diario.service';
 import { FindActiveCorteMensualService } from 'src/app/services/cortes/corte-mensual/find-active-corte-mensual.service';
 import { FindActiveCorteParcialService } from 'src/app/services/cortes/corte-parcial/find-active-corte-parcial.service';
@@ -61,7 +62,8 @@ export class NewComponent {
     private findCorteDiario: FindActiveCorteDiarioService,
     private deleteOrderData: DeleteOrderDataService,
     private paymentTypeFinder: GetAllowedPaymentTypesService,
-    private notifier : NotifyService
+    private notifier : NotifyService,
+    private findClienteOrden : FindAttachedClientToStoreService
   ) {
     console.log(this.codigoVenta);
   }
@@ -81,6 +83,15 @@ export class NewComponent {
 
     if (!corteMensual || !corteDiario || !corteParcial || Number(total) == 0) {
       return;
+    }
+
+    if(this.documentoSeleccionado == TipoDocumentos.CreditoFiscal){
+      const cliente = await this.findClienteOrden.find(this.codigoVenta);
+      if(cliente != undefined){
+        this.nombreCliente = cliente.nombre_cliente;
+      }
+    }else{
+
     }
 
     let transaccion: Transacciones = {
@@ -112,6 +123,15 @@ export class NewComponent {
       return;
     }
 
+    if(this.documentoSeleccionado == TipoDocumentos.CreditoFiscal){
+      const cliente = await this.findClienteOrden.find(this.codigoVenta);
+      if(cliente != undefined){
+        this.nombreCliente = cliente.nombre_cliente;
+      }
+    }else{
+
+    }
+    
     let transaccion: Transacciones = {
       codigo: this.codigoVenta,
       numero_transaccion: '',
