@@ -17,6 +17,13 @@ export class FindClientWithFiltersService {
     return clients;
   }
 
+  async findByName(name : string){
+    const clients = await db.clientes.filter((cliente) => {
+      return cliente.nombre_cliente.toLowerCase().includes(name.toLowerCase());
+    });
+    return clients.toArray();
+  }
+
   async all(){
     const all = await db.clientes.toArray();
     return all;

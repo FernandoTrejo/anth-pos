@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { liveQuery } from 'dexie';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { AttachClientToStoreService } from 'src/app/services/clientes/attach-client-to-store.service';
 import { FindAttachedClientToStoreService } from 'src/app/services/clientes/find-attached-client-to-store.service';
 import { FindClientWithFiltersService } from 'src/app/services/clientes/find-client-with-filters.service';
@@ -28,7 +28,9 @@ export class SectionCreditoFiscalComponent {
     private findClientsService: FindClientWithFiltersService,
     private notifier: NotifyService,
     private attach: AttachClientToStoreService,
-    private findAttached: FindAttachedClientToStoreService) { }
+    private findAttached: FindAttachedClientToStoreService) {
+      
+  }
 
   async store() {
     if (
@@ -68,10 +70,10 @@ export class SectionCreditoFiscalComponent {
 
   //busqueda de clientes
   @ViewChild('tipoFiltro') tipoFiltro!: ElementRef<HTMLSelectElement>;
-  clientesFiltros = liveQuery(() => this.findClientsService.find(this.filtros));
   filtros = {};
   existeFiltro = false;
-
+  clientesFiltros: BehaviorSubject<Cliente[]> = new BehaviorSubject<Cliente[]>([]);
+  
 
   async filtrarClientes(event: any) {
     let texto = event.target.value;
@@ -85,10 +87,8 @@ export class SectionCreditoFiscalComponent {
 
     switch (tipoFiltro) {
       case 'nombre_cliente':
-        this.filtros = {
-          nombre_cliente: texto
-        }
-        break;
+        this.clientesFiltros.next(await this.findClientsService.findByName(texto));
+        return;
       case 'nit':
         this.filtros = {
           nit: texto
@@ -101,9 +101,7 @@ export class SectionCreditoFiscalComponent {
         break;
     }
 
-    // console.log(filtros);
-    // this.clientesFiltros = liveQuery(() => this.findClientsService.find(filtros));
-    // this.clientesFiltros = liveQuery(() => this.findClientsService.find(filtros));
-
+    const newClients = await this.findClientsService.find(this.filtros, 2);
+    this.clientesFiltros.next(newClients);
   }
 }

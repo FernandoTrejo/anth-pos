@@ -40,7 +40,6 @@
 
                 <div class="modal-body">
                     <div *ngIf="!existeFiltro">
-                        sin filtro
                         <div class="table-responsive" *ngIf="(clientes | async)?.length; else noClientesInfo">
                             <table class="table">
                                 <thead>
@@ -77,7 +76,6 @@
                     
 
                     <div *ngIf="existeFiltro">
-                        con filtro
                         <div class="table-responsive" *ngIf="existeFiltro; else noClientesFiltroInfo">
                             <table class="table">
                                 <thead>
