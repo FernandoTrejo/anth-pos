@@ -72,6 +72,7 @@ export class SectionCreditoFiscalComponent {
   @ViewChild('tipoFiltro') tipoFiltro!: ElementRef<HTMLSelectElement>;
   filtros = {};
   existeFiltro = false;
+  noExisteFiltro = true;
   clientesFiltros: BehaviorSubject<Cliente[]> = new BehaviorSubject<Cliente[]>([]);
   
 
@@ -79,10 +80,12 @@ export class SectionCreditoFiscalComponent {
     let texto = event.target.value;
     if (texto.trim() == '') {
       this.existeFiltro = false;
+      this.noExisteFiltro = true;
       return;
     }
 
     this.existeFiltro = true;
+    this.noExisteFiltro = false;
     let tipoFiltro = this.tipoFiltro.nativeElement.value;
 
     switch (tipoFiltro) {
