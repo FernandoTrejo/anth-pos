@@ -69,6 +69,8 @@
                 <div class="card-body">
                     <app-tabla-productos-agregados [codigoVenta]="codigoVenta"></app-tabla-productos-agregados>
                 </div>
+
+                
             </div>
         </div>
 
@@ -103,7 +105,7 @@
                         <app-section-ticket *ngIf="documentoSeleccionado == 'ticket_venta'"
                             (nombreCliente)="actualizarNombreCliente($event)"></app-section-ticket>
                         <app-section-consumidor-final *ngIf="documentoSeleccionado == 'factura_consumidor_final'"
-                            (nombreCliente)="actualizarNombreCliente($event)"></app-section-consumidor-final>
+                        [codigoVenta]="codigoVenta"></app-section-consumidor-final>
                         <app-section-credito-fiscal [codigoVenta]="codigoVenta"
                             *ngIf="documentoSeleccionado == 'credito_fiscal'"></app-section-credito-fiscal>
                     </div>

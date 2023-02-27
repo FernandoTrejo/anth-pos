@@ -6,7 +6,7 @@ import { FindAttachedClientToStoreService } from 'src/app/services/clientes/find
 import { FindClientWithFiltersService } from 'src/app/services/clientes/find-client-with-filters.service';
 import { StoreClientService } from 'src/app/services/clientes/store-client.service';
 import { NotifyService } from 'src/app/services/Notifications/notify.service';
-import { Cliente } from 'src/app/storage/schema/clientes/clientes';
+import { Cliente, TipoCliente } from 'src/app/storage/schema/clientes/clientes';
 import { MessageType } from 'src/app/utilities/messages';
 import { v4 } from 'uuid';
 
@@ -22,6 +22,9 @@ export class SectionCreditoFiscalComponent {
   nombreClienteNuevo = '';
   nrcClienteNuevo = '';
   nitClienteNuevo = '';
+  duiClienteNuevo = '';
+  direccionClienteNuevo = '';
+  actividadClienteNuevo = '';
 
 
   constructor(private storeClientService: StoreClientService,
@@ -47,7 +50,11 @@ export class SectionCreditoFiscalComponent {
       nombre_cliente: this.nombreClienteNuevo,
       nrc: this.nrcClienteNuevo,
       nit: this.nitClienteNuevo,
-      codigo: codigoCliente
+      codigo: codigoCliente,
+      dui: this.duiClienteNuevo,
+      direccion: this.direccionClienteNuevo,
+      actividad_economica: this.actividadClienteNuevo,
+      tipo_cliente: TipoCliente.Empresa
     };
     const response = await this.storeClientService.store(cliente);
     this.notifier.show(response.type, response.title);
@@ -94,17 +101,19 @@ export class SectionCreditoFiscalComponent {
         return;
       case 'nit':
         this.filtros = {
-          nit: texto
+          nit: texto,
+          tipo_cliente: TipoCliente.Empresa
         }
         break;
       case 'nrc':
         this.filtros = {
-          nrc: texto
+          nrc: texto,
+          tipo_cliente: TipoCliente.Empresa
         }
         break;
     }
 
-    const newClients = await this.findClientsService.find(this.filtros, 2);
+    const newClients = await this.findClientsService.find(this.filtros);
     this.clientesFiltros.next(newClients);
   }
 }

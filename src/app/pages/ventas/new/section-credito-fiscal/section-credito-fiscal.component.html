@@ -125,27 +125,56 @@
 
     <div class="modal fade" id="modal-agregar-cliente" tabindex="-1" role="dialog" aria-labelledby="modal-default"
         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h2 class="h6 modal-title">Agregar Nuevo Cliente</h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group mb-2">
-                        <label for="">Nombre del Cliente</label>
-                        <input class="form-control" type="text" name="" #nombre placeholder="Nombre del Cliente"
-                            [(ngModel)]="nombreClienteNuevo">
-                    </div>
-                    <div class="form-group mb-2">
-                        <label for="">NRC</label>
-                        <input class="form-control" type="text" name="" #nrc placeholder="NRC"
-                            [(ngModel)]="nrcClienteNuevo">
-                    </div>
-                    <div class="form-group mb-2">
-                        <label for="">NIT</label>
-                        <input class="form-control" type="text" name="" #nit placeholder="NIT"
-                            [(ngModel)]="nitClienteNuevo">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-2">
+                                <label for="">Nombre del Cliente</label>
+                                <input class="form-control" type="text" name="" #nombre placeholder="Nombre del Cliente"
+                                    [(ngModel)]="nombreClienteNuevo">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-2">
+                                <label for="">NRC</label>
+                                <input class="form-control" type="text" name="" #nrc placeholder="NRC"
+                                    [(ngModel)]="nrcClienteNuevo">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-2">
+                                <label for="">NIT</label>
+                                <input class="form-control" type="text" name="" #nit placeholder="NIT"
+                                    [(ngModel)]="nitClienteNuevo">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-2">
+                                <label for="">DUI</label>
+                                <input class="form-control" type="text" name="" #dui placeholder="DUI"
+                                    [(ngModel)]="duiClienteNuevo">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group mb-2">
+                                <label for="">Direccion</label>
+                                <textarea class="form-control" type="text" name="" #direccion placeholder="Direccion"
+                                    [(ngModel)]="direccionClienteNuevo"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group mb-2">
+                                <label for="">Actividad Economica</label>
+                                <textarea class="form-control" type="text" name="" #actividad placeholder="Actividad Economica"
+                                    [(ngModel)]="actividadClienteNuevo"></textarea>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -62,8 +62,8 @@ export class NewComponent {
     private findCorteDiario: FindActiveCorteDiarioService,
     private deleteOrderData: DeleteOrderDataService,
     private paymentTypeFinder: GetAllowedPaymentTypesService,
-    private notifier : NotifyService,
-    private findClienteOrden : FindAttachedClientToStoreService
+    private notifier: NotifyService,
+    private findClienteOrden: FindAttachedClientToStoreService
   ) {
     console.log(this.codigoVenta);
   }
@@ -85,12 +85,14 @@ export class NewComponent {
       return;
     }
 
-    if(this.documentoSeleccionado == TipoDocumentos.CreditoFiscal){
+    if (this.documentoSeleccionado == TipoDocumentos.CreditoFiscal ||
+      this.documentoSeleccionado == TipoDocumentos.FacturaConsumidorFinal
+    ) {
       const cliente = await this.findClienteOrden.find(this.codigoVenta);
-      if(cliente != undefined){
+      if (cliente != undefined) {
         this.nombreCliente = cliente.nombre_cliente;
       }
-    }else{
+    } else {
 
     }
 
@@ -123,15 +125,17 @@ export class NewComponent {
       return;
     }
 
-    if(this.documentoSeleccionado == TipoDocumentos.CreditoFiscal){
+    if (this.documentoSeleccionado == TipoDocumentos.CreditoFiscal ||
+      this.documentoSeleccionado == TipoDocumentos.FacturaConsumidorFinal
+    ) {
       const cliente = await this.findClienteOrden.find(this.codigoVenta);
-      if(cliente != undefined){
+      if (cliente != undefined) {
         this.nombreCliente = cliente.nombre_cliente;
       }
-    }else{
+    } else {
 
     }
-    
+
     let transaccion: Transacciones = {
       codigo: this.codigoVenta,
       numero_transaccion: '',
@@ -169,13 +173,13 @@ export class NewComponent {
     return pagos.find(pago => pago.codigo === codigo);
   }
 
-  changeDocSelection(event : any){
+  changeDocSelection(event: any) {
     this.documentoSeleccionado = (event.target.value);
   }
 
-  async cancelOrder(){
+  async cancelOrder() {
     const response = await this.deleteOrderData.removeAll(this.codigoVenta);
-    if(response.type == MessageType.error){
+    if (response.type == MessageType.error) {
       this.notifier.error(response.title);
       return;
     }

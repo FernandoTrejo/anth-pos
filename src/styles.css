@@ -11,14 +11,14 @@
 }
 
 .product-card-1 {
-    width: 180px;
-    height: 180px;
+    width: 150px;
+    height: 150px;
 }
 
 .product-card-image {
     margin-top: 2px;
-    width: 176px;
-    max-height: 110px;
+    width: 146px;
+    max-height: 90px;
 }
 
 .scrollable-column {

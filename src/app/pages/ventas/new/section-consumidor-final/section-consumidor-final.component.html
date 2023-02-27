@@ -1,4 +1,165 @@
-<div class="form-group">
+<!-- <div class="form-group">
     <label for="">Nombre del Cliente</label>
     <input class="form-control" type="text" name="" #nombre placeholder="Nombre del Cliente" (keyup)="actualizarNombreCliente(nombre.value)" value="{{nombreInicial}}">
+</div> -->
+
+<div class="">
+    <!-- Button Modal -->
+    <button type="button" class="btn btn-block btn-outline-info mb-3" data-bs-toggle="modal"
+        data-bs-target="#modal-clientes">Buscar Cliente</button>
+
+    <div *ngIf="(attachedCliente | async)">
+        <div class="alert alert-info" role="alert">
+            Cliente Seleccionado: {{(attachedCliente | async)?.nombre_cliente}}
+        </div>
+    </div>
+    <!-- Modal Content -->
+    <div class="modal fade" id="modal-clientes" tabindex="-1" role="dialog" aria-labelledby="modal-default"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header d-flex justify-content-between">
+                    <h2 class="h6 modal-title">Clientes</h2>
+
+                    <div class="input-group mx-4">
+                        <span class="input-group-text" id="">
+                            <svg class="icon icon-xxs" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </span>
+                        <input type="text" (keyup)="filtrarClientes($event)" class="form-control" id=""
+                            placeholder="Buscar Cliente" aria-label="Search">
+                    </div>
+                    <select #tipoFiltro class="form-select" name="" id="">
+                        <option value="nombre_cliente">Por nombre</option>
+                        <option value="dui">Por DUI</option>
+                        <option value="nit">Por NIT</option>
+                    </select>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+
+
+                <div class="modal-body">
+                    <div *ngIf="noExisteFiltro">
+                        <div class="table-responsive" *ngIf="(clientes | async)?.length; else noClientesInfo">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Cliente</th>
+                                        <th>DUI</th>
+                                        <th>NIT</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="scrollable-table">
+                                    <tr *ngFor="let cliente of clientes | async">
+                                        <td>
+                                            {{cliente.nombre_cliente}}
+                                        </td>
+                                        <td>
+                                            {{cliente.dui}}
+                                        </td>
+                                        <td>
+                                            {{cliente.nit}}
+                                        </td>
+                                        <td>
+                                            <button data-bs-dismiss="modal" (click)="selectNewClient(cliente.codigo)"
+                                                class="btn btn-info">Seleccionar</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <ng-template #noClientesInfo class="d-flex justify-content-center">
+                            <span>No hay clientes registrados</span>
+                        </ng-template>
+                    </div>
+
+
+                    <div *ngIf="existeFiltro">
+                        <div class="table-responsive" *ngIf="existeFiltro; else noClientesFiltroInfo">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Cliente</th>
+                                        <th>DUI</th>
+                                        <th>NIT</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="scrollable-table">
+                                    <tr *ngFor="let cliente of clientesFiltros | async">
+                                        <td>
+                                            {{cliente.nombre_cliente}}
+                                        </td>
+                                        <td>
+                                            {{cliente.dui}}
+                                        </td>
+                                        <td>
+                                            {{cliente.nit}}
+                                        </td>
+                                        <td>
+                                            <button data-bs-dismiss="modal" (click)="selectNewClient(cliente.codigo)"
+                                                class="btn btn-info">Seleccionar</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <ng-template #noClientesFiltroInfo class="d-flex justify-content-center">
+                            <span>No hay clientes que cumplan ese criterio</span>
+                        </ng-template>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal"
+                        data-bs-target="#modal-agregar-cliente">Agregar Nuevo</button>
+                    <button type="button" data-bs-dismiss="modal"
+                        class="btn btn-link text-gray-600 ms-auto">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of Modal Content -->
+
+    <div class="modal fade" id="modal-agregar-cliente" tabindex="-1" role="dialog" aria-labelledby="modal-default"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="h6 modal-title">Agregar Nuevo Cliente</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group mb-2">
+                        <label for="">Nombre del Cliente</label>
+                        <input class="form-control" type="text" name="" #nombre placeholder="Nombre del Cliente"
+                            [(ngModel)]="nombreClienteNuevo">
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="">DUI</label>
+                        <input class="form-control" type="text" name="" #dui placeholder="DUI"
+                            [(ngModel)]="duiClienteNuevo">
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="">NIT</label>
+                        <input class="form-control" type="text" name="" #nit placeholder="NIT"
+                            [(ngModel)]="nitClienteNuevo">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" (click)="store()" class="btn btn-tertiary"
+                        data-bs-dismiss="modal">Aceptar</button>
+                    <button type="button" class="btn btn-link text-gray-600 ms-auto"
+                        data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

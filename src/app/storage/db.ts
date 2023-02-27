@@ -43,7 +43,7 @@ export class PosClientDB extends Dexie {
       tiposPagoPermitido: '++id, codigo',
       cortesTipoPagos: '++id, codigo_corte, codigo_tipo_pago, tipo',
       cortesFinalizados: '++id, codigo_corte, tipo_corte',
-      clientes: '++id, nit, nrc, codigo, nombre_cliente',
+      clientes: '++id, nit, nrc, codigo, nombre_cliente, tipo_cliente, dui',
       clientesOrden: '++id, codigo_orden, codigo_cliente',
     });
     this.on('populate', () => this.populate());

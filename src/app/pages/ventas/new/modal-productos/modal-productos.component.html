@@ -12,7 +12,7 @@
     </button>
     <!-- Modal Content -->
     <div class="modal fade" id="modal-productos" tabindex="-1" role="dialog" aria-labelledby="modal-productos">
-        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-right-side" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h2 class="h6 modal-title">Productos en Existencia</h2>
@@ -23,7 +23,7 @@
                         <div class="col-5">
                             <p class="mb-0 fw-bold">Categoria: Nombre</p>
                         </div>
-                        <div class="col-3">
+                        <div class="col-7">
                             <div class="input-group">
                                 <span class="input-group-text" id="">
                                     <svg class="icon icon-xxs" fill="currentColor" viewBox="0 0 20 20"
@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-3 scrollable-column">
+                        <div class="col-4 scrollable-column">
                             <!-- Tab Nav -->
                             <ul class="nav nav-pills square nav-fill flex-column vertical-tab mb-3 mb-lg-0" id="tab12"
                                 role="tablist">
@@ -57,7 +57,7 @@
                             </ul>
                             <!-- End of Tab Nav -->
                         </div>
-                        <div class="col-9 scrollable-column ">
+                        <div class="col-8 scrollable-column ">
                             <!-- Tab Content -->
                             <div class="card border-0">
                                 <div class="card-body py-0">
@@ -67,7 +67,7 @@
                                             class="tab-pane {{categoryIndexActive == i ? 'active show' : ''}} fade"
                                             id="tab-{{i}}" role="tabpanel" attr.aria-labelledby="tab-{{i}}">
                                             <div class="row">
-                                                <div class="col-md-3" *ngFor="let product of category.productos">
+                                                <div class="col-md-4" *ngFor="let product of category.productos">
                                                     <a data-bs-toggle="tooltip" data-bs-placement="top"
                                                         title="{{product.nombre}}"
                                                         (click)="storeOrderProduct(product.codigo, product.nombre, product.precio)">
@@ -88,7 +88,7 @@
                                                             </div>
                                                             <div class="px-2">
                                                                 <span class="mb-0 d-inline-block text-truncate fw-bold"
-                                                                    style="font-size: 13px; max-width: 170px;">
+                                                                    style="font-size: 13px; max-width: 140px;">
                                                                     {{product.nombre}}
                                                                 </span>
 
