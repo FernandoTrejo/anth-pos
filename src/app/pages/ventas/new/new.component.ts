@@ -21,6 +21,9 @@ import { Status } from 'src/app/utilities/status';
 import { TipoDocumentos } from 'src/app/utilities/tipo_documentos';
 import { TipoTransacciones } from 'src/app/utilities/tipo_transacciones';
 import { v4 as v4uuid } from 'uuid';
+import { CalculateTotalReceivedService } from 'src/app/services/payments/calculate-total-received.service';
+import { ResetClientInOrderService } from 'src/app/services/clientes/reset-client-in-order.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-new',
   templateUrl: './new.component.html',
@@ -63,7 +66,9 @@ export class NewComponent {
     private deleteOrderData: DeleteOrderDataService,
     private paymentTypeFinder: GetAllowedPaymentTypesService,
     private notifier: NotifyService,
-    private findClienteOrden: FindAttachedClientToStoreService
+    private findClienteOrden: FindAttachedClientToStoreService,
+    private totalReceivedService : CalculateTotalReceivedService,
+    private resetClienteService : ResetClientInOrderService
   ) {
     console.log(this.codigoVenta);
   }
@@ -73,7 +78,23 @@ export class NewComponent {
     return Number(productsCount) > 0;
   }
 
+  async showProcessConfirmation() {
+    Swal.fire({
+      title: '¿Desea finalizar la orden actual?',
+      text: 'Finalizar',
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'No',
+      confirmButtonText: 'Si'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await this.process();
+      }
 
+    });
+  }
   // PROCESAR ORDEN
   async process() {
     const total = await this.calculateTotal.calculate(this.codigoVenta);
@@ -81,19 +102,22 @@ export class NewComponent {
     const corteDiario = await this.findCorteDiario.find();
     const corteParcial = await this.findCorteParcial.find();
 
-    if (!corteMensual || !corteDiario || !corteParcial || Number(total) == 0) {
+    if (!corteMensual || !corteDiario || !corteParcial) {
+      this.notifier.error('Ha ocurrido un error inesperado'); return;
+    }
+
+    if(!this.totalIsGreaterThanZero(Number(total))){
+      this.notifier.error('El total no puede ser $0.00'); return;
+    }
+
+    const responseValidationDoc = await this.validateDocumentSelectedData();
+    if(!responseValidationDoc){
       return;
     }
 
-    if (this.documentoSeleccionado == TipoDocumentos.CreditoFiscal ||
-      this.documentoSeleccionado == TipoDocumentos.FacturaConsumidorFinal
-    ) {
-      const cliente = await this.findClienteOrden.find(this.codigoVenta);
-      if (cliente != undefined) {
-        this.nombreCliente = cliente.nombre_cliente;
-      }
-    } else {
-
+    if(!(await this.paymentIsComplete(Number(total)))){
+      this.notifier.error('El pago de la orden no esta completo');
+      return;
     }
 
     let transaccion: Transacciones = {
@@ -121,8 +145,8 @@ export class NewComponent {
     const corteDiario = await this.findCorteDiario.find();
     const corteParcial = await this.findCorteParcial.find();
 
-    if (!corteMensual || !corteDiario || !corteParcial || Number(total) == 0) {
-      return;
+    if (!corteMensual || !corteDiario || !corteParcial) {
+      this.notifier.error('Ha ocurrido un error inesperado'); return;
     }
 
     if (this.documentoSeleccionado == TipoDocumentos.CreditoFiscal ||
@@ -132,8 +156,6 @@ export class NewComponent {
       if (cliente != undefined) {
         this.nombreCliente = cliente.nombre_cliente;
       }
-    } else {
-
     }
 
     let transaccion: Transacciones = {
@@ -173,7 +195,8 @@ export class NewComponent {
     return pagos.find(pago => pago.codigo === codigo);
   }
 
-  changeDocSelection(event: any) {
+  async changeDocSelection(event: any) {
+    await this.resetClienteService.reset(this.codigoVenta);
     this.documentoSeleccionado = (event.target.value);
   }
 
@@ -185,5 +208,38 @@ export class NewComponent {
     }
 
     this.router.navigate(['ventas']);
+  }
+
+
+  /*VALIDACIONES PARA GUARDAR UNA ORDEN*/
+  totalIsGreaterThanZero(total : number) : boolean{
+    return Number(total) > 0;
+  }
+
+  async validateDocumentSelectedData() : Promise<boolean>{
+    if (this.documentoSeleccionado == TipoDocumentos.CreditoFiscal ||
+      this.documentoSeleccionado == TipoDocumentos.FacturaConsumidorFinal
+    ) {
+      const cliente = await this.findClienteOrden.find(this.codigoVenta);
+      if (cliente != undefined) {
+        this.nombreCliente = cliente.nombre_cliente;
+        return true;
+      }else{
+        this.notifier.error('No se ha seleccionado ningun cliente'); 
+        return false;
+      }
+    } else {
+      if(this.nombreCliente.trim() == ''){
+        this.notifier.error('Debe llenar el nombre del cliente'); 
+        return false;
+      }else{
+        return true;
+      }
+    }
+  }
+
+  async paymentIsComplete(total : number) : Promise<boolean>{
+    const received = await this.totalReceivedService.calculate(this.codigoVenta);
+    return Number(received) >= Number(total);
   }
 }
