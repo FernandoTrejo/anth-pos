@@ -42,6 +42,8 @@ import { SectionCreditoFiscalComponent } from './pages/ventas/new/section-credit
 import { DevolucionesIndexComponent } from './pages/devoluciones/devoluciones-index/devoluciones-index.component';
 import { DevolucionesNewComponent } from './pages/devoluciones/devoluciones-new/devoluciones-new.component';
 import { DevVentaprodModalComponent } from './pages/devoluciones/devoluciones-new/dev-ventaprod-modal/dev-ventaprod-modal.component';
+import { ConfigIndexComponent } from './pages/configuraciones/config-index/config-index.component';
+import { NumeradoresIndexComponent } from './pages/configuraciones/numeradores/numeradores-index/numeradores-index.component';
 
 
 @NgModule({
@@ -84,7 +86,9 @@ import { DevVentaprodModalComponent } from './pages/devoluciones/devoluciones-ne
     SectionCreditoFiscalComponent,
     DevolucionesIndexComponent,
     DevolucionesNewComponent,
-    DevVentaprodModalComponent
+    DevVentaprodModalComponent,
+    ConfigIndexComponent,
+    NumeradoresIndexComponent
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { liveQuery } from 'dexie';
+import { Observable } from 'rxjs';
+import { ActiveNav, NavItemActivatorService } from 'src/app/services/app/nav-item-activator.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { db } from 'src/app/storage/db';
+import { getLinkList } from 'src/app/utilities/link_list';
 
 @Component({
   selector: 'app-sidebar',
@@ -12,7 +15,13 @@ import { db } from 'src/app/storage/db';
 export class SidebarComponent {
   authUser = liveQuery(() => this.user());
 
-  constructor(private auth: AuthService, public router: Router) { }
+  links = getLinkList();
+
+  activeLink$: Observable<ActiveNav>;
+
+  constructor(private auth: AuthService, public router: Router, private activeNavService: NavItemActivatorService) {
+    this.activeLink$ = this.activeNavService.sharingObservable;
+  }
 
   async user() {
     return await this.auth.user();
@@ -23,8 +32,12 @@ export class SidebarComponent {
     this.router.navigate(['login']);
   }
 
+  changeActiveLink(newLink : string){
+    const nav = {
+      link: newLink
+    };
 
-  async resetDatabase(){
-    await db.resetDatabase();
+    this.activeNavService.sharingObservableData = nav;
   }
+
 }

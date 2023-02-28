@@ -36,8 +36,8 @@
             </div>
         </div>
         <ul class="nav flex-column pt-3 pt-md-0">
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/dashboard" routerLinkActive="active" ariaCurrentWhenActive="page">
+            <li class="nav-item {{(activeLink$ | async)?.link == 'dashboard' ? 'active' : '' }}">
+                <a class="nav-link" routerLink="/{{links.dashboard}}" routerLinkActive="active" ariaCurrentWhenActive="page" (click)="changeActiveLink(links.dashboard)" >
                     <span class="sidebar-icon">
                         <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
@@ -51,8 +51,8 @@
 
             <li role="separator" class="dropdown-divider mt-4 mb-3 border-gray-700"></li>
 
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/productos" routerLinkActive="active" ariaCurrentWhenActive="page">
+            <li class="nav-item {{(activeLink$ | async)?.link == links.productos ? 'active' : '' }}">
+                <a class="nav-link" routerLink="/{{links.productos}}" routerLinkActive="active" ariaCurrentWhenActive="page" (click)="changeActiveLink(links.productos)">
                     <span class="sidebar-icon">
                         <svg class="icon icon-xs me-2" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -124,12 +124,12 @@
                 <div class="multi-level collapse " role="list" id="submenu-reports" aria-expanded="false">
                     <ul class="flex-column nav">
                         <li class="nav-item ">
-                            <a class="nav-link" routerLink="/sesiones" routerLinkActive="active" ariaCurrentWhenActive="page">
+                            <a class="nav-link" routerLink="/{{links.sesionesAuth}}" routerLinkActive="active" ariaCurrentWhenActive="page">
                                 <span class="sidebar-text">Sesiones Auth</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" routerLink="/cortes" routerLinkActive="active" ariaCurrentWhenActive="page">
+                            <a class="nav-link" routerLink="/{{links.cortes}}" routerLinkActive="active" ariaCurrentWhenActive="page">
                                 <span class="sidebar-text">Cortes</span>
                             </a>
                         </li>
@@ -139,7 +139,7 @@
             <li role="separator" class="dropdown-divider mt-4 mb-3 border-gray-700"></li>
 
             <li class="nav-item ">
-                <a class="nav-link">
+                <a class="nav-link" routerLink="/{{links.config}}" routerLinkActive="active" ariaCurrentWhenActive="page">
                     <span class="sidebar-icon">
                         <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
@@ -149,13 +149,6 @@
                         </svg>
                     </span>
                     <span class="sidebar-text">Configuraciones</span>
-                </a>
-            </li>
-
-            <!-- Eliminar opcion -->
-            <li class="nav-item">
-                <a class="nav-link" (click)="resetDatabase()">
-                    <span class="sidebar-text">Reiniciar BD</span>
                 </a>
             </li>
 

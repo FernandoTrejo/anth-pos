@@ -75,6 +75,10 @@ export class ViewComponent implements OnInit, OnDestroy {
     }
   }
 
+  back(){
+    this.router.navigate(['ventas']);
+  }
+
   activateOption() {
     switch (this.documentoSeleccionado) {
       case TipoDocumentos.TicketVenta:

@@ -13,6 +13,8 @@ import { IndexComponent as CortesIndex } from './pages/cortes/index/index.compon
 import { ViewComponent as CortesView } from './pages/cortes/view/view.component';
 import { DevolucionesIndexComponent } from './pages/devoluciones/devoluciones-index/devoluciones-index.component';
 import { DevolucionesNewComponent } from './pages/devoluciones/devoluciones-new/devoluciones-new.component';
+import { ConfigIndexComponent } from './pages/configuraciones/config-index/config-index.component';
+import { NumeradoresIndexComponent } from './pages/configuraciones/numeradores/numeradores-index/numeradores-index.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService] },
@@ -25,6 +27,8 @@ const routes: Routes = [
   { path: 'ventas/:codigo_venta', component: VentasViewComponent, canActivate: [CorteActivateGuardService] },
   { path: 'devoluciones', component: DevolucionesIndexComponent, canActivate: [CorteActivateGuardService]},
   { path: 'devoluciones/nueva', component: DevolucionesNewComponent, canActivate: [CorteActivateGuardService]},
+  { path: 'configuraciones', component: ConfigIndexComponent, canActivate: [AuthGuardService]},
+  { path: 'configuraciones/numeradores', component: NumeradoresIndexComponent, canActivate: [AuthGuardService]},
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 ];
