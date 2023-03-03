@@ -1,6 +1,7 @@
 export enum TipoEmpleado{
     Cajero = 'cajero',
-    Encargado = 'encargado'
+    Encargado = 'encargado',
+    Informatica = 'informatica'
 }
 
 export interface Empleado{

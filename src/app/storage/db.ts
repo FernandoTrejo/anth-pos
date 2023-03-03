@@ -9,6 +9,7 @@ import { AuthSesion } from './schema/auth/sesiones';
 import { getPagosMock, TipoPagoPermitido } from './schema/pagos/tipos_pago';
 import { CorteTipoPago } from './schema/cortes/cortes_tipo_pagos';
 import { Cliente, ClienteOrden, getClientesMock } from './schema/clientes/clientes';
+import { getInitialNumeradores, Numerador } from './schema/numeradores/numeradores';
 
 export class PosClientDB extends Dexie {
   transacciones!: Table<Transacciones, number>;
@@ -26,6 +27,7 @@ export class PosClientDB extends Dexie {
   cortesFinalizados!: Table<CorteFinalizado, number>;
   clientes!: Table<Cliente, number>;
   clientesOrden!: Table<ClienteOrden, number>;
+  numeradores!: Table<Numerador, number>;
 
   constructor() {
     super('PosClientDB');
@@ -45,6 +47,7 @@ export class PosClientDB extends Dexie {
       cortesFinalizados: '++id, codigo_corte, tipo_corte',
       clientes: '++id, nit, nrc, codigo, nombre_cliente, tipo_cliente, dui',
       clientesOrden: '++id, codigo_orden, codigo_cliente',
+      numeradores: '++id, tipo_documento'
     });
     this.on('populate', () => this.populate());
   }
@@ -88,11 +91,19 @@ export class PosClientDB extends Dexie {
         nombre: 'Encargado Suc. X',
         clave: '123456',
         url_imagen: 'https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'
+      },{
+        codigo: '0011223344',
+        tipo_empleado: TipoEmpleado.Informatica,
+        usuario: 'admin',
+        nombre: 'admin',
+        clave: 'password',
+        url_imagen: 'https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png'
       },
     ]);
 
     await this.tiposPagoPermitido.bulkAdd(getPagosMock());
     await this.clientes.bulkAdd(getClientesMock());
+    await this.numeradores.bulkAdd(getInitialNumeradores());
   }
 
   async resetDatabase() {
@@ -112,7 +123,8 @@ export class PosClientDB extends Dexie {
         'cortesTipoPagos',
         'cortesFinalizados',
         'clientes',
-        'clientesOrden'
+        'clientesOrden',
+        'numeradores'
       ],
       () => {
         this.transacciones.clear();
@@ -130,6 +142,7 @@ export class PosClientDB extends Dexie {
         this.cortesFinalizados.clear();
         this.clientes.clear();
         this.clientesOrden.clear();
+        this.numeradores.clear();
         this.populate();
       });
   }
