@@ -1,0 +1,54 @@
+<div>
+    <!-- Button Modal -->
+    <button class="btn btn-primary my-3" data-bs-toggle="modal"
+    data-bs-target="#modal-nuevo-ingreso">Crear Nueva</button>
+    <!-- Modal Content -->
+    <div class="modal fade" id="modal-nuevo-ingreso" tabindex="-1" role="dialog" aria-labelledby="modal-productos">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="h6 modal-title">Nuevo Ingreso de Caja</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group mb-2">
+                                <label for="">Cantidad Efectivo</label>
+                                <input class="form-control" type="text" name="" placeholder=""
+                                    [(ngModel)]="cantidadEfectivo">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group mb-2">
+                                <label for="">Nombre del cliente</label>
+                                <input class="form-control" type="text" name=""
+                                    [(ngModel)]="nombreCliente">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group mb-2">
+                                <label for="">Referencia</label>
+                                <input class="form-control" type="text" name="" placeholder=""
+                                    [(ngModel)]="referenciaTransaccion">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group mb-2">
+                                <label for="">Descripcion</label>
+                                <textarea class="form-control" type="text" name=""
+                                    [(ngModel)]="descripcionTransaccion"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-tertiary" (click)="showConfirmation()">Registrar</button>
+                    <button type="button" class="btn btn-link text-gray-600 ms-auto"
+                        data-bs-dismiss="modal" #btnCloseModal>Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of Modal Content -->
+</div>

@@ -13,4 +13,5 @@ export interface Transacciones {
     corte_diario : string;
     corte_parcial : string;
     tipo_documento_clave : string;
+    descripcion?: string;
 }

@@ -15,6 +15,8 @@ import { DevolucionesIndexComponent } from './pages/devoluciones/devoluciones-in
 import { DevolucionesNewComponent } from './pages/devoluciones/devoluciones-new/devoluciones-new.component';
 import { ConfigIndexComponent } from './pages/configuraciones/config-index/config-index.component';
 import { NumeradoresIndexComponent } from './pages/configuraciones/numeradores/numeradores-index/numeradores-index.component';
+import { OtrosIngIndexComponent } from './pages/otros-ingresos/otros-ing-index/otros-ing-index.component';
+import { OtrosEgrIndexComponent } from './pages/otros-egresos/otros-egr-index/otros-egr-index.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService] },
@@ -25,6 +27,8 @@ const routes: Routes = [
   { path: 'ventas', component: VentasIndexComponent, canActivate: [CorteActivateGuardService] },
   { path: 'ventas/nueva', component: VentasNewComponent, canActivate: [CorteActivateGuardService] },
   { path: 'ventas/:codigo_venta', component: VentasViewComponent, canActivate: [CorteActivateGuardService] },
+  { path: 'otros-ingresos', component: OtrosIngIndexComponent, canActivate: [CorteActivateGuardService] },
+  { path: 'otros-egresos', component: OtrosEgrIndexComponent, canActivate: [CorteActivateGuardService] },
   { path: 'devoluciones', component: DevolucionesIndexComponent, canActivate: [CorteActivateGuardService]},
   { path: 'devoluciones/nueva', component: DevolucionesNewComponent, canActivate: [CorteActivateGuardService]},
   { path: 'configuraciones', component: ConfigIndexComponent, canActivate: [AuthGuardService]},

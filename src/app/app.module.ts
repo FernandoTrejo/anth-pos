@@ -44,7 +44,10 @@ import { DevolucionesNewComponent } from './pages/devoluciones/devoluciones-new/
 import { DevVentaprodModalComponent } from './pages/devoluciones/devoluciones-new/dev-ventaprod-modal/dev-ventaprod-modal.component';
 import { ConfigIndexComponent } from './pages/configuraciones/config-index/config-index.component';
 import { NumeradoresIndexComponent } from './pages/configuraciones/numeradores/numeradores-index/numeradores-index.component';
-
+import { OtrosIngIndexComponent } from './pages/otros-ingresos/otros-ing-index/otros-ing-index.component';
+import { OtrosEgrIndexComponent } from './pages/otros-egresos/otros-egr-index/otros-egr-index.component';
+import { NewComponent as OtrosIngresosNewComponent } from './pages/otros-ingresos/otros-ing-index/new/new.component';
+import { OtrosEgresisNewComponent } from './pages/otros-egresos/otros-egresis-new/otros-egresis-new.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +91,11 @@ import { NumeradoresIndexComponent } from './pages/configuraciones/numeradores/n
     DevolucionesNewComponent,
     DevVentaprodModalComponent,
     ConfigIndexComponent,
-    NumeradoresIndexComponent
+    NumeradoresIndexComponent,
+    OtrosIngIndexComponent,
+    OtrosEgrIndexComponent,
+    OtrosIngresosNewComponent,
+    OtrosEgresisNewComponent
   ],
   imports: [
     BrowserModule,
