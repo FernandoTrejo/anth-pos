@@ -98,10 +98,10 @@
                     <div class="row mb-4">
                         <app-section-ticket *ngIf="documentoSeleccionado == 'ticket_venta'"
                             (nombreCliente)="actualizarNombreCliente($event)"
-                            [nombreInicial]="nombreCliente"></app-section-ticket>
+                            [nombreInicial]="nombreCliente"  [statusTransaccion]="statusTransaccion"></app-section-ticket>
                         <app-section-consumidor-final *ngIf="documentoSeleccionado == 'factura_consumidor_final'"
-                            [codigoVenta]="codigoVenta"></app-section-consumidor-final>
-                        <app-section-credito-fiscal [codigoVenta]="codigoVenta"
+                            [codigoVenta]="codigoVenta" [statusTransaccion]="statusTransaccion"></app-section-consumidor-final>
+                        <app-section-credito-fiscal  [statusTransaccion]="statusTransaccion" [codigoVenta]="codigoVenta"
                             *ngIf="documentoSeleccionado == 'credito_fiscal'"></app-section-credito-fiscal>
 
                     </div>

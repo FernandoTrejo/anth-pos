@@ -48,7 +48,9 @@
                         <!-- Item -->
                         <tr *ngFor="let devolucion of devoluciones | async" [classList]="(devolucion.status == statusActual || statusActual == '') ? '' : 'd-none'">
                             <td>
-                                <a routerLink="/devoluciones/{{devolucion.codigo}}" routerLinkActive="active" ariaCurrentWhenActive="page" class="text-primary fw-bold">123456</a>
+                                <a routerLink="/devoluciones/{{devolucion.codigo}}" routerLinkActive="active" ariaCurrentWhenActive="page" class="text-primary fw-bold">
+                                    {{devolucion.numero_transaccion}}
+                                </a>
                             </td>
                             <td class="fw-bold">
                                 {{format(devolucion.fecha)}}

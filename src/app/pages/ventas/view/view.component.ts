@@ -21,6 +21,7 @@ import { NotifyService } from 'src/app/services/Notifications/notify.service';
 import Swal from 'sweetalert2';
 import { CalculateTotalReceivedService } from 'src/app/services/payments/calculate-total-received.service';
 import { MessageType } from 'src/app/utilities/messages';
+import { NextNumService } from 'src/app/services/numeradores/next-num.service';
 @Component({
   selector: 'app-view',
   templateUrl: './view.component.html',
@@ -119,7 +120,8 @@ export class ViewComponent implements OnInit, OnDestroy {
     private findClienteOrden: FindAttachedClientToStoreService,
     private resetClienteService: ResetClientInOrderService,
     private notifier: NotifyService,
-    private totalReceivedService: CalculateTotalReceivedService
+    private totalReceivedService: CalculateTotalReceivedService,
+    private nextNumeradorService : NextNumService
   ) {
   }
 
@@ -201,9 +203,11 @@ export class ViewComponent implements OnInit, OnDestroy {
       return;
     }
 
+    const nextNum = await this.nextNumeradorService.next(this.documentoSeleccionado);
+
     let transaccion: Transacciones = {
       codigo: this.codigoVenta,
-      numero_transaccion: '',
+      numero_transaccion: nextNum,
       fecha: new Date,
       referencia: '',
       nombre_cliente: this.nombreCliente,
@@ -216,9 +220,11 @@ export class ViewComponent implements OnInit, OnDestroy {
       tipo_documento_clave: this.documentoSeleccionado
     };
     const response = await this.updateOrder.update(this.codigoVenta, transaccion);
+    
     this.notifier.show(response.type, response.title);
 
     if (response.type == MessageType.success) {
+      await this.nextNumeradorService.updateActual(this.documentoSeleccionado);
       this.router.navigate(['/ventas']);
     }
   }

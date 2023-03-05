@@ -43,6 +43,7 @@
                             <th class="border-0">Fecha</th>
                             <th class="border-0">Cliente</th>
                             <th class="border-0">Total</th>
+                            <th class="border-0">Doc</th>
                             <th class="border-0 rounded-end">Status</th>
                         </tr>
                     </thead>
@@ -53,7 +54,7 @@
                                 <a (click)="showPanel(venta.codigo)" class="text-primary fw-bold" data-bs-toggle="modal"
                                     data-bs-target="#modal-venta-productos">
 
-                                    {{venta.codigo}}
+                                    {{venta.numero_transaccion}}
                                 </a>
                             </td>
                             <td class="fw-bold">
@@ -64,6 +65,9 @@
                             </td>
                             <td>
                                 {{formatMoney(venta.total)}}
+                            </td>
+                            <td>
+                                {{mostrarTipoDoc(venta.tipo_documento_clave)}}
                             </td>
                             <td [ngSwitch]="venta.status">
                                 <span *ngSwitchCase="statusAbierta" class="fw-bold text-info">{{venta.status}}</span>

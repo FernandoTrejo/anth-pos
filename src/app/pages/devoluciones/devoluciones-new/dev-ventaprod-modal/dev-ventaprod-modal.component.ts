@@ -16,6 +16,7 @@ import { TipoDocumentos } from 'src/app/utilities/tipo_documentos';
 import { TipoTransacciones } from 'src/app/utilities/tipo_transacciones';
 import { v4 } from 'uuid';
 import Swal from 'sweetalert2';
+import { NextNumService } from 'src/app/services/numeradores/next-num.service';
 
 @Component({
   selector: 'app-dev-ventaprod-modal',
@@ -37,7 +38,8 @@ export class DevVentaprodModalComponent implements OnChanges {
     private ventaFinder: FindByCodeService,
     private notifier: NotifyService,
     private guardarDevolucion: StoreDevolucionService,
-    private router: Router) { }
+    private router: Router,
+    private nextNumService :  NextNumService) { }
 
   ngOnChanges(): void {
     this.ventaProductos = liveQuery(() => this.orderProductFinder.allByOrderCode(this.ventaCodigo));
@@ -178,12 +180,13 @@ export class DevVentaprodModalComponent implements OnChanges {
 
     const codigoDevolucion = v4();
 
+    const nextNum = await this.nextNumService.next(TipoDocumentos.TicketDevolucion);
     const devolucion = {
       codigo: codigoDevolucion,
-      numero_transaccion: '',
+      numero_transaccion: nextNum,
       fecha: new Date(),
-      referencia: venta.codigo,//extraer de orden de venta
-      nombre_cliente: venta.nombre_cliente,//extraer de orden de venta
+      referencia: venta.numero_transaccion,
+      nombre_cliente: venta.nombre_cliente,
       total: Number(total) * -1,
       tipo_transaccion: TipoTransacciones.Devolucion,
       status: Status.Closed,
@@ -204,6 +207,7 @@ export class DevVentaprodModalComponent implements OnChanges {
     const response = await this.guardarDevolucion.store(devolucion, this.productosDevolucion);
     this.notifier.show(response.type, response.title);
     if (response.type == MessageType.success) {
+      await this.nextNumService.updateActual(TipoDocumentos.TicketDevolucion);
       this.router.navigate(['devoluciones']);
     }
   }

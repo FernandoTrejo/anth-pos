@@ -1,4 +1,11 @@
 <div class="form-group">
     <label for="">Nombre del Cliente</label>
-    <input class="form-control" type="text" name="" #nombre placeholder="Nombre del Cliente" (keyup)="actualizarNombreCliente(nombre.value)" value="{{nombreInicial}}">
+    <input *ngIf="statusTransaccion == statusAbierto; else disabled" class="form-control" type="text" name="" #nombre placeholder="Nombre del Cliente" (keyup)="actualizarNombreCliente(nombre.value)" value="{{nombreInicial}}">
+    
+    <ng-template #disabled>
+        <div class="alert alert-info" role="alert">
+            Cliente: {{nombreInicial}}
+        </div>
+    </ng-template>
+    
 </div>

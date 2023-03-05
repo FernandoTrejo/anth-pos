@@ -50,7 +50,9 @@
                         <tr *ngFor="let venta of ventas | async" [classList]="(venta.status == statusActual || statusActual == '') ? '' : 'd-none'">
                             <td>
                                 <!-- <a routerLink="/ventas/{{venta.codigo}}" routerLinkActive="active" ariaCurrentWhenActive="page" class="text-primary fw-bold">{{venta.numero_transaccion}}</a> -->
-                                <a routerLink="/ventas/{{venta.codigo}}" routerLinkActive="active" ariaCurrentWhenActive="page" class="text-primary fw-bold">123456</a>
+                                <a routerLink="/ventas/{{venta.codigo}}" routerLinkActive="active" ariaCurrentWhenActive="page" class="text-primary fw-bold">
+                                    {{(venta.numero_transaccion != '' ? venta.numero_transaccion : 'Ver Orden')}}
+                                </a>
                             </td>
                             <td class="fw-bold">
                                 {{format(venta.fecha)}}

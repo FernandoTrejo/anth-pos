@@ -24,6 +24,7 @@ import { v4 as v4uuid } from 'uuid';
 import { CalculateTotalReceivedService } from 'src/app/services/payments/calculate-total-received.service';
 import { ResetClientInOrderService } from 'src/app/services/clientes/reset-client-in-order.service';
 import Swal from 'sweetalert2';
+import { NextNumService } from 'src/app/services/numeradores/next-num.service';
 @Component({
   selector: 'app-new',
   templateUrl: './new.component.html',
@@ -68,9 +69,11 @@ export class NewComponent {
     private notifier: NotifyService,
     private findClienteOrden: FindAttachedClientToStoreService,
     private totalReceivedService : CalculateTotalReceivedService,
-    private resetClienteService : ResetClientInOrderService
+    private resetClienteService : ResetClientInOrderService,
+    private nextNumeradorService : NextNumService
   ) {
     console.log(this.codigoVenta);
+    
   }
 
   async getTablaResumenPagoVisibility() {
@@ -120,9 +123,11 @@ export class NewComponent {
       return;
     }
 
+    const nextNum = await this.nextNumeradorService.next(this.documentoSeleccionado);
+
     let transaccion: Transacciones = {
       codigo: this.codigoVenta,
-      numero_transaccion: '',
+      numero_transaccion: nextNum,
       fecha: new Date,
       referencia: '',
       nombre_cliente: this.nombreCliente,
@@ -135,6 +140,7 @@ export class NewComponent {
       tipo_documento_clave: this.documentoSeleccionado
     };
     await this.processOrder.process(transaccion);
+    await this.nextNumeradorService.updateActual(this.documentoSeleccionado);
     this.router.navigate(['/ventas']);
   }
 

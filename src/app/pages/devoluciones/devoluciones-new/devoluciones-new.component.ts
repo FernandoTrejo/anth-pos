@@ -9,6 +9,7 @@ import { TipoTransacciones } from 'src/app/utilities/tipo_transacciones';
 import { FindProductsService } from 'src/app/services/orders/added-products/find-products.service';
 import { ProductoOrden } from 'src/app/storage/schema/productos/productos_orden';
 import { Money } from 'src/app/utilities/money';
+import { TraducirTipoDocumento } from 'src/app/utilities/tipo_documentos';
 
 @Component({
   selector: 'app-devoluciones-new',
@@ -60,6 +61,10 @@ export class DevolucionesNewComponent {
 
   formatMoney(quantity : number){
     return (new Money(quantity)).toString();
+  }
+
+  mostrarTipoDoc(tipo : string){
+    return TraducirTipoDocumento(tipo);
   }
 
   ventaCodigo = '';

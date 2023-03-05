@@ -4,9 +4,11 @@ import { FindActiveCorteDiarioService } from 'src/app/services/cortes/corte-diar
 import { FindActiveCorteMensualService } from 'src/app/services/cortes/corte-mensual/find-active-corte-mensual.service';
 import { FindActiveCorteParcialService } from 'src/app/services/cortes/corte-parcial/find-active-corte-parcial.service';
 import { NotifyService } from 'src/app/services/Notifications/notify.service';
+import { NextNumService } from 'src/app/services/numeradores/next-num.service';
 import { StoreOrderService } from 'src/app/services/orders/store-order.service';
 import { Transacciones } from 'src/app/storage/schema/transacciones/transacciones';
 import { Status } from 'src/app/utilities/status';
+import { TipoDocumentos } from 'src/app/utilities/tipo_documentos';
 import { TipoTransacciones } from 'src/app/utilities/tipo_transacciones';
 import Swal from 'sweetalert2';
 import { v4 } from 'uuid';
@@ -31,7 +33,8 @@ export class OtrosEgresisNewComponent {
     private findCorteMensual: FindActiveCorteMensualService,
     private findCorteParcial: FindActiveCorteParcialService,
     private findCorteDiario: FindActiveCorteDiarioService,
-    private notifier: NotifyService,) { }
+    private notifier: NotifyService,
+    private nextNumService : NextNumService) { }
 
   async showConfirmation() {
     Swal.fire({
@@ -68,9 +71,10 @@ export class OtrosEgresisNewComponent {
 
 
     const codigo = v4();
+    const nextNum = await this.nextNumService.next(TipoDocumentos.TicketOtrosEgresos);
     let transaccion: Transacciones = {
       codigo: codigo,
-      numero_transaccion: '',
+      numero_transaccion: nextNum,
       fecha: new Date,
       referencia: this.referenciaTransaccion,
       nombre_cliente: this.nombreCliente,
@@ -84,6 +88,7 @@ export class OtrosEgresisNewComponent {
       descripcion: this.descripcionTransaccion
     };
     await this.storeOrder.process(transaccion);
+    await this.nextNumService.updateActual(TipoDocumentos.TicketOtrosEgresos);
     this.router.navigate(['/otros-egresos']);
   }
 

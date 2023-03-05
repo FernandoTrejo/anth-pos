@@ -2,7 +2,7 @@
 <div class="d-flex gap-4">
     <!-- Button Modal -->
     <button type="button" class="btn btn-block btn-outline-info mb-3" data-bs-toggle="modal"
-        data-bs-target="#modal-clientes">Buscar Cliente</button>
+        data-bs-target="#modal-clientes" *ngIf="statusTransaccion == statusAbierto">Buscar Cliente</button>
 
     <div *ngIf="(attachedCliente | async)">
         <div class="alert alert-info" role="alert">

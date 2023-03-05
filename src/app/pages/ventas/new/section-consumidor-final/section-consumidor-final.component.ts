@@ -8,6 +8,7 @@ import { StoreClientService } from 'src/app/services/clientes/store-client.servi
 import { NotifyService } from 'src/app/services/Notifications/notify.service';
 import { Cliente, TipoCliente } from 'src/app/storage/schema/clientes/clientes';
 import { MessageType } from 'src/app/utilities/messages';
+import { Status } from 'src/app/utilities/status';
 import { v4 } from 'uuid';
 
 @Component({
@@ -16,7 +17,16 @@ import { v4 } from 'uuid';
   styleUrls: ['./section-consumidor-final.component.css']
 })
 export class SectionConsumidorFinalComponent {
+
+  
+  statusAbierto = Status.Open;
+  statusCerrado = Status.Closed;
+  statusAnulado = Status.Nulled;
+
   @Input() codigoVenta: string = '';
+  @Input() statusTransaccion = Status.Open.toString();
+
+
   clientes = liveQuery(() => this.findClientes());
   attachedCliente = liveQuery(() => this.findAttached.find(this.codigoVenta));
   nombreClienteNuevo = '';
