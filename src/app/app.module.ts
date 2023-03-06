@@ -48,6 +48,7 @@ import { OtrosIngIndexComponent } from './pages/otros-ingresos/otros-ing-index/o
 import { OtrosEgrIndexComponent } from './pages/otros-egresos/otros-egr-index/otros-egr-index.component';
 import { NewComponent as OtrosIngresosNewComponent } from './pages/otros-ingresos/otros-ing-index/new/new.component';
 import { OtrosEgresisNewComponent } from './pages/otros-egresos/otros-egresis-new/otros-egresis-new.component';
+import { ImportarProductosComponent } from './pages/configuraciones/productos/importar-productos/importar-productos.component';
 
 @NgModule({
   declarations: [
@@ -95,7 +96,8 @@ import { OtrosEgresisNewComponent } from './pages/otros-egresos/otros-egresis-ne
     OtrosIngIndexComponent,
     OtrosEgrIndexComponent,
     OtrosIngresosNewComponent,
-    OtrosEgresisNewComponent
+    OtrosEgresisNewComponent,
+    ImportarProductosComponent
   ],
   imports: [
     BrowserModule,

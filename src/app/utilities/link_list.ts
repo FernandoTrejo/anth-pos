@@ -6,6 +6,7 @@ export function getLinkList() {
         ventas: 'ventas',
         dashboard: 'dashboard',
         sesionesAuth: 'sesiones',
-        configNumeradores: 'configuraciones/numeradores'
+        configNumeradores: 'configuraciones/numeradores',
+        configProductos: 'configuraciones/productos'
     };
 }

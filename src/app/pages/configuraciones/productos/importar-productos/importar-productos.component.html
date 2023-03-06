@@ -1,0 +1,91 @@
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+
+<main class="content">
+
+    <div class="row mt-4">
+        <div class="col d-flex justify-content-center">
+            <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modal-importar-productos">Cargar
+                Productos</button>
+        </div>
+    </div>
+</main>
+
+<div class="modal fade" id="" tabindex="-1" role="dialog" aria-labelledby="modal-productos">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="h6 modal-title">Importar Productos</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-2">
+                            <label for="">Delimitador</label>
+                            <input class="form-control" type="text" name="" [(ngModel)]="delimitador" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group mb-2">
+                            <label for="">Reemplazar Inventario</label>
+                            <input class="form-control" type="check" name="" [(ngModel)]="reemplazarInventario" />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group mb-2">
+                            <label for="">CSV Data</label>
+                            <textarea class="form-control" type="text" name="" [(ngModel)]="csvData"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-tertiary" (click)="importar()">Importar</button>
+            <button type="button" class="btn btn-link text-gray-600 ms-auto" data-bs-dismiss="modal"
+                #btnCloseModal>Cerrar</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-importar-productos" tabindex="-1" role="dialog" aria-labelledby="modal-productos">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="h6 modal-title">Importar Productos</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-2">
+                            <label for="">Delimitador</label>
+                            <input class="form-control" type="text" name="" [(ngModel)]="delimitador" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group mb-2">
+                            <label for="">Reemplazar Inventario</label>
+                            <input class="form-check" type="checkbox" name="" [(ngModel)]="reemplazarInventario" />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group mb-2">
+                            <label for="">CSV Data</label>
+                            <textarea class="form-control" type="text" name="" [(ngModel)]="csvData"></textarea>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-tertiary" (click)="importar()">Importar</button>
+                <button type="button" class="btn btn-link text-gray-600 ms-auto"
+                    data-bs-dismiss="modal" #btnCloseModal>Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- End of Modal Content -->

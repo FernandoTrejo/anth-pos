@@ -17,6 +17,7 @@ import { ConfigIndexComponent } from './pages/configuraciones/config-index/confi
 import { NumeradoresIndexComponent } from './pages/configuraciones/numeradores/numeradores-index/numeradores-index.component';
 import { OtrosIngIndexComponent } from './pages/otros-ingresos/otros-ing-index/otros-ing-index.component';
 import { OtrosEgrIndexComponent } from './pages/otros-egresos/otros-egr-index/otros-egr-index.component';
+import { ImportarProductosComponent } from './pages/configuraciones/productos/importar-productos/importar-productos.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService] },
@@ -33,6 +34,7 @@ const routes: Routes = [
   { path: 'devoluciones/nueva', component: DevolucionesNewComponent, canActivate: [CorteActivateGuardService]},
   { path: 'configuraciones', component: ConfigIndexComponent, canActivate: [AuthGuardService]},
   { path: 'configuraciones/numeradores', component: NumeradoresIndexComponent, canActivate: [AuthGuardService]},
+  { path: 'configuraciones/productos', component: ImportarProductosComponent, canActivate: [AuthGuardService]},
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 ];
