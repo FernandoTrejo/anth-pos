@@ -51,7 +51,6 @@ export class NewComponent {
       if (result.isConfirmed) {
         await this.store();
         this.CloseModal.nativeElement.click();
-        this.notifier.success('La transaccion se ha guardado exitosamente');
       }
 
     });
@@ -64,6 +63,10 @@ export class NewComponent {
 
     if (!corteMensual || !corteDiario || !corteParcial) {
       this.notifier.error('Ha ocurrido un error inesperado'); return;
+    }
+
+    if(!(await this.nextNumService.validateNext(TipoDocumentos.TicketOtrosIngresos))){
+      this.notifier.error('No hay correlativos'); return;
     }
 
     if (!this.totalIsGreaterThanZero(Number(this.cantidadEfectivo))) {
@@ -91,6 +94,8 @@ export class NewComponent {
       descripcion: this.descripcionTransaccion
     };
     await this.storeOrder.process(transaccion);
+    
+    this.notifier.success('La transaccion se ha guardado exitosamente');
     await this.nextNumService.updateActual(TipoDocumentos.TicketOtrosIngresos);
     this.router.navigate(['/otros-ingresos']);
   }

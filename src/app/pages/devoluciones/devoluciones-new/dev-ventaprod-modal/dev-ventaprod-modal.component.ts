@@ -172,6 +172,10 @@ export class DevVentaprodModalComponent implements OnChanges {
       return;
     }
 
+    if(! (await this.nextNumService.validateNext(TipoDocumentos.TicketDevolucion))){
+      this.notifier.error('No hay correlativos'); return;
+    }
+
     const venta = await this.ventaFinder.find(this.ventaCodigo);
     if (!venta) {
       this.notifier.error('Ha ocurrido un error');

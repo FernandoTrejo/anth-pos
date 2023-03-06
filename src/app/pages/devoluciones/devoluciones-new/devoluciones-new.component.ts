@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { liveQuery } from 'dexie';
 import { BreadcrumbItem } from 'src/app/components/global/breadcrumb/breadcrumb.component';
 import { FindActiveCorteDiarioService } from 'src/app/services/cortes/corte-diario/find-active-corte-diario.service';
@@ -9,14 +9,15 @@ import { TipoTransacciones } from 'src/app/utilities/tipo_transacciones';
 import { FindProductsService } from 'src/app/services/orders/added-products/find-products.service';
 import { ProductoOrden } from 'src/app/storage/schema/productos/productos_orden';
 import { Money } from 'src/app/utilities/money';
-import { TraducirTipoDocumento } from 'src/app/utilities/tipo_documentos';
+import { TipoDocumentos, TraducirTipoDocumento } from 'src/app/utilities/tipo_documentos';
+import { NextNumService } from 'src/app/services/numeradores/next-num.service';
 
 @Component({
   selector: 'app-devoluciones-new',
   templateUrl: './devoluciones-new.component.html',
   styleUrls: ['./devoluciones-new.component.css']
 })
-export class DevolucionesNewComponent {
+export class DevolucionesNewComponent implements OnInit{
   //breadcrumb
   breadcrumbItems: Array<BreadcrumbItem> = [
     {
@@ -36,8 +37,17 @@ export class DevolucionesNewComponent {
   constructor(
     private transactionFinder: FindWithFiltersService,
     private zFinder: FindActiveCorteDiarioService,
-    private orderProductFinder : FindProductsService
+    private nextNumService : NextNumService
   ) { }
+
+  mensajeErrorNumerador = '';
+  async ngOnInit(){
+    if(! (await this.nextNumService.validateNext(TipoDocumentos.TicketDevolucion))){
+      this.mensajeErrorNumerador = 'No hay correlativos para el documento seleccionado. Favor solicitar nuevos.'
+    }else{
+      this.mensajeErrorNumerador = '';
+    }
+  }
 
   statusCerrada = Status.Closed;
   statusAbierta = Status.Open;

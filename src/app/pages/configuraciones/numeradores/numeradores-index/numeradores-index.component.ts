@@ -88,7 +88,8 @@ export class NumeradoresIndexComponent {
       numeracion: this.numeracionEdicion,
       prefijo: this.prefijoEdicion,
       inicio: this.inicio,
-      fin: this.fin
+      fin: this.fin,
+      actual: this.inicio
     };
 
     const response = await this.storeChangesService.store(this.idEdicion, cambios);

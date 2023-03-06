@@ -50,7 +50,6 @@ export class OtrosEgresisNewComponent {
       if (result.isConfirmed) {
         await this.store();
         this.CloseModal.nativeElement.click();
-        this.notifier.success('La transaccion se ha guardado exitosamente');
       }
 
     });
@@ -63,6 +62,10 @@ export class OtrosEgresisNewComponent {
 
     if (!corteMensual || !corteDiario || !corteParcial) {
       this.notifier.error('Ha ocurrido un error inesperado'); return;
+    }
+
+    if (!(await this.nextNumService.validateNext(TipoDocumentos.TicketOtrosEgresos))) {
+      this.notifier.error('No hay correlativos'); return;
     }
 
     if (!this.totalIsGreaterThanZero(Number(this.cantidadEfectivo))) {
@@ -88,6 +91,8 @@ export class OtrosEgresisNewComponent {
       descripcion: this.descripcionTransaccion
     };
     await this.storeOrder.process(transaccion);
+    
+    this.notifier.success('La transaccion se ha guardado exitosamente');
     await this.nextNumService.updateActual(TipoDocumentos.TicketOtrosEgresos);
     this.router.navigate(['/otros-egresos']);
   }

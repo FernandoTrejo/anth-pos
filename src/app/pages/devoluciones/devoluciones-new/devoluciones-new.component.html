@@ -27,14 +27,14 @@
         </div>
     </div>
 
+    
+
+
     <div class="card border-0 shadow">
-        <div class="card-header d-flex gap-2">
-            <!-- <button class="btn btn-tertiary" (click)="viewStatus('')">Todas</button>
-            <button class="btn btn-info" (click)="viewStatus(statusAbierta)">Abiertas</button>
-            <button class="btn btn-secondary" (click)="viewStatus(statusCerrada)">Cerradas</button>
-            <button class="btn btn-danger" (click)="viewStatus(statusAnulada)">Anuladas</button> -->
-        </div>
         <div class="card-body">
+            <div class="alert alert-danger mt-3" *ngIf="mensajeErrorNumerador != ''">
+                <span class="text-danger">{{mensajeErrorNumerador}}</span>
+            </div>
             <div class="table-responsive" *ngIf="(ventasDiarias | async)?.length; else noDataVentas">
                 <table class="table table-centered table-nowrap mb-0 rounded">
                     <thead class="">

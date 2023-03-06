@@ -14,6 +14,8 @@ export class NextNumService {
       {tipo_documento: tipoDoc}
     ).first();
 
+    console.log(numerador);
+
     if(numerador != undefined){
       const actual = Number(numerador.actual);
       const inicio = Number(numerador.inicio);

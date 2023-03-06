@@ -74,6 +74,8 @@ export class ViewComponent implements OnInit, OnDestroy {
       this.documentoSeleccionado = datosOrden.tipo_documento_clave;
       this.activateOption();
     }
+
+    await this.setMessageNumeradorError();
   }
 
   back(){
@@ -104,6 +106,7 @@ export class ViewComponent implements OnInit, OnDestroy {
   async changeDocSelection(event: any) {
     await this.resetClienteService.reset(this.codigoVenta);
     this.documentoSeleccionado = (event.target.value);
+    await this.setMessageNumeradorError();
   }
 
   constructor(
@@ -130,7 +133,14 @@ export class ViewComponent implements OnInit, OnDestroy {
     return Number(productsCount) > 0;
   }
 
-
+  mensajeNumeradoresError = '';
+  async setMessageNumeradorError(){
+    if(!(await this.nextNumeradorService.validateNext(this.documentoSeleccionado))){
+      this.mensajeNumeradoresError = 'No hay correlativos para el documento seleccionado. Favor solicitar nuevos.';
+    }else{
+      this.mensajeNumeradoresError = '';
+    }
+  }
 
   // PROCESAR ORDEN
   async store(status: string) {
@@ -187,6 +197,10 @@ export class ViewComponent implements OnInit, OnDestroy {
 
     if (!corteMensual || !corteDiario || !corteParcial) {
       this.notifier.error('Ha ocurrido un error inesperado'); return;
+    }
+
+    if(!(await this.nextNumeradorService.validateNext(this.documentoSeleccionado))){
+      this.notifier.error('No hay correlativos disponibles'); return;
     }
 
     if (!this.totalIsGreaterThanZero(Number(total))) {
