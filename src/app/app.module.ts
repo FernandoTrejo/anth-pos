@@ -49,7 +49,8 @@ import { OtrosEgrIndexComponent } from './pages/otros-egresos/otros-egr-index/ot
 import { NewComponent as OtrosIngresosNewComponent } from './pages/otros-ingresos/otros-ing-index/new/new.component';
 import { OtrosEgresisNewComponent } from './pages/otros-egresos/otros-egresis-new/otros-egresis-new.component';
 import { ImportarProductosComponent } from './pages/configuraciones/productos/importar-productos/importar-productos.component';
-
+import {NgxPaginationModule} from 'ngx-pagination';
+import { FilterPipePipe } from './pipes/filter-pipe.pipe'; // <-- import the module
 @NgModule({
   declarations: [
     AppComponent,
@@ -97,7 +98,8 @@ import { ImportarProductosComponent } from './pages/configuraciones/productos/im
     OtrosEgrIndexComponent,
     OtrosIngresosNewComponent,
     OtrosEgresisNewComponent,
-    ImportarProductosComponent
+    ImportarProductosComponent,
+    FilterPipePipe
   ],
   imports: [
     BrowserModule,
@@ -108,7 +110,8 @@ import { ImportarProductosComponent } from './pages/configuraciones/productos/im
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]
