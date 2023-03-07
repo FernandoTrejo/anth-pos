@@ -3,6 +3,7 @@ export function getLinkList() {
         config: 'configuraciones',
         cortes: 'cortes',
         productos: 'productos',
+        clientes: 'clientes',
         ventas: 'ventas',
         dashboard: 'dashboard',
         sesionesAuth: 'sesiones',

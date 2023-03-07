@@ -18,10 +18,12 @@ import { NumeradoresIndexComponent } from './pages/configuraciones/numeradores/n
 import { OtrosIngIndexComponent } from './pages/otros-ingresos/otros-ing-index/otros-ing-index.component';
 import { OtrosEgrIndexComponent } from './pages/otros-egresos/otros-egr-index/otros-egr-index.component';
 import { ImportarProductosComponent } from './pages/configuraciones/productos/importar-productos/importar-productos.component';
+import { ClientesIndexComponent } from './pages/clientes/clientes-index/clientes-index.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService] },
   { path: 'productos', component: ProductosComponent, canActivate: [AuthGuardService] },
+  { path: 'clientes', component: ClientesIndexComponent, canActivate: [AuthGuardService] },
   { path: 'sesiones', component: SesionesIndex, canActivate: [AuthGuardService]},
   { path: 'cortes', component: CortesIndex, canActivate: [AuthGuardService]},
   { path: 'cortes/:codigo_corte', component: CortesView, canActivate: [AuthGuardService]},

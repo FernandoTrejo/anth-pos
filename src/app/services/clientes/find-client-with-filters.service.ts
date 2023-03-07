@@ -31,4 +31,8 @@ export class FindClientWithFiltersService {
     }).toArray();
     return all;
   }
+
+  async allCombined(){
+    return await db.clientes.toArray();
+  }
 }

@@ -50,7 +50,9 @@ import { NewComponent as OtrosIngresosNewComponent } from './pages/otros-ingreso
 import { OtrosEgresisNewComponent } from './pages/otros-egresos/otros-egresis-new/otros-egresis-new.component';
 import { ImportarProductosComponent } from './pages/configuraciones/productos/importar-productos/importar-productos.component';
 import {NgxPaginationModule} from 'ngx-pagination';
-import { FilterPipePipe } from './pipes/filter-pipe.pipe'; // <-- import the module
+import { FilterPipePipe } from './pipes/filter-pipe.pipe';
+import { ClientesIndexComponent } from './pages/clientes/clientes-index/clientes-index.component';
+import { EmptyTextTransformerPipe } from './pipes/empty-text-transformer.pipe'; // <-- import the module
 @NgModule({
   declarations: [
     AppComponent,
@@ -99,7 +101,9 @@ import { FilterPipePipe } from './pipes/filter-pipe.pipe'; // <-- import the mod
     OtrosIngresosNewComponent,
     OtrosEgresisNewComponent,
     ImportarProductosComponent,
-    FilterPipePipe
+    FilterPipePipe,
+    ClientesIndexComponent,
+    EmptyTextTransformerPipe
   ],
   imports: [
     BrowserModule,
