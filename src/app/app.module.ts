@@ -52,7 +52,8 @@ import { ImportarProductosComponent } from './pages/configuraciones/productos/im
 import {NgxPaginationModule} from 'ngx-pagination';
 import { FilterPipePipe } from './pipes/filter-pipe.pipe';
 import { ClientesIndexComponent } from './pages/clientes/clientes-index/clientes-index.component';
-import { EmptyTextTransformerPipe } from './pipes/empty-text-transformer.pipe'; // <-- import the module
+import { EmptyTextTransformerPipe } from './pipes/empty-text-transformer.pipe';
+import { FormatMoneyPipe } from './pipes/format-money.pipe'; // <-- import the module
 @NgModule({
   declarations: [
     AppComponent,
@@ -103,7 +104,8 @@ import { EmptyTextTransformerPipe } from './pipes/empty-text-transformer.pipe'; 
     ImportarProductosComponent,
     FilterPipePipe,
     ClientesIndexComponent,
-    EmptyTextTransformerPipe
+    EmptyTextTransformerPipe,
+    FormatMoneyPipe
   ],
   imports: [
     BrowserModule,

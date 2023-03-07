@@ -63,7 +63,7 @@
         <div class="col">
             <div class="card border-0 shadow">
                 <div class="card-body">
-                    <h6>Cantidades en Caja | Segun Cajero</h6>
+                    <h6>Cantidades en Caja | Segun Cuadre</h6>
                     <div class="table-responsive">
                         <table class="table table-centered table-nowrap mb-0 rounded">
                             <thead class="">
@@ -107,9 +107,8 @@
                             <tbody>
                                 <tr *ngFor="let detail of details | async">
                                     <td></td>
-                                    <!-- <td>{{detail.fecha}}</td> -->
                                     <td>{{detail.codigo_tipo_pago}}</td>
-                                    <td>{{formatMoney(detail.monto)}}</td>
+                                    <td>{{formatMoney(detail.total_calculado ? detail.total_calculado : 0)}}</td>
                                     <td></td>
                                 </tr>
                             </tbody>

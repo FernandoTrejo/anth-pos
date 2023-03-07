@@ -24,10 +24,10 @@
                     </span>
                 </td>
                 <td>
-                    ${{producto.precio}}
+                    {{producto.precio | formatMoney}}
                 </td>
                 <td>
-                    ${{producto.subtotal}}
+                    {{producto.subtotal | formatMoney}}
                 </td>
                 <td class="d-flex">
                     <button class="btn btn-sm btn-outline-danger p-1"
