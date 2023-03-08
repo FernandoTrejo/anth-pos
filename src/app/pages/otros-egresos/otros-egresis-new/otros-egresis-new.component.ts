@@ -81,7 +81,7 @@ export class OtrosEgresisNewComponent {
       fecha: new Date,
       referencia: this.referenciaTransaccion,
       nombre_cliente: this.nombreCliente,
-      total: Number(this.cantidadEfectivo),
+      total: Number(this.cantidadEfectivo) * -1,
       tipo_transaccion: this.tipoTransaccion,
       status: Status.Closed,
       corte_diario: corteDiario.codigo,

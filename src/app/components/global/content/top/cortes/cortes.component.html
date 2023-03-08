@@ -55,6 +55,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <div *ngIf="hayTransaccionesAbiertas">
+                    <div class="alert alert-danger">Hay {{(transaccionesAbiertas | async)?.length}} transaccion(es) abierta(s). Cierrelas de forma correcta.</div>
+                </div>
                 <app-corte-parcial-modal *ngIf="(corteParcial | async) != null"></app-corte-parcial-modal>
                 <div *ngIf="(corteParcial | async) == null">
                     <h5 class="text-danger">No se ha abierto caja</h5>
@@ -76,6 +79,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <div *ngIf="hayTransaccionesAbiertas">
+                    <div class="alert alert-danger">Hay {{(transaccionesAbiertas | async)?.length}} transaccion(es) abierta(s). Cierrelas de forma correcta.</div>
+                </div>
                 <app-corte-diario-modal *ngIf="(corteDiario | async) != null"></app-corte-diario-modal>
                 <div *ngIf="(corteDiario | async) == null">
                     <h5 class="text-danger">No se ha abierto caja</h5>
